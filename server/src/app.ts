@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 4000;
 const app = express();
 
 app.use(morgan('dev'));
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+app.use(cors({ origin: 'http://localhost:4000', credentials: true }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

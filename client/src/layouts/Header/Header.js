@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Search from "../../components/Search/Search";
-import Avatar from "../../components/Avatar/Avatar";
+// import Avatar from "../../components/Avatar/Avatar";
+import MUIAccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 const Header = () => {
   return (
@@ -10,7 +11,8 @@ const Header = () => {
         <HomeTitle>AMADDA</HomeTitle>
         <HeaderRight>
           <Search />
-          <Avatar />
+          {/* <Avatar /> */}
+          <AccountCircleIcon fontSize="large" />
         </HeaderRight>
       </Container>
     </div>
@@ -38,9 +40,14 @@ const HomeTitle = styled.h1`
 const HeaderRight = styled.div`
   display: flex;
   align-items: center;
-  width: 250px;
+  width: 280px;
   justify-content: space-between;
-  margin-right: 50px;
+  margin-right: 0px;
   position: absolute;
   right: 0;
+`;
+
+const AccountCircleIcon = styled(MUIAccountCircleIcon)`
+  color: #e5e1e1;
+  margin-right: 30px;
 `;

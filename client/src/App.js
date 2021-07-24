@@ -1,12 +1,24 @@
 import GlobalStyle from "./styles/GlobalStyle";
-import Header from "./layouts/Header/Header";
+// import Header from "./layouts/Header/Header";
+import { Route, Switch } from "react-router-dom";
+import SignInPage from "./pages/Login/SignInPage";
 
 function App() {
   return (
     <div className="App">
       <GlobalStyle />
-      <Header />
-      sadasd
+      {/* <Header /> */}
+      <Switch>
+        <Route path="/" exact>
+          {/* <MainPage/> */}
+        </Route>
+        <Route path="/sign-in" exact>
+          <SignInPage />
+        </Route>
+        <Route path="/sign-up" exact>
+          {/* <SignUpPage/> */}
+        </Route>
+      </Switch>
     </div>
   );
 }

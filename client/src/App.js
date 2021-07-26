@@ -2,6 +2,7 @@ import GlobalStyle from "./styles/GlobalStyle";
 // import Header from "./layouts/Header/Header";
 import { Route, Switch } from "react-router-dom";
 import SignInPage from "./pages/Login/SignInPage";
+import SignUpPage from "./pages/SignUp/SignUpPage";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <SignInPage />
         </Route>
         <Route path="/sign-up" exact>
-          {/* <SignUpPage/> */}
+          <SignUpPage />
         </Route>
       </Switch>
     </div>

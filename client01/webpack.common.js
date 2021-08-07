@@ -20,6 +20,12 @@ const config = {
           loader: "babel-loader",
         },
       },
+      {
+        test: /\.mp4$/,
+        use: {
+          loader: "file-loader",
+        },
+      },
     ],
   },
   plugins: [

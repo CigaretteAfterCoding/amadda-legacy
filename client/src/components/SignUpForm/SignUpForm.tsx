@@ -7,16 +7,13 @@ import GoogleIcon from '../Icons/Google';
 import colors from '../../styles/color-variables';
 
 const SignUpForm = () => {
-  const emailLabel = `Email address`;
-  const pwLabel = `Password`;
-  const pwConfirmLabel = `Password Confirm`;
   return (
     <Container>
-      <Input type="email" label={emailLabel} placeholder="Email" />
-      <Input type="password" label={pwLabel} placeholder="Password" />
+      <Input type="email" label="Email address" placeholder="Email" />
+      <Input type="password" label="Password" placeholder="Password" />
       <Input
         type="password"
-        label={pwConfirmLabel}
+        label="Password Confirm"
         placeholder="Password Confirm"
       />
       <SignUpBtn>Sign Up</SignUpBtn>

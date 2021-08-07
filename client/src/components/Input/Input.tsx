@@ -2,7 +2,13 @@ import React from 'react';
 import colors from '../../styles/color-variables';
 import styled from 'styled-components';
 
-const Input = ({ label = null, ...rests }) => {
+interface InputProps {
+  type: 'email' | 'password';
+  label?: string | null;
+  placeholder: string;
+}
+
+const Input = ({ label = null, ...rests }: InputProps) => {
   return (
     <Container>
       {label && <Label>{label}</Label>}

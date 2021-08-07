@@ -8,12 +8,10 @@ import { Link } from 'react-router-dom';
 import colors from '../../styles/color-variables';
 
 const SignInForm = () => {
-  const emailLabel = `Email address`;
-  const pwLabel = `Password`;
   return (
     <Container>
-      <Input type="email" label={emailLabel} placeholder="Email" />
-      <Input type="password" label={pwLabel} placeholder="Password" />
+      <Input type="email" label="Email address" placeholder="Email" />
+      <Input type="password" label="Password" placeholder="Password" />
       <SignInBtn>Sign In</SignInBtn>
       <GoogleBtn>
         Sign In With

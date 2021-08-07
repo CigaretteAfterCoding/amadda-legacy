@@ -1,17 +1,16 @@
-import React from "react";
-import styled from "styled-components";
-import SignUpForm from "../../components/SignUpForm/SignUpForm";
-import Abstract from "../../images/Abstract.mp4";
-import Clouds from "../../images/Clouds.mp4";
-import Jellyfis from "../../images/Jellyfis.mp4";
-import Rain from "../../images/Rain.mp4";
+import React from 'react';
+import styled from 'styled-components';
+import SignUpForm from '../../components/SignUpForm/SignUpForm';
+import Abstract from '../../images/Abstract.mp4';
+import Clouds from '../../images/Clouds.mp4';
+import Rain from '../../images/Rain.mp4';
 
 const SignUpPage = () => {
-  const videos = [Abstract, Clouds, Jellyfis, Rain];
+  const videos = [Abstract, Clouds, Rain];
   const videosNum = Math.floor(Math.random() * videos.length);
   return (
     <Container>
-      <video width="100%" height="auto" autoplay="true" loop muted playsinline>
+      <video width="100%" height="auto" autoPlay loop muted>
         <source src={videos[videosNum]} type="video/mp4" />
       </video>
       <SignUpWrapper>

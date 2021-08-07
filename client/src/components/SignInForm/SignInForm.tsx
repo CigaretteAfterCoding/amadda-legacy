@@ -1,10 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import Button from "../Button/Button";
-import Input from "../Input/Input";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import GoogleIcon from "../Icons/Google";
-import { Link } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import Button from '../Button/Button';
+import Input from '../Input/Input';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import GoogleIcon from '../Icons/Google';
+import { Link } from 'react-router-dom';
+import colors from '../../styles/color-variables';
 
 const SignInForm = () => {
   const emailLabel = `Email address`;
@@ -22,7 +23,7 @@ const SignInForm = () => {
       </GoogleBtn>
       <FaceBookBtn>
         Sign In With
-        <FacebookIcon style={{ color: "#395185", marginLeft: "3px" }} />
+        <FacebookIcon style={{ color: '#395185', marginLeft: '3px' }} />
       </FaceBookBtn>
       <Link to="/sign-up">
         <CreateAcoountBtn>Create new account</CreateAcoountBtn>
@@ -46,7 +47,7 @@ const Container = styled.div`
 
 const SignInBtn = styled(Button)`
   margin-top: 5px;
-  background-color: #45259d;
+  background-color: ${colors.amadda};
   margin-bottom: 10px;
   color: white;
 `;
@@ -55,7 +56,7 @@ const GoogleBtn = styled(Button)`
   margin-bottom: 10px;
   background-color: #fff;
   color: black;
-  border: 1px solid #bdbdbd;
+  border: 1px solid ${colors.gray[600]};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,7 +69,7 @@ const GoogleIconWrapper = styled.div`
 const FaceBookBtn = styled(Button)`
   background-color: #fff;
   color: black;
-  border: 1px solid #bdbdbd;
+  border: 1px solid ${colors.gray[600]};
   display: flex;
   align-items: center;
   justify-content: center;

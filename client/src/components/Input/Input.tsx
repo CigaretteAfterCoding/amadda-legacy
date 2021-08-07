@@ -1,5 +1,6 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import colors from '../../styles/color-variables';
+import styled from 'styled-components';
 
 const Input = ({ label = null, ...rests }) => {
   return (
@@ -22,7 +23,7 @@ const Container = styled.div`
 const Label = styled.label`
   color: #000;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 15px;
   margin-bottom: 13px;
 `;
@@ -31,7 +32,7 @@ const InputBoxWrapper = styled.div``;
 
 const InputBox = styled.input`
   background: #ffffff;
-  border: 1px solid #bdbdbd;
+  border: 1px solid ${colors.gray[500]};
   border-radius: 5px;
   width: 323px;
   height: 46px;
@@ -41,7 +42,7 @@ const InputBox = styled.input`
   padding: 0 10px;
   &::placeholder {
     font-size: 13px;
-    color: lightgray;
+    color: ${colors.gray[800]};
   }
 
   &:focus {

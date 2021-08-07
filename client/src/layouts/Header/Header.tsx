@@ -1,8 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import Search from "../../components/Search/Search";
+import React from 'react';
+import styled from 'styled-components';
+import Search from '../../components/Search/Search';
 // import Avatar from "../../components/Avatar/Avatar";
-import MUIAccountCircleIcon from "@material-ui/icons/AccountCircle";
+import MUIAccountCircleIcon from '@material-ui/icons/AccountCircle';
+import colors from '../../styles/color-variables';
 
 const Header = () => {
   return (
@@ -23,7 +24,7 @@ export default Header;
 
 const Container = styled.div`
   height: 70px;
-  background-color: white;
+  background-color: ${colors.white};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,7 +35,7 @@ const HomeTitle = styled.h1`
   font-size: 24px;
   line-height: 28px;
   display: flex;
-  color: #45259d;
+  color: ${colors.amadda};
 `;
 
 const HeaderRight = styled.div`
@@ -48,6 +49,6 @@ const HeaderRight = styled.div`
 `;
 
 const AccountCircleIcon = styled(MUIAccountCircleIcon)`
-  color: #e5e1e1;
+  color: ${colors.gray[400]};
   margin-right: 30px;
 `;

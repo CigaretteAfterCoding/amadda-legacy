@@ -11,6 +11,8 @@ const colors = {
     900: '#5c5c5c',
   },
   amadda: '#45259d',
+  white: '#fff',
+  black: '#000',
 };
 
 export default colors;

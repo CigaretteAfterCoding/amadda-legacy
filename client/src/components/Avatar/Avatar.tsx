@@ -19,7 +19,7 @@ const ProfileIcon = styled.div`
   height: 40px;
   border-radius: 50%;
   background-color: ${colors.amadda};
-  color: white;
+  color: ${colors.white};
   font-size: 20px;
   font-weight: bold;
   display: flex;

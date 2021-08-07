@@ -1,6 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import MuiSearchIcon from "@material-ui/icons/Search";
+import React from 'react';
+import styled from 'styled-components';
+import MuiSearchIcon from '@material-ui/icons/Search';
+import colors from '../../styles/color-variables';
 
 const Search = () => {
   return (
@@ -18,7 +19,7 @@ export default Search;
 const Wrapper = styled.div`
   border-radius: 40px;
   border: 0px;
-  background-color: #e5e1e1;
+  background-color: ${colors.gray[200]};
   height: 29px;
   width: 190px;
   display: flex;
@@ -40,8 +41,8 @@ const InputBox = styled.input`
 
 const SearchIcon = styled(MuiSearchIcon)`
   cursor: pointer;
-  color: darkgray;
+  color: ${colors.gray[500]};
   &:hover {
-    color: #45259d;
+    color: ${colors.amadda};
   }
 `;

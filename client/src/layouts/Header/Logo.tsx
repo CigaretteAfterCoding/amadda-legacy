@@ -1,5 +1,6 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import colors from '../../styles/color-variables';
+import styled from 'styled-components';
 
 const Logo = () => {
   return (
@@ -23,5 +24,5 @@ const HomeTitle = styled.h1`
   font-weight: bold;
   font-size: 24px;
   line-height: 28px;
-  color: #000;
+  color: ${colors.black};
 `;

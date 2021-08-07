@@ -51,13 +51,13 @@ const SignUpBtn = styled(Button)`
   margin-top: 5px;
   background-color: ${colors.amadda};
   margin-bottom: 10px;
-  color: white;
+  color: ${colors.white};
 `;
 
 const GoogleBtn = styled(Button)`
   margin-bottom: 10px;
-  background-color: #fff;
-  color: black;
+  background-color: ${colors.white};
+  color: ${colors.black};
   border: 1px solid ${colors.gray[600]};
   display: flex;
   align-items: center;
@@ -69,8 +69,8 @@ const GoogleIconWrapper = styled.div`
 `;
 
 const FaceBookBtn = styled(Button)`
-  background-color: #fff;
-  color: black;
+  background-color: ${colors.white};
+  color: ${colors.black};
   border: 1px solid ${colors.gray[600]};
   display: flex;
   align-items: center;

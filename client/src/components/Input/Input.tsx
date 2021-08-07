@@ -21,7 +21,7 @@ const Container = styled.div`
 `;
 
 const Label = styled.label`
-  color: #000;
+  color: ${colors.black};
   font-weight: bold;
   font-size: 17px;
   line-height: 15px;
@@ -31,7 +31,7 @@ const Label = styled.label`
 const InputBoxWrapper = styled.div``;
 
 const InputBox = styled.input`
-  background: #ffffff;
+  background: ${colors.white};
   border: 1px solid ${colors.gray[500]};
   border-radius: 5px;
   width: 323px;

@@ -1,3 +1,4 @@
+import React from "react";
 import GlobalStyle from "./styles/GlobalStyle";
 // import Header from "./layouts/Header/Header";
 import { Route, Switch } from "react-router-dom";

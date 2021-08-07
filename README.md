@@ -1,6 +1,8 @@
 # Amadda
 아마따 일기
 
+![작업하기전에](https://user-images.githubusercontent.com/75163849/128605816-282f2bf6-f01e-4d99-85be-dd6991086784.jpg)
+
 idea
 - 일기쓸 때마다 포인트 쌓임 -> 일기장 테마, 글 색깔, 폰트, 브금 등등 업그레이드 할 수 있음
 - 작게 시작

@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 import Input from "../Input/Input";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import GoogleIcon from "../Icons/Google";
+import { Link } from "react-router-dom";
 
 const SignInForm = () => {
   const emailLabel = `Email address`;
@@ -23,7 +24,9 @@ const SignInForm = () => {
         Sign In With
         <FacebookIcon style={{ color: "#395185", marginLeft: "3px" }} />
       </FaceBookBtn>
-      <CreateAcoountBtn>Create new account</CreateAcoountBtn>
+      <Link to="/sign-up">
+        <CreateAcoountBtn>Create new account</CreateAcoountBtn>
+      </Link>
     </Container>
   );
 };
@@ -38,11 +41,11 @@ const Container = styled.div`
   justify-content: center;
   padding: 50px 0 40px 0;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
 `;
 
 const SignInBtn = styled(Button)`
-  margin-top: 10px;
+  margin-top: 5px;
   background-color: #45259d;
   margin-bottom: 10px;
   color: white;
@@ -69,14 +72,15 @@ const FaceBookBtn = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 const CreateAcoountBtn = styled.button`
   border: none;
-  background-color: white;
-  color: #4f4f4f;
-  font-size: 15px;
+  background-color: transparent;
+  color: #000;
+  font-weight: bold;
+  font-size: 14px;
   &:hover {
     color: black;
     text-decoration: underline;

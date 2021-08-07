@@ -23,7 +23,7 @@ const Label = styled.label`
   color: #000;
   font-weight: bold;
   font-size: 16px;
-  line-height: 19px;
+  line-height: 15px;
   margin-bottom: 13px;
 `;
 
@@ -42,5 +42,9 @@ const InputBox = styled.input`
   &::placeholder {
     font-size: 13px;
     color: lightgray;
+  }
+
+  &:focus {
+    outline: none;
   }
 `;

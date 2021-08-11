@@ -33,8 +33,8 @@ async function signUp({
   }
 }
 
-type SignInParams = SignUpParams;
-type SignInResponse = SignUpResponse;
+interface SignInParams extends SignUpParams {};
+interface SignInResponse extends SignUpResponse {};
 
 async function signIn({
   email,
@@ -76,7 +76,7 @@ async function refreshAccessTokens(): Promise<void> {
   refreshTimeoutId = setTimeout(refreshAccessTokens, 10000);
 }
 
-type GetCurrentUserResponse = User;
+interface GetCurrentUserResponse extends User {};
 
 async function getCurrentUser() {
   try {

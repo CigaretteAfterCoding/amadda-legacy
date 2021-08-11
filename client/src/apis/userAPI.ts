@@ -1,4 +1,4 @@
-import { User } from '../types/user';
+import { User } from 'Types/user';
 import { amaddaApi } from './baseAPI';
 
 let refreshTimeoutId: ReturnType<typeof setTimeout>;
@@ -33,8 +33,8 @@ async function signUp({
   }
 }
 
-interface SignInParams extends SignUpParams {};
-interface SignInResponse extends SignUpResponse {};
+interface SignInParams extends SignUpParams {}
+interface SignInResponse extends SignUpResponse {}
 
 async function signIn({
   email,
@@ -69,14 +69,16 @@ interface RefreshAccessTokensResponse {
 }
 
 async function refreshAccessTokens(): Promise<void> {
-  const { data } = await amaddaApi.post<RefreshAccessTokensResponse>('/user/silent-refresh');
+  const { data } = await amaddaApi.post<RefreshAccessTokensResponse>(
+    '/user/silent-refresh',
+  );
   amaddaApi.defaults.headers.common[
     'Authorization'
   ] = `Bearer ${data.accessToken}`;
   refreshTimeoutId = setTimeout(refreshAccessTokens, 10000);
 }
 
-interface GetCurrentUserResponse extends User {};
+interface GetCurrentUserResponse extends User {}
 
 async function getCurrentUser() {
   try {

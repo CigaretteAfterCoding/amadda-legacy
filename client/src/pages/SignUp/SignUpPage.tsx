@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import SignUpForm from '../../components/SignUpForm/SignUpForm';
-import Abstract from '../../images/Abstract.mp4';
-import Clouds from '../../images/Clouds.mp4';
-import Rain from '../../images/Rain.mp4';
+import SignUpForm from 'Components/SignUpForm/SignUpForm';
+import Abstract from 'Images/Abstract.mp4';
+import Clouds from 'Images/Clouds.mp4';
+import Rain from 'Images/Rain.mp4';
 
 const SignUpPage = () => {
   const videos = [Abstract, Clouds, Rain];

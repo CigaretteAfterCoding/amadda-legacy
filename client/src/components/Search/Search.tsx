@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import MuiSearchIcon from '@material-ui/icons/Search';
-import colors from '../../styles/color-variables';
+import colors from 'Styles/color-variables';
 
 const Search = () => {
   return (

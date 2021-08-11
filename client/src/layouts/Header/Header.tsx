@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Search from '../../components/Search/Search';
-// import Avatar from "../../components/Avatar/Avatar";
+import Search from 'Components/Search/Search';
+// import Avatar from "Components/Avatar/Avatar";
 import MUIAccountCircleIcon from '@material-ui/icons/AccountCircle';
-import colors from '../../styles/color-variables';
+import colors from 'Styles/color-variables';
 
 const Header = () => {
   return (

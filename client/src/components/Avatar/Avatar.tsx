@@ -1,5 +1,5 @@
 import React from 'react';
-import colors from '../../styles/color-variables';
+import colors from 'Styles/color-variables';
 import styled from 'styled-components';
 
 const Avatar = () => {

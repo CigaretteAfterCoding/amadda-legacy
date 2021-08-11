@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Logo from '../../layouts/Header/Logo';
-import SignInForm from '../../components/SignInForm/SignInForm';
-import Abstract from '../../images/Abstract.mp4';
-import Clouds from '../../images/Clouds.mp4';
-import Rain from '../../images/Rain.mp4';
+import Logo from 'Layouts/Header/Logo';
+import SignInForm from 'Components/SignInForm/SignInForm';
+import Abstract from 'Images/Abstract.mp4';
+import Clouds from 'Images/Clouds.mp4';
+import Rain from 'Images/Rain.mp4';
 
 const SignInPage = () => {
   const videos = [Abstract, Clouds, Rain];

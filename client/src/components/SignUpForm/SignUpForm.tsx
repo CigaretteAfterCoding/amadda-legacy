@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../Button/Button';
-import Input from '../Input/Input';
+import Button from 'Elements/Button/Button';
+import Input from 'Elements/Input/Input';
 import FacebookIcon from '@material-ui/icons/Facebook';
-import GoogleIcon from '../Icons/Google';
-import colors from '../../styles/color-variables';
+import GoogleIcon from 'Elements/Icons/GoogleIcon';
+import colors from 'Styles/color-variables';
 
 const SignUpForm = () => {
   return (

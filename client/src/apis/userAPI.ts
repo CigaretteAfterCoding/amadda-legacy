@@ -11,6 +11,7 @@ interface SignUpParams {
 interface SignUpResponse extends User {
   accessToken: string;
 }
+
 async function signUp({
   email,
   password,
@@ -32,9 +33,8 @@ async function signUp({
   }
 }
 
-type SignInParams = SignUpParams;
-
-type SignInResponse = SignUpResponse;
+interface SignInParams extends SignUpParams {};
+interface SignInResponse extends SignUpResponse {};
 
 async function signIn({
   email,
@@ -64,17 +64,23 @@ function signOut(): void {
   console.log('로그아웃 되었습니다');
 }
 
+interface RefreshAccessTokensResponse {
+  accessToken: string;
+}
+
 async function refreshAccessTokens(): Promise<void> {
-  const { data } = await amaddaApi.post('/user/silent-refresh');
+  const { data } = await amaddaApi.post<RefreshAccessTokensResponse>('/user/silent-refresh');
   amaddaApi.defaults.headers.common[
     'Authorization'
   ] = `Bearer ${data.accessToken}`;
   refreshTimeoutId = setTimeout(refreshAccessTokens, 10000);
 }
 
+interface GetCurrentUserResponse extends User {};
+
 async function getCurrentUser() {
   try {
-    const { data } = await amaddaApi.get('/user');
+    const { data } = await amaddaApi.get<GetCurrentUserResponse>('/user');
     return data;
   } catch (error) {
     return error.response.data;

@@ -9,10 +9,13 @@ const colors = {
     700: '#a3a3a3',
     800: '#878787',
     900: '#5c5c5c',
+    1000: '#393732',
   },
   amadda: '#45259d',
   white: '#fff',
   black: '#000',
+  red: '#ff0000',
+  orange: '#ffa500',
 };
 
 export default colors;

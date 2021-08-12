@@ -6,13 +6,13 @@ import DiaryCard from 'Components/DiaryCard/DiaryCard';
 interface MainPageProps {}
 
 const MainPage = ({}: MainPageProps) => {
-  const post = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const test = Array(10).fill('');
   return (
     <MainPageContainer>
       <Header />
       <MainPageWrapper>
         <CardContainer>
-          {post?.map((item, idx) => (
+          {test?.map((item, idx) => (
             <DiaryCard />
           ))}
         </CardContainer>

@@ -14,6 +14,8 @@ const colors = {
   amadda: '#45259d',
   white: '#fff',
   black: '#000',
+  red: '#ff0000',
+  orange: '#ffa500',
 };
 
 export default colors;

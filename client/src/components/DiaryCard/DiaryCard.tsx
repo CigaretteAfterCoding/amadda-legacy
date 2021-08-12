@@ -6,13 +6,12 @@ import MuiLikeBorderIcon from '@material-ui/icons/FavoriteBorder';
 import MuiLikeIcon from '@material-ui/icons/Favorite';
 import MuiSunnyIcon from '@material-ui/icons/WbSunny';
 
-interface DiaryCardProps {}
-
-const DiaryCard = ({}: DiaryCardProps) => {
+const DiaryCard = () => {
   const [like, setLike] = useState(false);
   const handleClickLike = () => {
     setLike(!like);
   };
+
   return (
     <DiaryCardContainer>
       <DiaryCardPhoto />
@@ -48,7 +47,6 @@ const DiaryCardContainer = styled.div`
   border-radius: 18px;
   background-color: ${colors.white};
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  font-family: 'Roboto';
   & :hover {
     cursor: pointer;
   }
@@ -82,7 +80,7 @@ const DiaryCardTitle = styled.div`
 const DiaryCardWeather = styled(MuiSunnyIcon)`
   margin-right: 10px;
   font-size: 10px;
-  color: orange;
+  color: ${colors.orange};
 `;
 
 const ContentsMid = styled.div`
@@ -109,12 +107,14 @@ const ContentsBtm = styled.div`
   line-height: 13px;
   align-items: center;
 `;
+
 const LikeWrapper = styled.div`
   & :hover {
     cursor: pointer;
-    color: red;
+    color: ${colors.red};
   }
 `;
+
 const DiaryCardLikeBorder = styled(MuiLikeBorderIcon)`
   margin-left: 15px;
   color: ${colors.gray[800]};
@@ -122,7 +122,7 @@ const DiaryCardLikeBorder = styled(MuiLikeBorderIcon)`
 
 const DiaryCardLike = styled(MuiLikeIcon)`
   margin-left: 15px;
-  color: red;
+  color: ${colors.red};
 `;
 
 const DiaryCardDate = styled.div`

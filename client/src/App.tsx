@@ -4,6 +4,7 @@ import GlobalStyle from 'Styles/GlobalStyle';
 import { Route, Switch } from 'react-router-dom';
 import SignInPage from 'Pages/SignInPage/SignInPage';
 import SignUpPage from 'Pages/SignUpPage/SignUpPage';
+import MainPage from 'Pages/MainPage/MainPage';
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       {/* <Header /> */}
       <Switch>
         <Route path="/" exact>
-          {/* <MainPage/> */}
+          <MainPage />
         </Route>
         <Route path="/sign-in" exact>
           <SignInPage />

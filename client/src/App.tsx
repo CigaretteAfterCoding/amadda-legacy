@@ -2,8 +2,8 @@ import React from 'react';
 import GlobalStyle from 'Styles/GlobalStyle';
 // import Header from "./layouts/Header/Header";
 import { Route, Switch } from 'react-router-dom';
-import SignInPage from 'Pages/SignIn/SignInPage';
-import SignUpPage from 'Pages/SignUp/SignUpPage';
+import SignInPage from 'Pages/SignInPage/SignInPage';
+import SignUpPage from 'Pages/SignUpPage/SignUpPage';
 
 function App() {
   return (

@@ -93,7 +93,6 @@ const DiaryCardText = styled.div`
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 4;
-  word-break: break-all;
   overflow: hidden;
   -webkit-box-orient: vertical;
   height: 80px;

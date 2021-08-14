@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Header from 'Layouts/Header/Header';
 import DiaryCard from 'Components/DiaryCard/DiaryCard';
 import WriteButton from 'Components/WriteButton/WriteButton';
+import DiaryModal from 'Components/DiaryModal/DiaryModal';
 
 interface MainPageProps {}
 
@@ -12,11 +13,12 @@ const MainPage = ({}: MainPageProps) => {
     <MainPageContainer>
       <Header />
       <MainPageWrapper>
-        <CardContainer>
+        {/* <CardContainer>
           {test?.map((item, idx) => (
             <DiaryCard />
           ))}
-        </CardContainer>
+        </CardContainer> */}
+        <DiaryModal />
       </MainPageWrapper>
       <WriteButtonWrapper>
         <WriteButton />

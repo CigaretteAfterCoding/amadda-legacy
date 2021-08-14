@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node -r tsconfig-paths/register src/app.ts",
-    "start": "ts-node-dev server/src/app.ts"
+    "prebuild": "pm2 kill",
+    "build": "NODE_ENV=production tsc",
+    "postbuild": "npm run start",
+    "start": "NODE_ENV=production pm2 start build/src/app.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +34,7 @@
     "@typescript-eslint/parser": "^4.28.3",
     "eslint": "^7.31.0",
     "eslint-config-prettier": "^8.3.0",
+    "pm2": "^5.1.0",
     "prettier": "^2.3.2",
     "ts-node": "^10.1.0",
     "ts-node-dev": "^1.1.8",

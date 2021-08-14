@@ -48,7 +48,6 @@ export default DiaryModal;
 const DiaryModalContainer = styled.div`
   width: 900px;
   height: 600px;
-  border: 0;
   border-radius: 15px;
   display: flex;
   justify-content: flex-start;
@@ -88,7 +87,7 @@ const DiaryModalText = styled.textarea`
   &::-webkit-scrollbar {
     width: 6px;
   }
-  ::-webkit-scrollbar-thumb {
+  &::-webkit-scrollbar-thumb {
     background-color: ${colors.gray[400]};
     border-radius: 99px;
   }

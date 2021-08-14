@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Header from 'Layouts/Header/Header';
 import DiaryCard from 'Components/DiaryCard/DiaryCard';
+import WriteButton from 'Components/WriteButton/WriteButton';
 
 interface MainPageProps {}
 
@@ -17,6 +18,9 @@ const MainPage = ({}: MainPageProps) => {
           ))}
         </CardContainer>
       </MainPageWrapper>
+      <WriteButtonWrapper>
+        <WriteButton />
+      </WriteButtonWrapper>
     </MainPageContainer>
   );
 };
@@ -36,4 +40,10 @@ const CardContainer = styled.div`
   justify-content: flex-start;
   flex-wrap: wrap;
   max-width: 1425px;
+`;
+
+const WriteButtonWrapper = styled.div`
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
 `;

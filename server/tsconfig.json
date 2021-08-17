@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "outDir": "build",
+    "baseUrl": ".",
+    "paths": {
+      "Connection*": ["src/connection*"],
+      "Constants*": ["src/constants*"],
+      "Constants": ["src/constants/index.ts"],
+      "Errors*": ["src/errors*"],
+      "Middlewares*": ["src/middlewares*"],
+      "Model*": ["src/model*"],
+      "Routes*": ["src/routes*"],
+      "Service*": ["src/service*"],
+      "Types*": ["src/types*"],
+      "Utils*": ["src/utils*"]
+    }
+  },
+  "include": ["src", "tsconfig.json"]
+}

@@ -47,6 +47,7 @@ const DiaryCardContainer = styled.div`
   border-radius: 18px;
   background-color: ${colors.white};
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  user-select: none;
   & :hover {
     cursor: pointer;
   }
@@ -111,17 +112,27 @@ const LikeWrapper = styled.div`
   & :hover {
     cursor: pointer;
     color: ${colors.red};
+    transition: all ease 0.5s;
   }
 `;
 
 const DiaryCardLikeBorder = styled(MuiLikeBorderIcon)`
   margin-left: 15px;
-  color: ${colors.gray[800]};
+  color: ${colors.gray[600]};
 `;
 
 const DiaryCardLike = styled(MuiLikeIcon)`
   margin-left: 15px;
   color: ${colors.red};
+  animation: pop 0.3s;
+  @keyframes pop {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.2);
+    }
+  }
 `;
 
 const DiaryCardDate = styled.div`

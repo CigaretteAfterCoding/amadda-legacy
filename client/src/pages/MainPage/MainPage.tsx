@@ -13,12 +13,12 @@ const MainPage = ({}: MainPageProps) => {
     <MainPageContainer>
       <Header />
       <MainPageWrapper>
-        {/* <CardContainer>
+        <CardContainer>
           {test?.map((item, idx) => (
             <DiaryCard />
           ))}
-        </CardContainer> */}
-        <DiaryModal />
+        </CardContainer>
+        {/* <DiaryModal /> */}
       </MainPageWrapper>
       <WriteButtonWrapper>
         <WriteButton />

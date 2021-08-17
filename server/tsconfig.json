@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "es5",
+    "module": "commonjs",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -8,6 +9,7 @@
     "strict": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "plugins": [{ "transform": "@zerollup/ts-transform-paths" }],
     "outDir": "build",
     "baseUrl": ".",
     "paths": {
@@ -23,5 +25,5 @@
       "Utils*": ["src/utils*"]
     }
   },
-  "include": ["src", "tsconfig.json"]
+  "exclude": ["node_modules"]
 }

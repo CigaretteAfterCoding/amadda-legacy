@@ -7,6 +7,7 @@ import colors from 'Styles/color-variables';
 import Select from 'Elements/Select/Select';
 
 const Header = () => {
+  const SELECT_MENU = ['Nickname', 'Account Setting', 'Logout'];
   const [profileMenu, setProfileMenu] = useState(false);
   const handleClickMenu = () => {
     setProfileMenu(!profileMenu);
@@ -45,9 +46,7 @@ const Header = () => {
             onClick={handleClickMenu}
           />
           <SelectWrapper className="select-wrapper">
-            {profileMenu && (
-              <Select menu={['Nickname', 'Account Setting', 'Logout']} />
-            )}
+            {profileMenu && <Select menu={SELECT_MENU} />}
           </SelectWrapper>
         </HeaderRight>
       </Container>

@@ -12,8 +12,15 @@ const Header = () => {
     setProfileMenu(!profileMenu);
   };
 
-  const handleClickSelect = (e) => {
-    if (!(e.target.closest('.select-wrapper') || e.target.closest('.icon'))) {
+  const handleClickSelect = (
+    e: React.MouseEvent<HTMLBodyElement, MouseEvent>,
+  ) => {
+    if (
+      !(
+        (e.target as HTMLElement).closest('.select-wrapper') ||
+        (e.target as HTMLElement).closest('.icon')
+      )
+    ) {
       setProfileMenu(false);
     }
   };
@@ -39,7 +46,7 @@ const Header = () => {
           />
           <SelectWrapper className="select-wrapper">
             {profileMenu && (
-              <Select menu={['계정 설정', '좋아요 목록', '로그아웃']} />
+              <Select menu={['Nickname', 'Account Setting', 'Logout']} />
             )}
           </SelectWrapper>
         </HeaderRight>
@@ -87,7 +94,7 @@ const AccountCircleIcon = styled(MUIAccountCircleIcon)`
 `;
 
 const SelectWrapper = styled.div`
-  margin-top: 200px;
+  margin-top: 240px;
   position: absolute;
   right: 30px;
 `;

@@ -1,11 +1,30 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import styled, { css } from 'styled-components';
 import Search from 'Components/Search/Search';
 // import Avatar from "Components/Avatar/Avatar";
 import MUIAccountCircleIcon from '@material-ui/icons/AccountCircle';
 import colors from 'Styles/color-variables';
+import Select from 'Elements/Select/Select';
 
 const Header = () => {
+  const [profileMenu, setProfileMenu] = useState(false);
+  const handleClickMenu = () => {
+    setProfileMenu(!profileMenu);
+  };
+
+  const handleClickSelect = (e) => {
+    if (!(e.target.closest('.select-wrapper') || e.target.closest('.icon'))) {
+      setProfileMenu(false);
+    }
+  };
+
+  useEffect(() => {
+    const bodyElement = document.querySelector('body');
+    bodyElement?.addEventListener('click', handleClickSelect);
+
+    return () => bodyElement?.removeEventListener('click', handleClickSelect);
+  }, [handleClickSelect]);
+
   return (
     <div>
       <Container>
@@ -13,7 +32,16 @@ const Header = () => {
         <HeaderRight>
           <Search />
           {/* <Avatar /> */}
-          <AccountCircleIcon fontSize="large" />
+          <AccountCircleIcon
+            className="icon"
+            fontSize="inherit"
+            onClick={handleClickMenu}
+          />
+          <SelectWrapper className="select-wrapper">
+            {profileMenu && (
+              <Select menu={['계정 설정', '좋아요 목록', '로그아웃']} />
+            )}
+          </SelectWrapper>
         </HeaderRight>
       </Container>
     </div>
@@ -36,19 +64,30 @@ const HomeTitle = styled.h1`
   line-height: 28px;
   display: flex;
   color: ${colors.amadda};
+  user-select: none;
 `;
 
 const HeaderRight = styled.div`
+  font-size: 48px;
   display: flex;
   align-items: center;
-  width: 280px;
+  width: 308px;
   justify-content: space-between;
   margin-right: 0px;
   position: absolute;
-  right: 0;
+  right: 0px;
 `;
 
 const AccountCircleIcon = styled(MUIAccountCircleIcon)`
   color: ${colors.gray[400]};
   margin-right: 30px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const SelectWrapper = styled.div`
+  margin-top: 200px;
+  position: absolute;
+  right: 30px;
 `;

@@ -17,11 +17,11 @@ const Search = () => {
 export default Search;
 
 const Wrapper = styled.div`
-  border-radius: 40px;
+  border-radius: 35px;
   border: 0px;
   background-color: ${colors.gray[200]};
-  height: 29px;
-  width: 190px;
+  height: 33px;
+  width: 207px;
   display: flex;
   align-items: center;
 `;
@@ -36,7 +36,7 @@ const InputBox = styled.input`
     font-size: 14px;
   }
   padding-left: 13px;
-  width: 140px;
+  width: 155px;
 `;
 
 const SearchIcon = styled(MuiSearchIcon)`

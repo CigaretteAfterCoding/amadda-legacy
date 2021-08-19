@@ -7,11 +7,13 @@ import MuiCreateIcon from '@material-ui/icons/CreateOutlined';
 import MuiDeleteIcon from '@material-ui/icons/DeleteOutline';
 import MuiShareIcon from '@material-ui/icons/Reply';
 
-interface DiaryModalProps {}
+interface DiaryModalProps {
+  className: string;
+}
 
-const DiaryModal = ({}: DiaryModalProps) => {
+const DiaryModal = ({ className }: DiaryModalProps) => {
   return (
-    <DiaryModalContainer>
+    <DiaryModalContainer className={className}>
       <DiaryModalPhoto />
       <DiaryModalContents>
         <DiaryModalTitle>오늘의 일기</DiaryModalTitle>
@@ -52,6 +54,7 @@ const DiaryModalContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: ${colors.white};
 `;
 
 const DiaryModalPhoto = styled.div`

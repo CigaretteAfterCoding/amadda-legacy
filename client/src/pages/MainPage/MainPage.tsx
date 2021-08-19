@@ -15,7 +15,7 @@ const MainPage = ({}: MainPageProps) => {
       <MainPageWrapper>
         <CardContainer>
           {test?.map((item, idx) => (
-            <DiaryCard />
+            <DiaryCard key={idx} />
           ))}
         </CardContainer>
         {/* <DiaryModal /> */}

@@ -6,6 +6,8 @@ interface InputProps {
   type: 'email' | 'password';
   label?: string | null;
   placeholder: string;
+  value?: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input = ({ label = null, ...rests }: InputProps) => {

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 interface ButtonProps {
   children: React.ReactNode;
+  onClick?: () => void;
 }
 
 const Button = (props: ButtonProps) => {

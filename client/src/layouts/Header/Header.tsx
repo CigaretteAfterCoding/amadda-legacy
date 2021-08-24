@@ -7,14 +7,13 @@ import colors from 'Styles/color-variables';
 import Select from 'Elements/Select/Select';
 
 const Header = () => {
+  const SELECT_MENU = ['Nickname', 'Account Setting', 'Logout'];
   const [profileMenu, setProfileMenu] = useState(false);
   const handleClickMenu = () => {
     setProfileMenu(!profileMenu);
   };
 
-  const handleClickSelect = (
-    e: React.MouseEvent<HTMLBodyElement, MouseEvent>,
-  ) => {
+  const handleClickSelect = (e: React.MouseEvent<HTMLBodyElement>) => {
     if (
       !(
         (e.target as HTMLElement).closest('.select-wrapper') ||
@@ -27,9 +26,10 @@ const Header = () => {
 
   useEffect(() => {
     const bodyElement = document.querySelector('body');
-    bodyElement?.addEventListener('click', handleClickSelect);
+    bodyElement?.addEventListener('click', () => handleClickSelect);
 
-    return () => bodyElement?.removeEventListener('click', handleClickSelect);
+    return () =>
+      bodyElement?.removeEventListener('click', () => handleClickSelect);
   }, [handleClickSelect]);
 
   return (
@@ -45,9 +45,7 @@ const Header = () => {
             onClick={handleClickMenu}
           />
           <SelectWrapper className="select-wrapper">
-            {profileMenu && (
-              <Select menu={['Nickname', 'Account Setting', 'Logout']} />
-            )}
+            {profileMenu && <Select menu={SELECT_MENU} />}
           </SelectWrapper>
         </HeaderRight>
       </Container>

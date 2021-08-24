@@ -6,11 +6,11 @@ interface SelectProps {
   menu: string[];
 }
 
-const Select = (props: SelectProps) => {
+const Select = ({ menu }: SelectProps) => {
   return (
     <SelectContainer>
       <SelectMenu>
-        {props.menu?.map((menu, idx) => (
+        {menu?.map((menu, idx) => (
           <SelectMenuList key={idx}>{menu}</SelectMenuList>
         ))}
       </SelectMenu>

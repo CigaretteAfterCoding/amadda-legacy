@@ -25,7 +25,7 @@ async function signUp({
     amaddaApi.defaults.headers.common[
       'Authorization'
     ] = `Bearer ${data.accessToken}`;
-    refreshTimeoutId = setTimeout(refreshAccessTokens, 5000);
+    refreshTimeoutId = setTimeout(refreshAccessTokens, 500000);
 
     return data;
   } catch (error) {
@@ -33,8 +33,8 @@ async function signUp({
   }
 }
 
-interface SignInParams extends SignUpParams {}
-interface SignInResponse extends SignUpResponse {}
+type SignInParams = SignUpParams
+type SignInResponse = SignUpResponse
 
 async function signIn({
   email,
@@ -49,7 +49,7 @@ async function signIn({
     amaddaApi.defaults.headers.common[
       'Authorization'
     ] = `Bearer ${data.accessToken}`;
-    refreshTimeoutId = setTimeout(refreshAccessTokens, 5000);
+    refreshTimeoutId = setTimeout(refreshAccessTokens, 500000);
 
     return data;
   } catch (error) {
@@ -78,7 +78,7 @@ async function refreshAccessTokens(): Promise<void> {
   refreshTimeoutId = setTimeout(refreshAccessTokens, 10000);
 }
 
-interface GetCurrentUserResponse extends User {}
+type GetCurrentUserResponse = User
 
 async function getCurrentUser() {
   try {

@@ -6,11 +6,13 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import GoogleIcon from 'Elements/Icons/GoogleIcon';
 import colors from 'Styles/color-variables';
 import userAPI from 'Apis/userAPI';
+import { useHistory } from 'react-router-dom';
 
 const SignUpForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setpasswordConfirm] = useState('');
+  const history = useHistory();
 
   const isValidEmail = useMemo(() => {
     const emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -21,7 +23,7 @@ const SignUpForm = () => {
     return password !== '' && password === passwordConfirm;
   }, [password, passwordConfirm]);
 
-  const handleClickSubmit = useCallback(() => {
+  const handleClickSubmit = useCallback(async () => {
     if (!isValidEmail) {
       alert('이메일 형식이 ㄴㄴ');
       return;
@@ -32,8 +34,12 @@ const SignUpForm = () => {
       return;
     }
 
-    userAPI.signUp({ email, password });
-  }, [isValidEmail, isValidPassword, email, password]);
+    const data = await userAPI.signUp({ email, password });
+
+    if (data.id) {
+      history.push('/');
+    }
+  }, [isValidEmail, isValidPassword, email, password, history]);
 
   return (
     <Container>

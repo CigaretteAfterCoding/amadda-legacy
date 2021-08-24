@@ -13,9 +13,7 @@ const Header = () => {
     setProfileMenu(!profileMenu);
   };
 
-  const handleClickSelect = (
-    e: React.MouseEvent<HTMLBodyElement, MouseEvent>,
-  ) => {
+  const handleClickSelect = (e: React.MouseEvent<HTMLBodyElement>) => {
     if (
       !(
         (e.target as HTMLElement).closest('.select-wrapper') ||
@@ -28,9 +26,10 @@ const Header = () => {
 
   useEffect(() => {
     const bodyElement = document.querySelector('body');
-    bodyElement?.addEventListener('click', handleClickSelect);
+    bodyElement?.addEventListener('click', () => handleClickSelect);
 
-    return () => bodyElement?.removeEventListener('click', handleClickSelect);
+    return () =>
+      bodyElement?.removeEventListener('click', () => handleClickSelect);
   }, [handleClickSelect]);
 
   return (

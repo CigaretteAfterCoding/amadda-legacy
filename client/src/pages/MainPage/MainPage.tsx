@@ -9,22 +9,27 @@ interface MainPageProps {}
 const MainPage = () => {
   const [diaryModalOpen, setDiaryModalOpen] = useState(false);
   const test = Array(10).fill('');
+
   const DiaryModalOpen = () => {
     setDiaryModalOpen(!diaryModalOpen);
   };
-  const DiaryModalClose = (e) => {
-    console.log(!e.target.closest('.diary-modal'));
-    if (!e.target.closest('.diary-modal')) {
+
+  const DiaryModalClose = (e: React.MouseEvent<HTMLBodyElement>) => {
+    if (!(e.target as HTMLElement).closest('.diary-modal')) {
       setDiaryModalOpen(false);
     }
   };
+
   useEffect(() => {
     const body = document.querySelector('body');
+
     if (diaryModalOpen) {
       body?.addEventListener('click', DiaryModalClose);
     }
+
     return () => body?.removeEventListener('click', DiaryModalClose);
   }, [DiaryModalClose, diaryModalOpen]);
+
   return (
     <MainPageContainer>
       <Header />
@@ -57,7 +62,12 @@ const MainPageWrapper = styled.div`
   justify-content: center;
 `;
 
-const DiaryCardWrapper = styled.div``;
+const DiaryCardWrapper = styled.div`
+  &:hover {
+    transition: all ease 0.5s;
+    transform: translateY(-8px);
+  }
+`;
 
 const DiaryModalWrapper = styled.div<{ diaryModalOpen: boolean }>`
   display: ${(props) => (props.diaryModalOpen ? 'flex' : 'none')};

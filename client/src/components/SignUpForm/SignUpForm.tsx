@@ -8,6 +8,7 @@ import colors from 'Styles/color-variables';
 
 const SignUpForm = () => {
   const [email, setEmail] = useState('');
+  const a = 1;
 
   return (
     <Container>

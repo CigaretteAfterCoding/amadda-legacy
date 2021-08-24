@@ -6,6 +6,7 @@ import WriteButton from 'Components/WriteButton/WriteButton';
 import DiaryModal from 'Components/DiaryModal/DiaryModal';
 interface MainPageProps {}
 
+
 const MainPage = () => {
   const [diaryModalOpen, setDiaryModalOpen] = useState(false);
   const test = Array(10).fill('');

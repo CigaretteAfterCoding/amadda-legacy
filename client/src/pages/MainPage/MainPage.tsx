@@ -14,13 +14,12 @@ const MainPage = () => {
     setDiaryModalOpen(!diaryModalOpen);
   };
 
-  const DiaryModalClose = (e: React.MouseEvent<HTMLBodyElement>) => {
-    if (!(e.target as HTMLElement).closest('.diary-modal')) {
-      setDiaryModalOpen(false);
-    }
-  };
-
   useEffect(() => {
+    const DiaryModalClose = (e: React.MouseEvent<HTMLBodyElement>) => {
+      if (!(e.target as HTMLElement).closest('.diary-modal')) {
+        setDiaryModalOpen(false);
+      }
+    };
     const body = document.querySelector('body');
 
     if (diaryModalOpen) {
@@ -28,7 +27,7 @@ const MainPage = () => {
     }
 
     return () => body?.removeEventListener('click', DiaryModalClose);
-  }, [DiaryModalClose, diaryModalOpen]);
+  }, [diaryModalOpen]);
 
   return (
     <MainPageContainer>
@@ -36,7 +35,7 @@ const MainPage = () => {
       <MainPageWrapper>
         <CardContainer>
           {test?.map((item, idx) => (
-            <DiaryCardWrapper onClick={DiaryModalOpen}>
+            <DiaryCardWrapper key={idx} onClick={DiaryModalOpen}>
               <DiaryCard key={idx} />
             </DiaryCardWrapper>
           ))}
@@ -59,7 +58,7 @@ const MainPageContainer = styled.div``;
 const MainPageWrapper = styled.div`
   margin-top: 50px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
 `;
 
 const DiaryCardWrapper = styled.div`

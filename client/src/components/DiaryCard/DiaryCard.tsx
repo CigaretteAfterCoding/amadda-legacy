@@ -42,9 +42,11 @@ export default DiaryCard;
 
 const DiaryCardContainer = styled.div`
   margin: 30px 20px 0px 20px;
-  width: 245px;
-  height: 360px;
-  border-radius: 18px;
+  width: 230px;
+  height: 321px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-radius: 5px;
   background-color: ${colors.white};
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   user-select: none;
@@ -54,43 +56,43 @@ const DiaryCardContainer = styled.div`
 `;
 
 const DiaryCardPhoto = styled.div`
-  height: 142px;
-  border-radius: 18px 18px 0 0;
+  height: 130px;
+  border-radius: 10px 10px 0 0;
   background-image: url(${testImg});
   background-size: cover;
 `;
 
 const DiaryCardContents = styled.div`
-  height: 162px;
+  height: 160px;
 `;
 
 const ContentsTop = styled.div`
   display: float;
   justify-content: space-between;
   align-items: center;
-  margin-top: 14px;
-  line-height: 10px;
+  margin-top: 11px;
+  line-height: 3px;
 `;
 
 const DiaryCardTitle = styled.div`
   font-weight: bold;
   margin-left: 15px;
-  font-size: 16px;
+  font-size: 14px;
 `;
 
 const DiaryCardWeather = styled(MuiSunnyIcon)`
   margin-right: 10px;
-  font-size: 10px;
+  font-size: 8px;
   color: ${colors.orange};
 `;
 
 const ContentsMid = styled.div`
-  margin: 12px 10px 15px 15px;
-  line-height: 21px;
+  margin: 6px 10px 15px 15px;
+  line-height: 20px;
 `;
 
 const DiaryCardText = styled.div`
-  font-size: 14px;
+  font-size: 13px;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 4;
@@ -103,7 +105,7 @@ const DiaryCardText = styled.div`
 const ContentsBtm = styled.div`
   display: float;
   justify-content: space-between;
-  margin-top: 53px;
+  margin-top: 35px;
   line-height: 13px;
   align-items: center;
 `;

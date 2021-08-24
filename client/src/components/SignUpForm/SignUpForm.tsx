@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from 'Elements/Button/Button';
 import Input from 'Elements/Input/Input';
@@ -7,6 +7,7 @@ import GoogleIcon from 'Elements/Icons/GoogleIcon';
 import colors from 'Styles/color-variables';
 
 const SignUpForm = () => {
+
   return (
     <Container>
       <Input type="email" label="Email address" placeholder="Email" />

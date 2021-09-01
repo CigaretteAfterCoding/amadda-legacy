@@ -69,9 +69,9 @@ const DiaryModal = ({ className }: DiaryModalProps) => {
 export default DiaryModal;
 
 const DiaryModalContainer = styled.div`
-  width: 1200px;
-  height: 750px;
-  border-radius: 15px;
+  width: 920px;
+  height: 580px;
+  border-radius: 10px;
   display: flex;
   justify-content: flex-start;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
@@ -79,21 +79,21 @@ const DiaryModalContainer = styled.div`
 `;
 
 const DiaryModalPhoto = styled.div`
-  width: 500px;
-  height: 750px;
+  width: 400px;
+  height: 580px;
   background-image: url(${testImg});
   background-size: cover;
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 14px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 `;
 
 const DiaryModalContents = styled.div`
-  margin: 50px 0 0 60px;
+  margin: 30px 30px 0 60px;
 `;
 
 const DiaryModalTitle = styled.div`
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 22px;
   display: flex;
   justify-content: flex-end;
@@ -101,13 +101,13 @@ const DiaryModalTitle = styled.div`
 
 const DiaryModalText = styled.div`
   text-align: left;
-  margin-top: 40px;
-  margin-left: 40px;
-  font-size: 16px;
+  margin-top: 35px;
+  margin-left: 0px;
+  font-size: 14px;
   line-height: 25px;
   font-family: Roboto;
-  width: 560px;
-  height: 510px;
+  width: 490px;
+  height: 400px;
   border: 0px;
   background-color: white;
   overflow: scroll;
@@ -144,7 +144,7 @@ const DiaryModalBottom = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin: 30px 0px 0px 0;
+  margin: 20px 0px 0px 0;
 `;
 
 const DiaryModalShare = styled(MuiShareIcon)`

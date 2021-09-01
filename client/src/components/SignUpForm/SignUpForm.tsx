@@ -1,22 +1,70 @@
-import React from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 import Button from 'Elements/Button/Button';
 import Input from 'Elements/Input/Input';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import GoogleIcon from 'Elements/Icons/GoogleIcon';
 import colors from 'Styles/color-variables';
+import userAPI from 'Apis/userAPI';
+import { useHistory } from 'react-router-dom';
 
 const SignUpForm = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setpasswordConfirm] = useState('');
+  const history = useHistory();
+
+  const isValidEmail = useMemo(() => {
+    const emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    return emailRegex.test(email);
+  }, [email]);
+
+  const isValidPassword = useMemo(() => {
+    return password !== '' && password === passwordConfirm;
+  }, [password, passwordConfirm]);
+
+  const handleClickSubmit = useCallback(async () => {
+    if (!isValidEmail) {
+      alert('이메일 형식이 ㄴㄴ');
+      return;
+    }
+
+    if (!isValidPassword) {
+      alert('비번이 다르네');
+      return;
+    }
+
+    const data = await userAPI.signUp({ email, password });
+
+    if (data.id) {
+      history.push('/');
+    }
+  }, [isValidEmail, isValidPassword, email, password, history]);
+
   return (
     <Container>
-      <Input type="email" label="Email address" placeholder="Email" />
-      <Input type="password" label="Password" placeholder="Password" />
+      <Input
+        type="email"
+        label="Email address"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <Input
+        type="password"
+        label="Password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
       <Input
         type="password"
         label="Password Confirm"
         placeholder="Password Confirm"
+        value={passwordConfirm}
+        onChange={(e) => setpasswordConfirm(e.target.value)}
       />
-      <SignUpBtn>Sign Up</SignUpBtn>
+      <SignUpBtn onClick={handleClickSubmit}>Sign Up</SignUpBtn>
       <GoogleBtn>
         Sign Up With
         <GoogleIconWrapper>

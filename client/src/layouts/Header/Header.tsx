@@ -1,11 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Search from 'Components/Search/Search';
 // import Avatar from "Components/Avatar/Avatar";
 import MUIAccountCircleIcon from '@material-ui/icons/AccountCircle';
 import colors from 'Styles/color-variables';
+import Select from 'Elements/Select/Select';
 
 const Header = () => {
+  const SELECT_MENU = ['Nickname', 'Favorite', 'Account Setting', 'Log Out'];
+  const [profileMenu, setProfileMenu] = useState(false);
+  const handleClickMenu = () => {
+    setProfileMenu(!profileMenu);
+  };
+
+  useEffect(() => {
+    const handleClickSelect = (e: React.MouseEvent<HTMLBodyElement>) => {
+      if (
+        !(
+          (e.target as HTMLElement).closest('.select-wrapper') ||
+          (e.target as HTMLElement).closest('.icon')
+        )
+      ) {
+        setProfileMenu(false);
+      }
+    };
+    const bodyElement = document.querySelector('body');
+    bodyElement?.addEventListener('click', () => handleClickSelect);
+
+    return () =>
+      bodyElement?.removeEventListener('click', () => handleClickSelect);
+  }, []);
+
   return (
     <div>
       <Container>
@@ -13,7 +38,14 @@ const Header = () => {
         <HeaderRight>
           <Search />
           {/* <Avatar /> */}
-          <AccountCircleIcon fontSize="large" />
+          <AccountCircleIcon
+            className="icon"
+            fontSize="inherit"
+            onClick={handleClickMenu}
+          />
+          <SelectWrapper className="select-wrapper">
+            {profileMenu && <Select menus={SELECT_MENU} />}
+          </SelectWrapper>
         </HeaderRight>
       </Container>
     </div>
@@ -23,7 +55,7 @@ const Header = () => {
 export default Header;
 
 const Container = styled.div`
-  height: 70px;
+  height: 60px;
   background-color: ${colors.white};
   display: flex;
   align-items: center;
@@ -36,19 +68,31 @@ const HomeTitle = styled.h1`
   line-height: 28px;
   display: flex;
   color: ${colors.amadda};
+  user-select: none;
 `;
 
 const HeaderRight = styled.div`
+  font-size: 40px;
   display: flex;
   align-items: center;
-  width: 280px;
+  width: 290px;
   justify-content: space-between;
   margin-right: 0px;
   position: absolute;
-  right: 0;
+  right: 0px;
 `;
 
 const AccountCircleIcon = styled(MUIAccountCircleIcon)`
   color: ${colors.gray[400]};
   margin-right: 30px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const SelectWrapper = styled.div`
+  z-index: 9999;
+  margin-top: 240px;
+  position: absolute;
+  right: 30px;
 `;

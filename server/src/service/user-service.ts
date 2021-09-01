@@ -17,27 +17,29 @@ export async function signUpWithEmail(req: Request, res: Response, next: NextFun
 
   const hash = await bcrypt.hash(password, 12);
   const nickname = email.split('@')[0];
+  const profile_image = 'random_image';
 
   const insertId = await UserRepo.createUser({
     email,
     nickname,
     password: hash,
+    profile_image,
   });
 
   const accessToken = createJWT({ id: insertId, email, nickname });
   const refreshToken = createRefreshJWT({ id: insertId, email, nickname });
   res.cookie('refreshToken', refreshToken);
 
-  res.status(STATUS_CODE.CREATED).json({ id: insertId, email, nickname, accessToken });
+  res.status(STATUS_CODE.CREATED).json({ id: insertId, email, nickname, profile_image, access_token: accessToken });
 }
 
 export async function signInWithEmail(req: Request, res: Response): Promise<void> {
-  const { id, email, nickname }: any = req.user;
+  const { id, email, nickname, profile_image }: any = req.user;
   const accessToken = createJWT({ id, email, nickname });
   const refreshToken = createRefreshJWT({ id, email, nickname });
   res.cookie('refreshToken', refreshToken);
 
-  const signInWithEmailResponse = { id, email, nickname, accessToken };
+  const signInWithEmailResponse = { id, email, nickname, profile_image, access_token: accessToken };
   res.status(200).json(signInWithEmailResponse);
 }
 
@@ -50,6 +52,6 @@ export async function refreshTokens(req: Request, res: Response): Promise<void> 
 }
 
 export async function getCurrentUser(req: Request, res: Response): Promise<void> {
-  const { id, email, nickname }: any = req.user;
-  res.status(200).json({ id, email, nickname });
+  const { id, email, nickname, profile_image }: any = req.user;
+  res.status(200).json({ id, email, nickname, profile_image });
 }

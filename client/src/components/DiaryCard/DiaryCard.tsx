@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import colors from 'Styles/color-variables';
-import testImg from 'Images/test.jpg';
+import testImg from 'Images/test2.jpg';
 import MuiLikeBorderIcon from '@material-ui/icons/FavoriteBorder';
 import MuiLikeIcon from '@material-ui/icons/Favorite';
 import MuiSunnyIcon from '@material-ui/icons/WbSunny';
@@ -84,6 +84,7 @@ const DiaryCardWeather = styled(MuiSunnyIcon)`
   margin-right: 10px;
   font-size: 8px;
   color: ${colors.orange};
+  opacity: 0.6;
 `;
 
 const ContentsMid = styled.div`

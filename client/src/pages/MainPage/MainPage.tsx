@@ -4,11 +4,10 @@ import Header from 'Layouts/Header/Header';
 import DiaryCard from 'Components/DiaryCard/DiaryCard';
 import WriteButton from 'Components/WriteButton/WriteButton';
 import DiaryModal from 'Components/DiaryModal/DiaryModal';
-interface MainPageProps {}
 
 const MainPage = () => {
   const [diaryModalOpen, setDiaryModalOpen] = useState(false);
-  const test = Array(10).fill('');
+  const test = Array(8).fill('');
 
   const DiaryModalOpen = () => {
     setDiaryModalOpen(!diaryModalOpen);
@@ -56,9 +55,11 @@ export default MainPage;
 const MainPageContainer = styled.div``;
 
 const MainPageWrapper = styled.div`
-  margin-top: 50px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  min-width: 1340px;
+  max-width: 1350px;
+  margin: 50px auto;
 `;
 
 const DiaryCardWrapper = styled.div`
@@ -85,7 +86,6 @@ const CardContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  max-width: 1425px;
 `;
 
 const WriteButtonWrapper = styled.div`

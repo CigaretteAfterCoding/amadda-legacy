@@ -60,6 +60,17 @@ class DiaryRepo {
     const result = await queryExecutor(query);
     return result;
   }
+
+  static async deleteDiary(diaryId: number): Promise<any> {
+    const query = `
+      DELETE FROM
+        diary
+      WHERE
+        id=${diaryId}
+    `;
+    const result = await queryExecutor(query);
+    return result;
+  }
 }
 
 export default DiaryRepo;

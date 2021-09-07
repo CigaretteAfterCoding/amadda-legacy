@@ -18,7 +18,7 @@ diaryRouter.post(
     'is_private',
   ]),
   isSignedIn,
-  DiaryService.addSalon,
+  DiaryService.addDiary,
 );
 
 diaryRouter.get('/:diaryId', DiaryService.getDiary);
@@ -34,5 +34,7 @@ diaryRouter.patch(
     'is_private',]),
   DiaryService.updateDiary,
 );
+
+diaryRouter.delete('/:diaryId', decodeJWT, DiaryService.deleteDiary);
 
 export default diaryRouter;

@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react/jsx-max-props-per-line */
+import React, { forwardRef } from 'react';
 import colors from 'Styles/color-variables';
 import styled from 'styled-components';
 
@@ -10,16 +11,20 @@ interface InputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input = ({ label = null, ...rests }: InputProps) => {
-  return (
-    <Container>
-      {label && <Label>{label}</Label>}
-      <InputBoxWrapper>
-        <InputBox {...rests} />
-      </InputBoxWrapper>
-    </Container>
-  );
-};
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ label = null, ...rests }: InputProps, ref) => {
+    return (
+      <Container>
+        {label && <Label>{label}</Label>}
+        <InputBoxWrapper>
+          <InputBox ref={ref} {...rests} />
+        </InputBoxWrapper>
+      </Container>
+    );
+  },
+);
+
+Input.displayName = 'Input';
 
 export default Input;
 
@@ -31,7 +36,7 @@ const Container = styled.div`
 const Label = styled.label`
   color: ${colors.black};
   font-weight: bold;
-  font-size: 17px;
+  font-size: 15px;
   line-height: 15px;
   margin-bottom: 13px;
 `;
@@ -41,7 +46,7 @@ const InputBoxWrapper = styled.div``;
 const InputBox = styled.input`
   background: ${colors.white};
   border: 1px solid ${colors.gray[500]};
-  border-radius: 5px;
+  border-radius: 3px;
   width: 323px;
   height: 46px;
   margin-bottom: 13px;
@@ -54,6 +59,7 @@ const InputBox = styled.input`
   }
 
   &:focus {
+    box-shadow: 0 0 2px 2px #1da1fa;
     outline: none;
   }
 `;

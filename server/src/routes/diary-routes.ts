@@ -8,7 +8,7 @@ import DiaryService from 'Service/diary-service';
 const diaryRouter = Router();
 
 diaryRouter.post(
-  '/add-diary',
+  '/',
   decodeJWT,
   validateBody<AddDiaryBody>([
     'title',
@@ -20,5 +20,7 @@ diaryRouter.post(
   isSignedIn,
   DiaryService.addSalon,
 );
+
+diaryRouter.get('/:diaryId', DiaryService.getDiary);
 
 export default diaryRouter;

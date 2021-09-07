@@ -19,15 +19,11 @@ class DiaryService {
     res.status(200).json(diaryId);
   }
 
-  // static async getSalon(req: Request, res: Response): Promise<void> {
-  //   const salonId = parseInt(req.params.salonId);
-  //   const salon = await SalonRepo.findOneSalon(salonId);
-  //   const participants = await SalonRepo.findAllUsersInSalon(salonId);
-  //   const books = await SalonRepo.findAllBooksInSalon(salonId);
-  //   salon.books = books;
-  //   salon.participants = participants;
-  //   res.status(200).json(salon);
-  // }
+  static async getDiary(req: Request, res: Response): Promise<void> {
+    const diaryId = parseInt(req.params.diaryId);
+    const diary = await DiaryRepo.findOneDiary(diaryId);
+    res.status(200).json(diary);
+  }
 
   // static async updateSalon(req: Request, res: Response): Promise<void> {
   //   const salonId = parseInt(req.params.salonId);

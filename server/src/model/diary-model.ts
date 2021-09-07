@@ -13,6 +13,33 @@ class DiaryRepo {
     return await queryExecutor(query);
   }
 
+  static async findOneDiary(diaryId: number): Promise<Diary> {
+    const query = `
+      SELECT
+        diary.id id,
+        diary.title title,
+        diary.content content,
+        diary.date date,
+        diary.weather weather,
+        diary.private private,
+        diary.created_at created_at,
+        diary.updated_at updated_at,
+        user.email user_email,
+        user.nickname user_nickname,
+        user.profile_image user_profile_image
+      FROM 
+        diary
+      JOIN
+        user
+      ON
+        diary.user_id=user.id
+      WHERE
+        diary.id=${diaryId}
+    `;
+    const result = await queryExecutor(query);
+    return result[0];
+  }
+
 }
 
 export default DiaryRepo;

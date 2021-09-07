@@ -22,6 +22,11 @@ const SignUpForm = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const passwordConfirmRef = useRef<HTMLInputElement>(null);
+  const [emptyEmail, setEmptyEmail] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [emptyPassword, setEmptyPassword] = useState(false);
+  const [emptyPasswordConfirm, setEmptyPasswordConfirm] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
 
   useEffect(() => {
     emailRef?.current?.focus();
@@ -39,31 +44,36 @@ const SignUpForm = () => {
 
   const handleClickSubmit = useCallback(async () => {
     if (!email) {
-      alert('이메일을 입력해주세요.');
+      setEmptyEmail(true);
       emailRef?.current?.focus();
       return;
     }
 
     if (!isValidEmail) {
-      alert('이메일 형식이 아닙니다.');
+      setEmptyEmail(false);
+      setEmailError(true);
       emailRef?.current?.focus();
       return;
     }
 
     if (!password) {
-      alert('비밀번호를 입력해주세요.');
+      setEmptyPassword(true);
       passwordRef?.current?.focus();
       return;
     }
 
     if (!passwordConfirm) {
-      alert('비밀번호를 한번 더 입력해주세요.');
+      setEmptyPasswordConfirm(true);
       passwordConfirmRef?.current?.focus();
       return;
     }
 
     if (!isValidPassword) {
-      alert('비밀번호가 다릅니다.');
+      setPasswordError(true);
+      setEmptyPasswordConfirm(false);
+      setEmptyPassword(false);
+      setPassword('');
+      setpasswordConfirm('');
       passwordRef?.current?.focus();
       return;
     }
@@ -82,6 +92,32 @@ const SignUpForm = () => {
     history,
   ]);
 
+  const emailErrorMessage = useMemo(() => {
+    if (emptyEmail) {
+      return '이메일을 입력해주세요.';
+    }
+
+    if (emailError) {
+      return '이메일 형식이 유효하지 않습니다.';
+    }
+  }, [emptyEmail, emailError]);
+
+  const passwordErrorMessage = useMemo(() => {
+    if (emptyPassword) {
+      return '비밀번호를 입력해주세요.';
+    }
+
+    if (passwordError) {
+      return '비밀번호 확인이 틀렸습니다.';
+    }
+  }, [emptyPassword, passwordError]);
+
+  const passwordConfirmErrorMessage = useMemo(() => {
+    if (emptyPasswordConfirm) {
+      return '비밀번호를 다시 입력해주세요.';
+    }
+  }, [emptyPasswordConfirm]);
+
   return (
     <Container>
       <Input
@@ -90,6 +126,8 @@ const SignUpForm = () => {
         label="Email address"
         placeholder="Email"
         value={email}
+        error={emptyEmail || emailError}
+        errorMessage={emailErrorMessage}
         onChange={(e) => setEmail(e.target.value)}
       />
       <Input
@@ -98,6 +136,8 @@ const SignUpForm = () => {
         label="Password"
         placeholder="Password"
         value={password}
+        error={emptyPassword || passwordError}
+        errorMessage={passwordErrorMessage}
         onChange={(e) => setPassword(e.target.value)}
       />
       <Input
@@ -106,6 +146,8 @@ const SignUpForm = () => {
         label="Password Confirm"
         placeholder="Password Confirm"
         value={passwordConfirm}
+        error={emptyPasswordConfirm}
+        errorMessage={passwordConfirmErrorMessage}
         onChange={(e) => setpasswordConfirm(e.target.value)}
       />
       <SignUpBtn onClick={handleClickSubmit}>Sign Up</SignUpBtn>
@@ -137,10 +179,13 @@ const Container = styled.div`
 `;
 
 const SignUpBtn = styled(Button)`
-  margin-top: 5px;
+  margin-top: 17px;
   background-color: ${colors.amadda};
   margin-bottom: 10px;
   color: ${colors.white};
+  &:hover {
+    background-color: ${colors.amaddaHover};
+  }
 `;
 
 const GoogleBtn = styled(Button)`

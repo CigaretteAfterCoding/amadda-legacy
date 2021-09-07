@@ -91,8 +91,6 @@ const SignInForm = () => {
     }
   }, [emptyPassword]);
 
-  console.log(emailError);
-
   return (
     <Container>
       <Input

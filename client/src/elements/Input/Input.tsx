@@ -63,47 +63,8 @@ const Error = styled.div`
   margin-top: 3px;
   font-weight: bold;
   animation: fadein 0.4s;
-  -moz-animation: fadein 0.4s;
-  /* Firefox */
-  -webkit-animation: fadein 0.4s;
-  /* Safari and Chrome */
-  -o-animation: fadein 0.4s;
-  /* Opera */
 
   @keyframes fadein {
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
-  }
-
-  @-moz-keyframes fadein {
-    /* Firefox */
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
-  }
-
-  @-webkit-keyframes fadein {
-    /* Safari and Chrome */
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
-  }
-
-  @-o-keyframes fadein {
-    /* Opera */
     from {
       opacity: 0;
     }
@@ -147,54 +108,14 @@ const InputBox = styled.input<{ error: boolean }>`
       }
 
       animation: fadein 0.4s;
-  -moz-animation: fadein 0.4s;
-  /* Firefox */
-  -webkit-animation: fadein 0.4s;
-  /* Safari and Chrome */
-  -o-animation: fadein 0.4s;
-  /* Opera */
 
-  @keyframes fadein {
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
-  }
-
-  @-moz-keyframes fadein {
-    /* Firefox */
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
-  }
-
-  @-webkit-keyframes fadein {
-    /* Safari and Chrome */
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
-  }
-
-  @-o-keyframes fadein {
-    /* Opera */
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
-
+      @keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
     `}
 `;

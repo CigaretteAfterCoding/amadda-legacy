@@ -106,6 +106,7 @@ const SignUpForm = () => {
     if (emptyPassword) {
       return '비밀번호를 입력해주세요.';
     }
+
     if (passwordError) {
       return '비밀번호 확인이 틀렸습니다.';
     }

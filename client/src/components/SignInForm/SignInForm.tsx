@@ -1,4 +1,10 @@
-import React from 'react';
+import React, {
+  useState,
+  useMemo,
+  useCallback,
+  useRef,
+  useEffect,
+} from 'react';
 import styled from 'styled-components';
 import Button from 'Elements/Button/Button';
 import Input from 'Elements/Input/Input';
@@ -6,13 +12,108 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import GoogleIcon from 'Elements/Icons/GoogleIcon';
 import { Link } from 'react-router-dom';
 import colors from 'Styles/color-variables';
+import { useHistory } from 'react-router';
+import userAPI from 'Apis/userAPI';
 
 const SignInForm = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const history = useHistory();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const [emptyEmail, setEmptyEmail] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [emptyPassword, setEmptyPassword] = useState(false);
+  const [signInError, setSignInError] = useState(false);
+
+  useEffect(() => {
+    emailRef?.current?.focus();
+  }, []);
+
+  const isValidEmail = useMemo(() => {
+    const emailRegex =
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    return emailRegex.test(email);
+  }, [email]);
+
+  const handleClickSubmit = useCallback(async () => {
+    if (!email) {
+      setEmptyEmail(true);
+      emailRef?.current?.focus();
+      return;
+    }
+
+    if (!isValidEmail) {
+      setEmptyEmail(false);
+      setEmailError(true);
+      emailRef?.current?.focus();
+      return;
+    }
+
+    if (!password) {
+      setEmptyPassword(true);
+      passwordRef?.current?.focus();
+      return;
+    }
+
+    const data = await userAPI.signIn({ email, password });
+
+    if (data.id) {
+      history.push('/');
+      return;
+    }
+
+    emailRef?.current?.focus();
+    setSignInError(true);
+    setPassword('');
+    setEmptyEmail(false);
+    setEmailError(false);
+    setEmptyPassword(false);
+  }, [isValidEmail, email, password, history]);
+
+  const emailErrorMessage = useMemo(() => {
+    if (emptyEmail) {
+      return '이메일을 입력해주세요.';
+    }
+
+    if (emailError) {
+      return '이메일 형식이 유효하지 않습니다.';
+    }
+
+    if (signInError) {
+      return '이메일이나 비밀번호가 틀렸습니다.';
+    }
+  }, [emptyEmail, emailError, signInError]);
+
+  const passwordErrorMessage = useMemo(() => {
+    if (emptyPassword) {
+      return '비밀번호를 입력해주세요.';
+    }
+  }, [emptyPassword]);
+
   return (
     <Container>
-      <Input type="email" label="Email address" placeholder="Email" />
-      <Input type="password" label="Password" placeholder="Password" />
-      <SignInBtn>Sign In</SignInBtn>
+      <Input
+        ref={emailRef}
+        type="email"
+        label="Email address"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        error={emailError || emptyEmail || signInError}
+        errorMessage={emailErrorMessage}
+      />
+      <Input
+        ref={passwordRef}
+        type="password"
+        label="Password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        error={emptyPassword}
+        errorMessage={passwordErrorMessage}
+      />
+      <SignInBtn onClick={handleClickSubmit}>Sign In</SignInBtn>
       <GoogleBtn>
         Sign In With
         <GoogleIconWrapper>
@@ -44,10 +145,13 @@ const Container = styled.div`
 `;
 
 const SignInBtn = styled(Button)`
-  margin-top: 5px;
+  margin-top: 17px;
   background-color: ${colors.amadda};
   margin-bottom: 10px;
   color: ${colors.white};
+  &:hover {
+    background-color: ${colors.amaddaHover};
+  }
 `;
 
 const GoogleBtn = styled(Button)`

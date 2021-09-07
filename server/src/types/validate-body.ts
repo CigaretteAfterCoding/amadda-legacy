@@ -19,3 +19,11 @@ export interface AddDiaryBody {
   weather: string;
   is_private: boolean;
 }
+
+export interface UpdateDiaryBody {
+  title?: string;
+  content?: string;
+  date?: string;
+  weather?: string;
+  is_private?: boolean;
+}

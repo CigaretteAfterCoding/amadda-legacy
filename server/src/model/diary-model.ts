@@ -2,6 +2,9 @@ import { Diary } from 'Types/diary';
 import { queryExecutor } from 'Utils/query-executor';
 
 interface AddDiaryParams extends Diary {};
+interface UpdateDiaryParams extends Pick<Diary, 'title'| 'content'| 'date' | 'weather' | 'isPrivate'> {
+  diaryId: number;
+}
 
 class DiaryRepo {
   static async addDiary({ title, content, date, weather, isPrivate, userId }: AddDiaryParams): Promise<number> {
@@ -40,6 +43,23 @@ class DiaryRepo {
     return result[0];
   }
 
+  static async updateDiary({ diaryId, title, content, date, weather, isPrivate }: UpdateDiaryParams): Promise<any> {
+    const query = `
+      UPDATE
+        diary
+      SET 
+        title='${title}',
+        content='${content}',
+        date='${date}',
+        weather='${weather}',
+        private='${isPrivate}',
+        updated_at=NOW()
+      WHERE 
+        id=${diaryId}
+    `;
+    const result = await queryExecutor(query);
+    return result;
+  }
 }
 
 export default DiaryRepo;

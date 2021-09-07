@@ -25,12 +25,14 @@ class DiaryService {
     res.status(200).json(diary);
   }
 
-  // static async updateSalon(req: Request, res: Response): Promise<void> {
-  //   const salonId = parseInt(req.params.salonId);
-  //   const { name } = req.body;
-  //   await SalonRepo.updateSalon({ salonId, name });
-  //   res.status(200).json({ message: 'modified successfully' });
-  // }
+  static async updateDiary(req: Request, res: Response): Promise<void> {
+    console.log('업뎃')
+    const diaryId = parseInt(req.params.diaryId);
+    const { title, content, date, weather, is_private } = req.body;
+    const isPrivate = is_private ? 1 : 0;
+    await DiaryRepo.updateDiary({ diaryId, title, content, date, weather, isPrivate });
+    res.status(200).json({ message: 'modified successfully' });
+  }
 
   // static async getBook(req: Request, res: Response): Promise<void> {
   //   const bookId = parseInt(req.params.bookId);

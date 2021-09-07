@@ -38,11 +38,13 @@ const SignInForm = () => {
       emailRef?.current?.focus();
       return;
     }
+
     if (!isValidEmail) {
       alert('이메일 형식이 아닙니다.');
       emailRef?.current?.focus();
       return;
     }
+
     if (!password) {
       alert('비밀번호를 입력해주세요.');
       passwordRef?.current?.focus();

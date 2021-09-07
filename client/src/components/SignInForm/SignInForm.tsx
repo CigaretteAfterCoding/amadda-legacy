@@ -1,4 +1,10 @@
-import React from 'react';
+import React, {
+  useState,
+  useMemo,
+  useCallback,
+  useRef,
+  useEffect,
+} from 'react';
 import styled from 'styled-components';
 import Button from 'Elements/Button/Button';
 import Input from 'Elements/Input/Input';
@@ -6,13 +12,69 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import GoogleIcon from 'Elements/Icons/GoogleIcon';
 import { Link } from 'react-router-dom';
 import colors from 'Styles/color-variables';
+import { useHistory } from 'react-router';
+import userAPI from 'Apis/userAPI';
 
 const SignInForm = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const history = useHistory();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    emailRef?.current?.focus();
+  }, []);
+
+  const isValidEmail = useMemo(() => {
+    const emailRegex =
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    return emailRegex.test(email);
+  }, [email]);
+
+  const handleClickSubmit = useCallback(async () => {
+    if (!email) {
+      alert('이메일을 입력해주세요.');
+      emailRef?.current?.focus();
+      return;
+    }
+    if (!isValidEmail) {
+      alert('이메일 형식이 아닙니다.');
+      emailRef?.current?.focus();
+      return;
+    }
+    if (!password) {
+      alert('비밀번호를 입력해주세요.');
+      passwordRef?.current?.focus();
+      return;
+    }
+
+    const data = await userAPI.signIn({ email, password });
+
+    if (data.id) {
+      history.push('/');
+    }
+  }, [isValidEmail, email, password, history]);
+
   return (
     <Container>
-      <Input type="email" label="Email address" placeholder="Email" />
-      <Input type="password" label="Password" placeholder="Password" />
-      <SignInBtn>Sign In</SignInBtn>
+      <Input
+        ref={emailRef}
+        type="email"
+        label="Email address"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <Input
+        ref={passwordRef}
+        type="password"
+        label="Password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <SignInBtn onClick={handleClickSubmit}>Sign In</SignInBtn>
       <GoogleBtn>
         Sign In With
         <GoogleIconWrapper>

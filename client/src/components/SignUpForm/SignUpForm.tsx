@@ -1,4 +1,10 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useMemo,
+  useEffect,
+  useRef,
+} from 'react';
 import styled from 'styled-components';
 import Button from 'Elements/Button/Button';
 import Input from 'Elements/Input/Input';
@@ -13,9 +19,17 @@ const SignUpForm = () => {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setpasswordConfirm] = useState('');
   const history = useHistory();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const passwordConfirmRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    emailRef?.current?.focus();
+  }, []);
 
   const isValidEmail = useMemo(() => {
-    const emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    const emailRegex =
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
     return emailRegex.test(email);
   }, [email]);
 
@@ -24,13 +38,33 @@ const SignUpForm = () => {
   }, [password, passwordConfirm]);
 
   const handleClickSubmit = useCallback(async () => {
+    if (!email) {
+      alert('이메일을 입력해주세요.');
+      emailRef?.current?.focus();
+      return;
+    }
+
     if (!isValidEmail) {
-      alert('이메일 형식이 ㄴㄴ');
+      alert('이메일 형식이 아닙니다.');
+      emailRef?.current?.focus();
+      return;
+    }
+
+    if (!password) {
+      alert('비밀번호를 입력해주세요.');
+      passwordRef?.current?.focus();
+      return;
+    }
+
+    if (!passwordConfirm) {
+      alert('비밀번호를 한번 더 입력해주세요.');
+      passwordConfirmRef?.current?.focus();
       return;
     }
 
     if (!isValidPassword) {
-      alert('비번이 다르네');
+      alert('비밀번호가 다릅니다.');
+      passwordRef?.current?.focus();
       return;
     }
 
@@ -39,11 +73,19 @@ const SignUpForm = () => {
     if (data.id) {
       history.push('/');
     }
-  }, [isValidEmail, isValidPassword, email, password, history]);
+  }, [
+    isValidEmail,
+    isValidPassword,
+    email,
+    password,
+    passwordConfirm,
+    history,
+  ]);
 
   return (
     <Container>
       <Input
+        ref={emailRef}
         type="email"
         label="Email address"
         placeholder="Email"
@@ -51,6 +93,7 @@ const SignUpForm = () => {
         onChange={(e) => setEmail(e.target.value)}
       />
       <Input
+        ref={passwordRef}
         type="password"
         label="Password"
         placeholder="Password"
@@ -58,6 +101,7 @@ const SignUpForm = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <Input
+        ref={passwordConfirmRef}
         type="password"
         label="Password Confirm"
         placeholder="Password Confirm"

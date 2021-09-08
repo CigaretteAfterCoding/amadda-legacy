@@ -179,7 +179,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 30px 0 30px 0;
+  padding: 30px 0;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.5);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);

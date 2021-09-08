@@ -24,5 +24,5 @@ const HomeTitle = styled.h1`
   font-weight: bold;
   font-size: 24px;
   line-height: 28px;
-  color: ${colors.black};
+  color: ${colors.amadda};
 `;

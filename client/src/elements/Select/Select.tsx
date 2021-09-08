@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import colors from 'Styles/color-variables';
 
 interface SelectProps {
-  menus: string[];
+  menus: React.ReactNode[];
 }
 
 const Select = ({ menus }: SelectProps) => {
@@ -22,8 +22,7 @@ export default Select;
 
 const SelectContainer = styled.div`
   background-color: ${colors.white};
-  width: 170px;
-  height: 170px;
+  width: 180px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   user-select: none;
@@ -46,7 +45,10 @@ const SelectMenu = styled.ul`
 `;
 
 const SelectMenuList = styled.li`
-  padding: 13px 0 15px 13px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 13px 0 15px 10px;
   &:first-child {
     font-weight: bold;
     color: ${colors.amadda};
@@ -58,7 +60,7 @@ const SelectMenuList = styled.li`
     }
   }
   &:last-child {
-    border-top: 1px solid ${colors.gray[300]};
+    /* border-top: 1px solid ${colors.gray[300]}; */
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
   }

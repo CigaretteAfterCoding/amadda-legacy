@@ -5,9 +5,26 @@ import Search from 'Components/Search/Search';
 import MUIAccountCircleIcon from '@material-ui/icons/AccountCircle';
 import colors from 'Styles/color-variables';
 import Select from 'Elements/Select/Select';
+import SettingsIcon from '@material-ui/icons/Settings';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const Header = () => {
-  const SELECT_MENU = ['Nickname', 'Favorite', 'Account Setting', 'Log Out'];
+  const SELECT_MENU = [
+    'Nickname',
+    <>
+      <FavoriteBorderIcon fontSize="small" style={{ marginRight: '5px' }} />
+      Favorite
+    </>,
+    <>
+      <SettingsIcon fontSize="small" style={{ marginRight: '5px' }} />
+      Account Setting
+    </>,
+    <>
+      <ExitToAppIcon fontSize="small" style={{ marginRight: '5px' }} />
+      Log Out
+    </>,
+  ];
   const [profileMenu, setProfileMenu] = useState(false);
   const handleClickMenu = () => {
     setProfileMenu(!profileMenu);
@@ -25,10 +42,9 @@ const Header = () => {
       }
     };
     const bodyElement = document.querySelector('body');
-    bodyElement?.addEventListener('click', () => handleClickSelect);
+    bodyElement?.addEventListener('click', handleClickSelect);
 
-    return () =>
-      bodyElement?.removeEventListener('click', () => handleClickSelect);
+    return () => bodyElement?.removeEventListener('click', handleClickSelect);
   }, []);
 
   return (

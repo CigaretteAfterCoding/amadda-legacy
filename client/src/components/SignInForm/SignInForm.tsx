@@ -134,13 +134,14 @@ const SignInForm = () => {
 export default SignInForm;
 
 const Container = styled.div`
-  width: 480px;
+  width: 430px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 50px 0 40px 0;
+  padding: 30px 0;
   border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
 `;
 
@@ -162,6 +163,9 @@ const GoogleBtn = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
+  &:hover {
+    background-color: ${colors.gray[400]};
+  }
 `;
 
 const GoogleIconWrapper = styled.div`
@@ -176,6 +180,9 @@ const FaceBookBtn = styled(Button)`
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
+  &:hover {
+    background-color: ${colors.gray[400]};
+  }
 `;
 
 const CreateAcoountBtn = styled.button`

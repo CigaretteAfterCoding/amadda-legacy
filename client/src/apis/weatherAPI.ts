@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const BASE_URI =
-  'https://api.openweathermap.org/data/2.5/weather?q=SEOUL&appid=e7b1a57cd2158c8d195bfb24b7597bad&lang=kr&units=metric';
+  `https://api.openweathermap.org/data/2.5/weather?q=SEOUL&appid=${process.env.WEATHER_API_ID}&lang=kr&units=metric`;
 
 const getWeather = async () => {
   try {

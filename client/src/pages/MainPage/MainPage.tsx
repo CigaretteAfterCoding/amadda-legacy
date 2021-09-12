@@ -12,13 +12,7 @@ const MainPage = () => {
 
   const DiaryModalOpen = () => {
     setDiaryModalOpen(!diaryModalOpen);
-    diaryAPI.addDiary({
-      title: 'asdf',
-      content: 'dddd',
-      weather: 'sunny',
-      date: '2020-01-01',
-      is_private: false,
-    });
+    diaryAPI.getDiary(3);
   };
 
   useEffect(() => {

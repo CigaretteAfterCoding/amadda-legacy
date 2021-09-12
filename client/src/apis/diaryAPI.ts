@@ -11,8 +11,24 @@ interface AddDiaryParams {
 async function addDiary(diary: AddDiaryParams): Promise<number | undefined> {
   try {
     const { data } = await amaddaApi.post<number>('/diary', diary);
-    console.log({ data });
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
+interface GetDiaryResponse {
+  title: string;
+  content: string;
+  date: string;
+  weather: 'sunny' | 'cloudy' | 'rainy' | 'snowy';
+  is_private: boolean;
+}
+
+async function getDiary(diaryId: number) {
+  try {
+    const { data } = await amaddaApi.get<GetDiaryResponse>(`/diary/${diaryId}`);
+    console.log({ data });
     return data;
   } catch (error) {
     console.error(error);
@@ -21,4 +37,7 @@ async function addDiary(diary: AddDiaryParams): Promise<number | undefined> {
 
 export default {
   addDiary,
+  getDiary,
+  // updateDiary,
+  // deleteDiary,
 };

@@ -57,24 +57,30 @@ const SignUpForm = () => {
     }
 
     if (!password) {
+      setEmptyEmail(false);
+      setEmailError(false);
       setEmptyPassword(true);
       passwordRef?.current?.focus();
       return;
     }
 
     if (!passwordConfirm) {
+      setEmptyEmail(false);
+      setEmailError(false);
+      setEmptyPassword(false);
       setEmptyPasswordConfirm(true);
       passwordConfirmRef?.current?.focus();
       return;
     }
 
     if (!isValidPassword) {
-      setPasswordError(true);
-      setEmptyPasswordConfirm(false);
+      setEmptyEmail(false);
+      setEmailError(false);
       setEmptyPassword(false);
-      setPassword('');
+      setEmptyPasswordConfirm(false);
+      setPasswordError(true);
       setpasswordConfirm('');
-      passwordRef?.current?.focus();
+      passwordConfirmRef?.current?.focus();
       return;
     }
 
@@ -106,17 +112,17 @@ const SignUpForm = () => {
     if (emptyPassword) {
       return '비밀번호를 입력해주세요.';
     }
-
-    if (passwordError) {
-      return '비밀번호 확인이 틀렸습니다.';
-    }
-  }, [emptyPassword, passwordError]);
+  }, [emptyPassword]);
 
   const passwordConfirmErrorMessage = useMemo(() => {
     if (emptyPasswordConfirm) {
       return '비밀번호를 다시 입력해주세요.';
     }
-  }, [emptyPasswordConfirm]);
+
+    if (passwordError) {
+      return '비밀번호 확인이 틀렸습니다.';
+    }
+  }, [emptyPasswordConfirm, passwordError]);
 
   return (
     <Container>
@@ -136,7 +142,7 @@ const SignUpForm = () => {
         label="Password"
         placeholder="Password"
         value={password}
-        error={emptyPassword || passwordError}
+        error={emptyPassword}
         errorMessage={passwordErrorMessage}
         onChange={(e) => setPassword(e.target.value)}
       />
@@ -146,7 +152,7 @@ const SignUpForm = () => {
         label="Password Confirm"
         placeholder="Password Confirm"
         value={passwordConfirm}
-        error={emptyPasswordConfirm}
+        error={emptyPasswordConfirm || passwordError}
         errorMessage={passwordConfirmErrorMessage}
         onChange={(e) => setpasswordConfirm(e.target.value)}
       />
@@ -168,13 +174,14 @@ const SignUpForm = () => {
 export default SignUpForm;
 
 const Container = styled.div`
-  width: 480px;
+  width: 430px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 50px 0 40px 0;
+  padding: 30px 0;
   border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
 `;
 
@@ -196,6 +203,9 @@ const GoogleBtn = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
+  &:hover {
+    background-color: ${colors.gray[400]};
+  }
 `;
 
 const GoogleIconWrapper = styled.div`
@@ -210,4 +220,7 @@ const FaceBookBtn = styled(Button)`
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
+  &:hover {
+    background-color: ${colors.gray[400]};
+  }
 `;

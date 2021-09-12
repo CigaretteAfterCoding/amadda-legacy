@@ -73,7 +73,7 @@ const SignInForm = () => {
     setEmptyEmail(false);
     setEmailError(false);
     setEmptyPassword(false);
-  }, [isValidEmail, email, password, history]);
+  }, [isValidEmail, email, password, history, setUser]);
 
   const emailErrorMessage = useMemo(() => {
     if (emptyEmail) {

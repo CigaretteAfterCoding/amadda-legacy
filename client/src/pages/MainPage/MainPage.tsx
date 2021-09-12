@@ -4,29 +4,41 @@ import Header from 'Layouts/Header/Header';
 import DiaryCard from 'Components/DiaryCard/DiaryCard';
 import WriteButton from 'Components/WriteButton/WriteButton';
 import DiaryModal from 'Components/DiaryModal/DiaryModal';
+import diaryAPI from 'Apis/diaryAPI';
 
 const MainPage = () => {
   const [diaryModalOpen, setDiaryModalOpen] = useState(false);
+  const [modalMode, setModalMode] = useState<'default' | 'write' | 'edit'>(
+    'default',
+  );
   const test = Array(8).fill('');
 
-  const DiaryModalOpen = () => {
+  const openDiaryModal = () => {
     setDiaryModalOpen(!diaryModalOpen);
+    diaryAPI.deleteDiary(3);
   };
 
+  const openDiaryWriteModal = () => {
+    setDiaryModalOpen(!diaryModalOpen);
+    setModalMode('write');
+  };
+
+  const body = document.querySelector('body');
+
   useEffect(() => {
-    const DiaryModalClose = (e: React.MouseEvent<HTMLBodyElement>) => {
+    const closeDiaryModal = (e: React.MouseEvent<HTMLBodyElement>) => {
       if (!(e.target as HTMLElement).closest('.diary-modal')) {
         setDiaryModalOpen(false);
+        setModalMode('default');
       }
     };
-    const body = document.querySelector('body');
 
     if (diaryModalOpen) {
-      body?.addEventListener('click', DiaryModalClose);
+      body?.addEventListener('click', closeDiaryModal);
     }
 
-    return () => body?.removeEventListener('click', DiaryModalClose);
-  }, [diaryModalOpen]);
+    return () => body?.removeEventListener('click', closeDiaryModal);
+  }, [diaryModalOpen, body]);
 
   return (
     <MainPageContainer>
@@ -34,16 +46,18 @@ const MainPage = () => {
       <MainPageWrapper>
         <CardContainer>
           {test?.map((item, idx) => (
-            <DiaryCardWrapper key={idx} onClick={DiaryModalOpen}>
+            <DiaryCardWrapper key={idx} onClick={openDiaryModal}>
               <DiaryCard key={idx} />
             </DiaryCardWrapper>
           ))}
         </CardContainer>
         <DiaryModalWrapper diaryModalOpen={diaryModalOpen}>
-          {diaryModalOpen && <DiaryModal className="diary-modal" />}
+          {diaryModalOpen && (
+            <DiaryModal className="diary-modal" modalMode={modalMode} />
+          )}
         </DiaryModalWrapper>
       </MainPageWrapper>
-      <WriteButtonWrapper>
+      <WriteButtonWrapper onClick={openDiaryWriteModal}>
         <WriteButton />
       </WriteButtonWrapper>
     </MainPageContainer>

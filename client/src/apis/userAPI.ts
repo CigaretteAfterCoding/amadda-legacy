@@ -9,7 +9,7 @@ interface SignUpParams {
 }
 
 interface SignUpResponse extends User {
-  accessToken: string;
+  access_token: string;
 }
 
 async function signUp({
@@ -24,7 +24,8 @@ async function signUp({
 
     amaddaApi.defaults.headers.common[
       'Authorization'
-    ] = `Bearer ${data.accessToken}`;
+    ] = `Bearer ${data.access_token}`;
+    localStorage.setItem('accessToken', data.access_token);
     refreshTimeoutId = setTimeout(refreshAccessTokens, 500000);
 
     return data;
@@ -45,10 +46,12 @@ async function signIn({
       email,
       password,
     });
+    console.log({ data });
 
     amaddaApi.defaults.headers.common[
       'Authorization'
-    ] = `Bearer ${data.accessToken}`;
+    ] = `Bearer ${data.access_token}`;
+    localStorage.setItem('accessToken', data.access_token);
     refreshTimeoutId = setTimeout(refreshAccessTokens, 500000);
 
     return data;
@@ -65,7 +68,7 @@ function signOut(): void {
 }
 
 interface RefreshAccessTokensResponse {
-  accessToken: string;
+  access_token: string;
 }
 
 async function refreshAccessTokens(): Promise<void> {
@@ -75,6 +78,7 @@ async function refreshAccessTokens(): Promise<void> {
   amaddaApi.defaults.headers.common[
     'Authorization'
   ] = `Bearer ${data.accessToken}`;
+  localStorage.setItem('accessToken', data.access_token);
   refreshTimeoutId = setTimeout(refreshAccessTokens, 10000);
 }
 

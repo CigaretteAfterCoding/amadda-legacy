@@ -2,12 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import Logo from 'Layouts/Header/Logo';
 import SignInForm from 'Components/SignInForm/SignInForm';
-import Abstract from 'Images/Abstract.mp4';
 import Clouds from 'Images/Clouds.mp4';
 import Rain from 'Images/Rain.mp4';
 
 const SignInPage = () => {
-  const videos = [Abstract, Clouds, Rain];
+  const videos = [Clouds, Rain];
   const videosNum = Math.floor(Math.random() * videos.length);
   return (
     <>

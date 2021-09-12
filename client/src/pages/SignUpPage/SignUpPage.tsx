@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import SignUpForm from 'Components/SignUpForm/SignUpForm';
-import Abstract from 'Images/Abstract.mp4';
 import Clouds from 'Images/Clouds.mp4';
 import Rain from 'Images/Rain.mp4';
 
 const SignUpPage = () => {
-  const videos = [Abstract, Clouds, Rain];
+  const videos = [Clouds, Rain];
   const videosNum = Math.floor(Math.random() * videos.length);
   return (
     <Container>

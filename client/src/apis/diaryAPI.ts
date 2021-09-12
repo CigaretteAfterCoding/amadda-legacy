@@ -62,9 +62,23 @@ async function updateDiary({ diaryId, title, content, date, weather, is_private 
   }
 }
 
+interface DeleteDiaryResponse {
+  message: 'deleted successfully' | 'no items to delete';
+}
+
+async function deleteDiary(diaryId: number) {
+  try {
+    const { data } = await amaddaApi.delete<DeleteDiaryResponse>(`/diary/${diaryId}`);
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export default {
   addDiary,
   getDiary,
   updateDiary,
-  // deleteDiary,
+  deleteDiary,
 };

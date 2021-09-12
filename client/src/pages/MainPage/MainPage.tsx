@@ -12,14 +12,7 @@ const MainPage = () => {
 
   const DiaryModalOpen = () => {
     setDiaryModalOpen(!diaryModalOpen);
-    diaryAPI.updateDiary({
-      diaryId: 3,
-      title: 'dsafas',
-      content: 'adsfa',
-      date: '2092-12-12',
-      weather: 'sunny',
-      is_private: false,
-    });
+    diaryAPI.deleteDiary(3);
   };
 
   useEffect(() => {

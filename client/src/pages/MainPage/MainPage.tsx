@@ -4,6 +4,7 @@ import Header from 'Layouts/Header/Header';
 import DiaryCard from 'Components/DiaryCard/DiaryCard';
 import WriteButton from 'Components/WriteButton/WriteButton';
 import DiaryModal from 'Components/DiaryModal/DiaryModal';
+import diaryAPI from 'Apis/diaryAPI';
 
 const MainPage = () => {
   const [diaryModalOpen, setDiaryModalOpen] = useState(false);
@@ -14,6 +15,7 @@ const MainPage = () => {
 
   const openDiaryModal = () => {
     setDiaryModalOpen(!diaryModalOpen);
+    diaryAPI.deleteDiary(3);
   };
 
   const openDiaryWriteModal = () => {

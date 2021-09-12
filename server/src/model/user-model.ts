@@ -1,5 +1,4 @@
 import { queryExecutor } from 'Utils/query-executor';
-import { CreateUserParams } from 'Types/repository-param';
 
 export interface UserInfo {
   id: number;
@@ -13,6 +12,13 @@ export interface PublicUserInfo {
   id: number;
   email: string;
   nickname: string;
+  profile_image: string;
+}
+
+export interface CreateUserParams {
+  email: string;
+  nickname: string;
+  password: string;
   profile_image: string;
 }
 

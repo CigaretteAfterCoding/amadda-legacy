@@ -4,10 +4,12 @@
   "description": "아마따 일기",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node -r tsconfig-paths/register src/app.ts",
+    "dev": "env-cmd -f .env.local ts-node -r tsconfig-paths/register src/app.ts",
+    "dev:aws": "ts-node -r tsconfig-paths/register src/app.ts",
     "prebuild": "pm2 kill",
     "build": "NODE_ENV=production rimraf build/* && ttsc",
     "postbuild": "npm run start",
+    "build:client": "cd ../client && npm run deploy",
     "monit": "pm2 plus",
     "start": "NODE_ENV=production pm2 start build/app.js"
   },
@@ -34,6 +36,7 @@
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
     "@zerollup/ts-transform-paths": "^1.7.18",
+    "env-cmd": "^10.1.0",
     "eslint": "^7.31.0",
     "eslint-config-prettier": "^8.3.0",
     "pm2": "^5.1.0",

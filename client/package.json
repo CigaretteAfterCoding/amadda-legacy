@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack serve --config webpack.dev.js"
+    "dev": "webpack serve --config webpack.dev.js",
+    "build": "cross-env INLINE_RUNTIME_CHUNK=false webpack build --config webpack.prod.js",
+    "predeploy": "npm run build",
+    "deploy": "NODE_ENV=production pm2 start npm -- start"
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +15,7 @@
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.1",
+    "cross-env": "^7.0.3",
     "html-webpack-plugin": "^5.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -42,6 +46,7 @@
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "file-loader": "^6.2.0",
+    "pm2": "^5.1.1",
     "styled-reset": "^4.3.4",
     "typescript": "^4.3.5",
     "webpack": "^5.49.0"

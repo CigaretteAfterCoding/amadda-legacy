@@ -10,13 +10,13 @@ import WriteButton from 'Components/WriteButton/WriteButton';
 
 interface DiaryModalProps {
   className: string;
-  diaryWriteModal: boolean;
+  modalMode: 'default' | 'write' | 'edit';
 }
 
-const DiaryModal = ({ className, diaryWriteModal }: DiaryModalProps) => {
+const DiaryModal = ({ className, modalMode = 'default' }: DiaryModalProps) => {
   return (
     <DiaryModalContainer className={className}>
-      {diaryWriteModal ? (
+      {modalMode === 'write' ? (
         <PhotoContainer>
           <UploadButtonWrapper>
             <UploadButton />
@@ -26,7 +26,7 @@ const DiaryModal = ({ className, diaryWriteModal }: DiaryModalProps) => {
         <DiaryModalPhoto />
       )}
       <DiaryModalContents>
-        {diaryWriteModal ? (
+        {modalMode === 'write' ? (
           <TitleWriteWrapper>
             <TitleWrite placeholder="당신의 하루는 어떠셨나요?" />
             <MuiCreateIcon
@@ -43,7 +43,7 @@ const DiaryModal = ({ className, diaryWriteModal }: DiaryModalProps) => {
             </DiaryDateWrapper>
           </DiaryTitleWrapper>
         )}
-        {diaryWriteModal ? (
+        {modalMode === 'write' ? (
           <TextWrite placeholder="당신의 기분을 적어주세요..." />
         ) : (
           <DiaryModalText>

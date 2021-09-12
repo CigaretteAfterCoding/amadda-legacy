@@ -8,7 +8,8 @@
     "dev:aws": "ts-node -r tsconfig-paths/register src/app.ts",
     "prebuild": "pm2 kill",
     "build": "NODE_ENV=production rimraf build/* && ttsc",
-    "postbuild": "npm run start && cd ../client && npm run deploy",
+    "postbuild": "npm run start",
+    "build:client": "cd ../client && npm run deploy",
     "monit": "pm2 plus",
     "start": "NODE_ENV=production pm2 start build/app.js"
   },

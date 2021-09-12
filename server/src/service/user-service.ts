@@ -48,7 +48,7 @@ export async function refreshTokens(req: Request, res: Response): Promise<void> 
   const accessToken = createJWT({ id, email, nickname });
   const refreshToken = createRefreshJWT({ id, email, nickname });
   res.cookie('refreshToken', refreshToken);
-  res.status(200).json({ accessToken });
+  res.status(200).json({ access_token: accessToken });
 }
 
 export async function getCurrentUser(req: Request, res: Response): Promise<void> {

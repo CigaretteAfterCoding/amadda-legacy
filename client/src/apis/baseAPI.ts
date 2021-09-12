@@ -12,7 +12,10 @@ export const apiURL = baseURL + PORT + '/api';
 export const amaddaApi = Axios.create({
   baseURL: apiURL,
   withCredentials: true,
-  headers: { 'Content-Type': 'application/json' },
+  headers: {
+    'Content-Type': 'application/json',
+    // [TOKEN_KEY]: `Bearer ${localStorage.getItem('accessToken')}`,
+  },
 });
 
 // export const amaddaApiWithAuth = Axios.create({

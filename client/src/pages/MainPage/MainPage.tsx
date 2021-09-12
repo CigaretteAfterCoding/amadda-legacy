@@ -4,6 +4,7 @@ import Header from 'Layouts/Header/Header';
 import DiaryCard from 'Components/DiaryCard/DiaryCard';
 import WriteButton from 'Components/WriteButton/WriteButton';
 import DiaryModal from 'Components/DiaryModal/DiaryModal';
+import diaryAPI from 'Apis/diaryAPI';
 
 const MainPage = () => {
   const [diaryModalOpen, setDiaryModalOpen] = useState(false);
@@ -11,6 +12,7 @@ const MainPage = () => {
 
   const DiaryModalOpen = () => {
     setDiaryModalOpen(!diaryModalOpen);
+    diaryAPI.deleteDiary(3);
   };
 
   useEffect(() => {
@@ -34,7 +36,9 @@ const MainPage = () => {
       <MainPageWrapper>
         <CardContainer>
           {test?.map((item, idx) => (
-            <DiaryCardWrapper key={idx} onClick={DiaryModalOpen}>
+            <DiaryCardWrapper key={idx}
+              onClick={DiaryModalOpen}
+            >
               <DiaryCard key={idx} />
             </DiaryCardWrapper>
           ))}

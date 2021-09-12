@@ -40,7 +40,7 @@ class DiaryService {
       res.status(200).json({ message: 'deleted successfully' });
       return;
     }
-    res.status(200).json({ messgage: 'no items to delete' });
+    res.status(200).json({ message: 'no items to delete' });
   }
 }
 

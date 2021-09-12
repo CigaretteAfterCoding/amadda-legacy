@@ -34,7 +34,10 @@ module.exports = {
     '@typescript-eslint/type-annotation-spacing': 'error',
 
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/exhaustive-deps': ['warn',
+      {
+        'additionalHooks': 'useRecoilCallback',
+      }],
     'react/jsx-max-props-per-line': ['error', { maximum: 1 }],
     'react/jsx-wrap-multilines': 'error',
     'react/jsx-closing-bracket-location': ['error', 'tag-aligned'],

@@ -28,7 +28,34 @@ interface GetDiaryResponse {
 async function getDiary(diaryId: number) {
   try {
     const { data } = await amaddaApi.get<GetDiaryResponse>(`/diary/${diaryId}`);
-    console.log({ data });
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+interface UpdateDiaryParams {
+  diaryId: number;
+  title?: string;
+  content?: string;
+  date?: string;
+  weather?: 'sunny' | 'cloudy' | 'rainy' | 'snowy';
+  is_private?: boolean;
+}
+interface UpdateDiaryResponse {
+  message: 'modified successfully';
+}
+
+async function updateDiary({ diaryId, title, content, date, weather, is_private }: UpdateDiaryParams) {
+  try {
+    const { data } = await amaddaApi.patch<UpdateDiaryResponse>(`/diary/${diaryId}`, {
+      title,
+      content,
+      date,
+      weather,
+      is_private,
+    });
+
     return data;
   } catch (error) {
     console.error(error);
@@ -38,6 +65,6 @@ async function getDiary(diaryId: number) {
 export default {
   addDiary,
   getDiary,
-  // updateDiary,
+  updateDiary,
   // deleteDiary,
 };

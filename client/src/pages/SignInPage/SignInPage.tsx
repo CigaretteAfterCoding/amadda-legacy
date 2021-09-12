@@ -8,14 +8,22 @@ import Rain from 'Images/Rain.mp4';
 const SignInPage = () => {
   const videos = [Clouds, Rain];
   const videosNum = Math.floor(Math.random() * videos.length);
+
   return (
     <>
       <LogoWrapper>
         <Logo />
       </LogoWrapper>
       <Container>
-        <video width="100%" height="auto" autoPlay loop muted>
-          <source src={videos[videosNum]} type="video/mp4" />
+        <video width="100%"
+          height="auto"
+          autoPlay
+          loop
+          muted
+        >
+          <source src={videos[videosNum]}
+            type="video/mp4"
+          />
         </video>
         <SignInWrapper>
           <SignInForm />

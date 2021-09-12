@@ -46,14 +46,18 @@ const MainPage = () => {
       <MainPageWrapper>
         <CardContainer>
           {test?.map((item, idx) => (
-            <DiaryCardWrapper key={idx} onClick={openDiaryModal}>
+            <DiaryCardWrapper key={idx}
+              onClick={openDiaryModal}
+            >
               <DiaryCard key={idx} />
             </DiaryCardWrapper>
           ))}
         </CardContainer>
         <DiaryModalWrapper diaryModalOpen={diaryModalOpen}>
           {diaryModalOpen && (
-            <DiaryModal className="diary-modal" modalMode={modalMode} />
+            <DiaryModal className="diary-modal"
+              modalMode={modalMode}
+            />
           )}
         </DiaryModalWrapper>
       </MainPageWrapper>

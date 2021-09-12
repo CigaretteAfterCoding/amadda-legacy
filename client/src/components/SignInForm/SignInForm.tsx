@@ -14,6 +14,8 @@ import { Link } from 'react-router-dom';
 import colors from 'Styles/color-variables';
 import { useHistory } from 'react-router';
 import userAPI from 'Apis/userAPI';
+import { useRecoilState } from 'recoil';
+import userState from 'Recoil/userState';
 
 const SignInForm = () => {
   const [email, setEmail] = useState('');
@@ -25,6 +27,7 @@ const SignInForm = () => {
   const [emailError, setEmailError] = useState(false);
   const [emptyPassword, setEmptyPassword] = useState(false);
   const [signInError, setSignInError] = useState(false);
+  const [_, setUser] = useRecoilState(userState);
 
   useEffect(() => {
     emailRef?.current?.focus();
@@ -60,6 +63,7 @@ const SignInForm = () => {
 
     if (data.id) {
       history.push('/');
+      setUser(data);
       return;
     }
 
@@ -69,7 +73,7 @@ const SignInForm = () => {
     setEmptyEmail(false);
     setEmailError(false);
     setEmptyPassword(false);
-  }, [isValidEmail, email, password, history]);
+  }, [isValidEmail, email, password, history, setUser]);
 
   const emailErrorMessage = useMemo(() => {
     if (emptyEmail) {

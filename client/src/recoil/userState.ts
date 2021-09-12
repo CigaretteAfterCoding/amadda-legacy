@@ -1,12 +1,11 @@
 import { atom } from 'recoil';
+import { User } from 'Types/user';
 
-interface User {
-  id: number;
-  nickname: string;
-  email: string;
+interface UserState extends User {
+  access_token?: string;
 }
 
-const userState = atom<User | null>({
+const userState = atom<UserState | null>({
   key: 'userState',
   default: null,
 });

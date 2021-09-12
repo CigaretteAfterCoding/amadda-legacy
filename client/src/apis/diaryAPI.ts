@@ -11,7 +11,7 @@ interface AddDiaryParams {
 async function addDiary(diary: AddDiaryParams): Promise<number | undefined> {
   try {
     const { data } = await amaddaApi.post<number>('/diary', diary);
-    console.log(data);
+    console.log({ data });
 
     return data;
   } catch (error) {

@@ -9,7 +9,7 @@ interface SignUpParams {
 }
 
 interface SignUpResponse extends User {
-  accessToken: string;
+  access_token: string;
 }
 
 async function signUp({
@@ -24,7 +24,7 @@ async function signUp({
 
     amaddaApi.defaults.headers.common[
       'Authorization'
-    ] = `Bearer ${data.accessToken}`;
+    ] = `Bearer ${data.access_token}`;
     refreshTimeoutId = setTimeout(refreshAccessTokens, 500000);
 
     return data;
@@ -48,7 +48,7 @@ async function signIn({
 
     amaddaApi.defaults.headers.common[
       'Authorization'
-    ] = `Bearer ${data.accessToken}`;
+    ] = `Bearer ${data.access_token}`;
     refreshTimeoutId = setTimeout(refreshAccessTokens, 500000);
 
     return data;

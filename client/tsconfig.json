@@ -27,7 +27,8 @@
       "Types*": ["src/types*"],
       "Features*": ["src/features*"],
       "Images*": ["src/images*"],
-      "Layouts*": ["src/layouts*"]
+      "Layouts*": ["src/layouts*"],
+      "Recoil*": ["src/recoil*"]
     },
     "forceConsistentCasingInFileNames": true
   },

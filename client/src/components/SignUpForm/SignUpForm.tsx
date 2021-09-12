@@ -13,6 +13,8 @@ import GoogleIcon from 'Elements/Icons/GoogleIcon';
 import colors from 'Styles/color-variables';
 import userAPI from 'Apis/userAPI';
 import { useHistory } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import userState from 'Recoil/userState';
 
 const SignUpForm = () => {
   const [email, setEmail] = useState('');
@@ -27,6 +29,7 @@ const SignUpForm = () => {
   const [emptyPassword, setEmptyPassword] = useState(false);
   const [emptyPasswordConfirm, setEmptyPasswordConfirm] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [_, setUser] = useRecoilState(userState);
 
   useEffect(() => {
     emailRef?.current?.focus();
@@ -88,6 +91,7 @@ const SignUpForm = () => {
 
     if (data.id) {
       history.push('/');
+      setUser(data);
     }
   }, [
     isValidEmail,
@@ -96,6 +100,7 @@ const SignUpForm = () => {
     password,
     passwordConfirm,
     history,
+    setUser,
   ]);
 
   const emailErrorMessage = useMemo(() => {

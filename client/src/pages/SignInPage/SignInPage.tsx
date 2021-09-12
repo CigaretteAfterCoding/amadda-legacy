@@ -30,7 +30,7 @@ const SignInPage = () => {
           autoPlay
           loop
           muted
-                                 >
+        >
           <source src={videos[weatherData]}
             type="video/mp4"
           />

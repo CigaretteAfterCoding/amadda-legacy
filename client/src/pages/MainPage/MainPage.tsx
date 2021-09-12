@@ -7,26 +7,35 @@ import DiaryModal from 'Components/DiaryModal/DiaryModal';
 
 const MainPage = () => {
   const [diaryModalOpen, setDiaryModalOpen] = useState(false);
+  const [diaryWriteModal, setDairyWriteModal] = useState(false);
   const test = Array(8).fill('');
 
   const DiaryModalOpen = () => {
     setDiaryModalOpen(!diaryModalOpen);
   };
 
+  const DiaryWriteModalOpen = () => {
+    setDiaryModalOpen(!diaryModalOpen);
+    setDairyWriteModal(!diaryWriteModal);
+  };
+
+  console.log(diaryWriteModal);
+  const body = document.querySelector('body');
+
   useEffect(() => {
     const DiaryModalClose = (e: React.MouseEvent<HTMLBodyElement>) => {
       if (!(e.target as HTMLElement).closest('.diary-modal')) {
         setDiaryModalOpen(false);
+        setDairyWriteModal(false);
       }
     };
-    const body = document.querySelector('body');
 
     if (diaryModalOpen) {
       body?.addEventListener('click', DiaryModalClose);
     }
 
     return () => body?.removeEventListener('click', DiaryModalClose);
-  }, [diaryModalOpen]);
+  }, [diaryModalOpen, body]);
 
   return (
     <MainPageContainer>
@@ -40,10 +49,15 @@ const MainPage = () => {
           ))}
         </CardContainer>
         <DiaryModalWrapper diaryModalOpen={diaryModalOpen}>
-          {diaryModalOpen && <DiaryModal className="diary-modal" />}
+          {diaryModalOpen && (
+            <DiaryModal
+              className="diary-modal"
+              diaryWriteModal={diaryWriteModal}
+            />
+          )}
         </DiaryModalWrapper>
       </MainPageWrapper>
-      <WriteButtonWrapper>
+      <WriteButtonWrapper onClick={DiaryWriteModalOpen}>
         <WriteButton />
       </WriteButtonWrapper>
     </MainPageContainer>

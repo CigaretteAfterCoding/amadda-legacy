@@ -44,6 +44,20 @@ Status: 201 Created
 }
 ```
 
+```
+Status: 409 Conflict
+```
+```
+{
+  "errors": [
+    {
+      "type": "ID_ALREADY_EXISTS",
+      "message": "아이디가 이미 존재합니다."
+    }
+  ]
+}
+```
+
 ## Sign In
 ```
 POST /api/user/sign-in
@@ -68,22 +82,6 @@ Status: 200 Ok
   "access_token": "mVtYWlsIjoic29yY"
 }
 ```
-
-```
-Status: 409 Conflict
-```
-```
-{
-  "errors": [
-    {
-      "type": "ID_ALREADY_EXISTS",
-      "message": "아이디가 이미 존재합니다."
-    }
-  ]
-}
-```
-
-
 
 ## Get User Info
 ```

@@ -12,7 +12,7 @@ export class DuplicateIdError extends CustomError {
   public statusCode = 409;
 
   constructor() {
-    super('ID Already Exists');
+    super('아이디가 이미 존재합니다.');
   }
 }
 

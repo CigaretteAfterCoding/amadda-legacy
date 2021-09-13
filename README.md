@@ -18,13 +18,14 @@ todo
 
 tech stack
 - front(sora)
-  - Javascript
+  - Typescript
   - React
-  - Redux
-  - Styled-components
+  - Recoil
+  - react-query
+  - styled-components
 
 - back(zara)
   - Typescript
   - Node (Express)
   - Mysql
-  - AWS
+  - AWS lightsail

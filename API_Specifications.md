@@ -317,6 +317,7 @@ Status: 401 Unauthorized
     }
   ]
 }
+```
 
 ## Delete Diary
 ```

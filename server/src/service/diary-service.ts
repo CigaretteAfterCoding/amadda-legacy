@@ -1,19 +1,18 @@
 import { Request, Response } from 'express';
 import DiaryRepo from 'Model/diary-model';
 
-
 class DiaryService {
   static async addDiary(req: Request, res: Response): Promise<void> {
     const { title, content, date, weather, is_private } = req.body;
     const isPrivate = is_private ? 1 : 0;
     const userId = parseInt((req.user as any).id);
-    const diaryId = await DiaryRepo.addDiary({ 
-      title, 
+    const diaryId = await DiaryRepo.addDiary({
+      title,
       content,
       date,
       weather,
       isPrivate,
-      userId 
+      userId,
     });
 
     res.status(200).json(diaryId);

@@ -69,6 +69,22 @@ Status: 200 Ok
 }
 ```
 
+```
+Status: 409 Conflict
+```
+```
+{
+  "errors": [
+    {
+      "type": "ID_ALREADY_EXISTS",
+      "message": "아이디가 이미 존재합니다."
+    }
+  ]
+}
+```
+
+
+
 ## Get User Info
 ```
 GET /api/user
@@ -87,6 +103,32 @@ Status: 200 Ok
   "access_token": "mVtYWlsIjoic29yY"
 }
 ```
+
+```
+Status: 401 Unauthorized
+```
+```
+{
+  "errors": [
+    {
+      "type": "UNAUTHORIZED",
+      "message": "로그인을 해주세요."
+    }
+  ]
+}
+
+```
+Status: 403 Forbidden
+```
+```
+{
+  "errors": [
+    {
+      "type": "ALREADY_SIGNED_IN",
+      "message": "이미 로그인되어 있습니다."
+    }
+  ]
+}
 
 ## Silent Refresh
 ```
@@ -142,6 +184,19 @@ Status: 201 Created
   "user_profile_image": "random_image"
 }
 ```
+
+```
+Status: 401 Unauthorized
+```
+```
+{
+  "errors": [
+    {
+      "type": "UNAUTHORIZED",
+      "message": "로그인을 해주세요."
+    }
+  ]
+}
 
 ## Get A Diary
 ```
@@ -251,6 +306,19 @@ Status: 200 OK
 }
 ```
 
+```
+Status: 401 Unauthorized
+```
+```
+{
+  "errors": [
+    {
+      "type": "UNAUTHORIZED",
+      "message": "로그인을 해주세요."
+    }
+  ]
+}
+
 ## Delete Diary
 ```
 DELETE /api/diary/{diaryId}
@@ -282,4 +350,15 @@ Status: 200 OK
 }
 ```
 
-
+```
+Status: 401 Unauthorized
+```
+```
+{
+  "errors": [
+    {
+      "type": "UNAUTHORIZED",
+      "message": "로그인을 해주세요."
+    }
+  ]
+}

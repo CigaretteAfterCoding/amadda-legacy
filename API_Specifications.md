@@ -108,7 +108,7 @@ Status: 200 Ok
 }
 ```
 
-# 😇 Diary
+# 📒 Diary
 ## Add Diary
 ```
 POST /api/diary

@@ -25,6 +25,11 @@ class DiaryService {
     res.status(200).json(diary);
   }
 
+  static async getAllDiaries(req: Request, res: Response): Promise<void> {
+    const diaries = await DiaryRepo.findAllDiaries();
+    res.status(200).json(diaries);
+  }
+
   static async updateDiary(req: Request, res: Response): Promise<void> {
     const diaryId = parseInt(req.params.diaryId);
     const { title, content, date, weather, is_private } = req.body;

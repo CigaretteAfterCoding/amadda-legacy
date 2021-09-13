@@ -3,16 +3,16 @@ import { NextFunction, Request, Response } from 'express';
 import UserRepo from 'Model/user-model';
 import { createJWT, createRefreshJWT } from 'Utils/jwt';
 import bcrypt from 'bcryptjs';
-import { STATUS_CODE } from 'Constants';
-import { DuplicateIdError } from 'Errors/authenticate-error';
+import { ERROR_RESPONSE, STATUS_CODE } from 'Constants';
 
-export async function signUpWithEmail(req: Request, res: Response, next: NextFunction): Promise<void> {
+export async function signUpWithEmail(req: Request, res: Response, _next: NextFunction): Promise<void> {
   const { email, password } = req.body;
 
   const user = await UserRepo.findByEmail(email);
 
   if (user) {
-    next(new DuplicateIdError());
+    res.status(STATUS_CODE.CONFLICT).json(ERROR_RESPONSE.ID_ALREADY_EXISTS);
+
     return;
   }
 

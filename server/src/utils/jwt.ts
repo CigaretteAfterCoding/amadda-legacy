@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { JWT_EXPIRATION_TIME } from 'Constants';
 import jwt from 'jsonwebtoken';
 

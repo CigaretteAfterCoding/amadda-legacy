@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { CustomError } from 'Errors/custom-error';
 
 export class InsufficientBodyError extends CustomError {

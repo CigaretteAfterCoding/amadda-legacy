@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextFunction, Request, Response } from 'express';
 import UserRepo from 'Model/user-model';
 import { createJWT, createRefreshJWT } from 'Utils/jwt';

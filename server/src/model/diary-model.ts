@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Diary } from 'Types/diary';
 import { queryExecutor } from 'Utils/query-executor';
 
-interface AddDiaryParams extends Diary {};
+type AddDiaryParams = Diary;
 interface UpdateDiaryParams extends Pick<Diary, 'title'| 'content'| 'date' | 'weather' | 'isPrivate'> {
   diaryId: number;
 }

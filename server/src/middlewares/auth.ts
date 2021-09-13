@@ -13,7 +13,7 @@ export function isSignedIn(req: Request, res: Response, next: NextFunction): voi
 export function isNotSignedIn(req: Request, res: Response, next: NextFunction): void {
   if (!req.headers['authorization']) {
     next();
-    // return;
+    return;
   }
-  // next(new AlreadySignedInError());
+  next(new AlreadySignedInError());
 }

@@ -12,8 +12,6 @@ import path from 'path';
 const PORT = process.env.PORT || 4000;
 const app = express();
 
-const a = 1;
-
 app.use(morgan('dev'));
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(cookieParser());

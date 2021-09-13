@@ -195,6 +195,7 @@ Status: 401 Unauthorized
     }
   ]
 }
+```
 
 ## Get A Diary
 ```

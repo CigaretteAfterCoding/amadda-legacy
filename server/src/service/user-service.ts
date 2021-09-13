@@ -35,12 +35,12 @@ export async function signUpWithEmail(req: Request, res: Response, _next: NextFu
 }
 
 export async function signInWithEmail(req: Request, res: Response): Promise<void> {
-  const { id, email, nickname, profile_image }: any = req.user;
+  const { id, email, nickname }: any = req.user;
   const accessToken = createJWT({ id, email, nickname });
   const refreshToken = createRefreshJWT({ id, email, nickname });
-  res.cookie('refreshToken', refreshToken);
+  const signInWithEmailResponse = { id, email, nickname, access_token: accessToken };
 
-  const signInWithEmailResponse = { id, email, nickname, profile_image, access_token: accessToken };
+  res.cookie('refreshToken', refreshToken);
   res.status(200).json(signInWithEmailResponse);
 }
 

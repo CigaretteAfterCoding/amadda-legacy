@@ -82,6 +82,19 @@ Status: 200 Ok
   "access_token": "mVtYWlsIjoic29yY"
 }
 ```
+```
+Status: 403 Forbidden
+```
+```
+{
+  "errors": [
+    {
+      "type": "ALREADY_SIGNED_IN",
+      "message": "이미 로그인되어 있습니다."
+    }
+  ]
+}
+```
 
 ## Get User Info
 ```
@@ -116,17 +129,6 @@ Status: 401 Unauthorized
 }
 
 ```
-Status: 403 Forbidden
-```
-```
-{
-  "errors": [
-    {
-      "type": "ALREADY_SIGNED_IN",
-      "message": "이미 로그인되어 있습니다."
-    }
-  ]
-}
 
 ## Silent Refresh
 ```

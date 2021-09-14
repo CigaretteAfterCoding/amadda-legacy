@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Diary } from 'Types/diary';
+import { DiaryParams, DiaryResponse } from 'Types/diary';
 import { queryExecutor } from 'Utils/query-executor';
 
-type AddDiaryParams = Diary;
-interface UpdateDiaryParams extends Pick<Diary, 'title'| 'content'| 'date' | 'weather' | 'isPrivate'> {
+type AddDiaryParams = DiaryParams;
+interface UpdateDiaryParams extends Pick<DiaryParams, 'title'| 'content'| 'date' | 'weather' | 'isPrivate'> {
   diaryId: number;
 }
 
@@ -17,7 +17,7 @@ class DiaryRepo {
     return await queryExecutor(query);
   }
 
-  static async findOneDiary(diaryId: number): Promise<Diary> {
+  static async findOneDiary(diaryId: number): Promise<DiaryResponse> {
     const query = `
       SELECT
         diary.id id,
@@ -44,7 +44,7 @@ class DiaryRepo {
     return result[0];
   }
 
-  static async findAllDiaries(): Promise<Diary[]> {
+  static async findAllDiaries(): Promise<DiaryResponse[]> {
     const query = `
       SELECT
         diary.id id,

@@ -16,7 +16,9 @@ class DiaryService {
       userId,
     });
 
-    res.status(200).json(diaryId);
+    const diary = await DiaryRepo.findOneDiary(diaryId);
+
+    res.status(200).json(diary);
   }
 
   static async getDiary(req: Request, res: Response): Promise<void> {

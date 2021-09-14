@@ -12,6 +12,7 @@ export async function queryExecutor(query: string): Promise<any> {
   connection.release();
 
   if (/^insert/i.test(query.trimStart())) {
+    console.log(result);
     return result.insertId;
   }
 

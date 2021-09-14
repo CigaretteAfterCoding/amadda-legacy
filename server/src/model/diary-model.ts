@@ -11,7 +11,7 @@ class DiaryRepo {
   static async addDiary({ title, content, date, weather, isPrivate, userId }: AddDiaryParams): Promise<number> {
     const query = `
       INSERT INTO 
-        diary(title, content, date, weather, private, user_id, created_at, updated_at) 
+        diary(title, content, date, weather, is_private, user_id, created_at, updated_at) 
       VALUES('${title}', '${content}', '${date}', '${weather}', '${isPrivate}', '${userId}', NOW(), NOW())
     `;
     return await queryExecutor(query);
@@ -25,7 +25,7 @@ class DiaryRepo {
         diary.content content,
         diary.date date,
         diary.weather weather,
-        diary.private private,
+        diary.is_private is_private,
         diary.created_at created_at,
         diary.updated_at updated_at,
         user.email user_email,
@@ -52,7 +52,7 @@ class DiaryRepo {
         diary.content content,
         diary.date date,
         diary.weather weather,
-        diary.private private,
+        diary.is_private is_private,
         diary.created_at created_at,
         diary.updated_at updated_at,
         user.email user_email,
@@ -78,7 +78,7 @@ class DiaryRepo {
         content='${content}',
         date='${date}',
         weather='${weather}',
-        private='${isPrivate}',
+        is_private='${isPrivate}',
         updated_at=NOW()
       WHERE 
         id=${diaryId}

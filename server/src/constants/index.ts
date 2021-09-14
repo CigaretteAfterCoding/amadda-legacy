@@ -36,4 +36,12 @@ export const ERROR_RESPONSE = {
       },
     ],
   },
+  NO_ITEMS_TO_DELETE: {
+    errors: [
+      {
+        type: 'NO_ITEMS_TO_DELETE',
+        message: '삭제할 아이템이 존재하지 않습니다.',
+      },
+    ],
+  },
 };

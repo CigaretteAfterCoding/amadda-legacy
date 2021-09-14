@@ -15,7 +15,7 @@ interface SignUpResponse extends User {
 async function signUp({
   email,
   password,
-}: SignUpParams): Promise<SignUpResponse> {
+}: SignUpParams): Promise<SignUpResponse | void> {
   try {
     const { data } = await amaddaApi.post<SignUpResponse>('/user/sign-up', {
       email,
@@ -30,7 +30,7 @@ async function signUp({
 
     return data;
   } catch (error) {
-    return error.response.data;
+    console.error(error);
   }
 }
 
@@ -40,13 +40,12 @@ type SignInResponse = SignUpResponse
 async function signIn({
   email,
   password,
-}: SignInParams): Promise<SignInResponse> {
+}: SignInParams): Promise<SignInResponse | void> {
   try {
     const { data } = await amaddaApi.post('/user/sign-in', {
       email,
       password,
     });
-    console.log({ data });
 
     amaddaApi.defaults.headers.common[
       'Authorization'
@@ -56,7 +55,7 @@ async function signIn({
 
     return data;
   } catch (error) {
-    return error.response.data;
+    console.error(error);
   }
 }
 
@@ -77,7 +76,7 @@ async function refreshAccessTokens(): Promise<void> {
   );
   amaddaApi.defaults.headers.common[
     'Authorization'
-  ] = `Bearer ${data.accessToken}`;
+  ] = `Bearer ${data.access_token}`;
   localStorage.setItem('accessToken', data.access_token);
   refreshTimeoutId = setTimeout(refreshAccessTokens, 10000);
 }
@@ -89,7 +88,7 @@ async function getCurrentUser() {
     const { data } = await amaddaApi.get<GetCurrentUserResponse>('/user');
     return data;
   } catch (error) {
-    return error.response.data;
+    console.error(error);
   }
 }
 

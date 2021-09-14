@@ -1,3 +1,5 @@
+import { Diary } from 'Types/diary';
+import { NoItemsToDeleteErrorResponse, UnauthorizedErrorResponse } from 'Types/errors';
 import { amaddaApi } from './baseAPI';
 
 interface AddDiaryParams {
@@ -8,24 +10,20 @@ interface AddDiaryParams {
   is_private: boolean;
 }
 
-async function addDiary(diary: AddDiaryParams): Promise<number | undefined> {
+type AddDiaryResponse = Diary | UnauthorizedErrorResponse;
+
+async function addDiary(diary: AddDiaryParams): Promise<AddDiaryResponse | void> {
   try {
-    const { data } = await amaddaApi.post<number>('/diary', diary);
+    const { data } = await amaddaApi.post<AddDiaryResponse>('/diary', diary);
     return data;
   } catch (error) {
     console.error(error);
   }
 }
 
-interface GetDiaryResponse {
-  title: string;
-  content: string;
-  date: string;
-  weather: 'sunny' | 'cloudy' | 'rainy' | 'snowy';
-  is_private: boolean;
-}
+type GetDiaryResponse = Diary;
 
-async function getDiary(diaryId: number) {
+async function getDiary(diaryId: number): Promise<GetDiaryResponse | void> {
   try {
     const { data } = await amaddaApi.get<GetDiaryResponse>(`/diary/${diaryId}`);
     return data;
@@ -42,11 +40,10 @@ interface UpdateDiaryParams {
   weather?: 'sunny' | 'cloudy' | 'rainy' | 'snowy';
   is_private?: boolean;
 }
-interface UpdateDiaryResponse {
-  message: 'modified successfully';
-}
 
-async function updateDiary({ diaryId, title, content, date, weather, is_private }: UpdateDiaryParams) {
+type UpdateDiaryResponse = Diary | UnauthorizedErrorResponse;
+
+async function updateDiary({ diaryId, title, content, date, weather, is_private }: UpdateDiaryParams): Promise<UpdateDiaryResponse | void> {
   try {
     const { data } = await amaddaApi.patch<UpdateDiaryResponse>(`/diary/${diaryId}`, {
       title,
@@ -62,11 +59,9 @@ async function updateDiary({ diaryId, title, content, date, weather, is_private 
   }
 }
 
-interface DeleteDiaryResponse {
-  message: 'deleted successfully' | 'no items to delete';
-}
+type DeleteDiaryResponse = Diary | UnauthorizedErrorResponse | NoItemsToDeleteErrorResponse;
 
-async function deleteDiary(diaryId: number) {
+async function deleteDiary(diaryId: number): Promise<DeleteDiaryResponse | void> {
   try {
     const { data } = await amaddaApi.delete<DeleteDiaryResponse>(`/diary/${diaryId}`);
     console.log(data);

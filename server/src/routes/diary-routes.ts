@@ -22,6 +22,7 @@ diaryRouter.post(
 );
 
 diaryRouter.get('/:diaryId', DiaryService.getDiary);
+diaryRouter.get('/', DiaryService.getAllDiaries);
 
 diaryRouter.patch(
   '/:diaryId',
@@ -31,7 +32,8 @@ diaryRouter.patch(
     'content',
     'date',
     'weather',
-    'is_private',]),
+    'is_private',
+  ]),
   DiaryService.updateDiary,
 );
 

@@ -1,5 +1,3 @@
-import { Diary } from "./diary";
-
 // user
 export interface SignUpUserBody {
   email: string;

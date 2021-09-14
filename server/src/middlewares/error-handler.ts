@@ -4,8 +4,17 @@ import { CustomError } from 'Errors/custom-error';
 
 export function errorHandler(err: Error, req: Request, res: Response, next: NextFunction): void {
   if (err instanceof CustomError) {
+    const errorResponse = {
+      errors: [
+        {
+          type: err.type,
+          message: err.message,
+        },
+      ],
+    };
+
     res.status(err.statusCode);
-    res.json({ error: { message: err.message } });
+    res.json(errorResponse);
     return;
   }
 

@@ -4,7 +4,7 @@ import colors from 'Styles/color-variables';
 import testImg from 'Images/test2.jpg';
 import MuiLikeBorderIcon from '@material-ui/icons/FavoriteBorder';
 import MuiLikeIcon from '@material-ui/icons/Favorite';
-import MuiSunnyIcon from '@material-ui/icons/WbSunny';
+import MuiWbSunnyOutlinedIcon from '@material-ui/icons/WbSunnyOutlined';
 
 const DiaryCard = () => {
   const [like, setLike] = useState(false);
@@ -80,7 +80,7 @@ const DiaryCardTitle = styled.div`
   font-size: 14px;
 `;
 
-const DiaryCardWeather = styled(MuiSunnyIcon)`
+const DiaryCardWeather = styled(MuiWbSunnyOutlinedIcon)`
   margin-right: 10px;
   font-size: 8px;
   color: ${colors.orange};

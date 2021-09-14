@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Diary } from 'Types/diary';
 import { queryExecutor } from 'Utils/query-executor';
 
-interface AddDiaryParams extends Diary {};
+type AddDiaryParams = Diary;
 interface UpdateDiaryParams extends Pick<Diary, 'title'| 'content'| 'date' | 'weather' | 'isPrivate'> {
   diaryId: number;
 }
@@ -10,7 +11,7 @@ class DiaryRepo {
   static async addDiary({ title, content, date, weather, isPrivate, userId }: AddDiaryParams): Promise<number> {
     const query = `
       INSERT INTO 
-        diary(title, content, date, weather, private, user_id, created_at, updated_at) 
+        diary(title, content, date, weather, is_private, user_id, created_at, updated_at) 
       VALUES('${title}', '${content}', '${date}', '${weather}', '${isPrivate}', '${userId}', NOW(), NOW())
     `;
     return await queryExecutor(query);
@@ -24,7 +25,7 @@ class DiaryRepo {
         diary.content content,
         diary.date date,
         diary.weather weather,
-        diary.private private,
+        diary.is_private is_private,
         diary.created_at created_at,
         diary.updated_at updated_at,
         user.email user_email,
@@ -43,6 +44,31 @@ class DiaryRepo {
     return result[0];
   }
 
+  static async findAllDiaries(): Promise<Diary[]> {
+    const query = `
+      SELECT
+        diary.id id,
+        diary.title title,
+        diary.content content,
+        diary.date date,
+        diary.weather weather,
+        diary.is_private is_private,
+        diary.created_at created_at,
+        diary.updated_at updated_at,
+        user.email user_email,
+        user.nickname user_nickname,
+        user.profile_image user_profile_image
+      FROM 
+        diary
+      JOIN
+        user
+      ON
+        diary.user_id=user.id
+    `;
+    const result = await queryExecutor(query);
+    return result;
+  }
+
   static async updateDiary({ diaryId, title, content, date, weather, isPrivate }: UpdateDiaryParams): Promise<any> {
     const query = `
       UPDATE
@@ -52,7 +78,7 @@ class DiaryRepo {
         content='${content}',
         date='${date}',
         weather='${weather}',
-        private='${isPrivate}',
+        is_private='${isPrivate}',
         updated_at=NOW()
       WHERE 
         id=${diaryId}

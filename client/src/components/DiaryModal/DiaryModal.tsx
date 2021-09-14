@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import testImg from 'Images/test.jpg';
-import MuiSunnyIcon from '@material-ui/icons/WbSunny';
+import MuiWbSunnyOutlinedIcon from '@material-ui/icons/WbSunnyOutlined';
 import colors from 'Styles/color-variables';
 import MuiCreateIcon from '@material-ui/icons/CreateOutlined';
 import MuiDeleteIcon from '@material-ui/icons/DeleteOutline';
 import MuiShareIcon from '@material-ui/icons/Reply';
 import WriteButton from 'Components/WriteButton/WriteButton';
+import MuiCheckRoundedIcon from '@material-ui/icons/CheckRounded';
+import MuiClearRoundedIcon from '@material-ui/icons/ClearRounded';
 
 interface DiaryModalProps {
   className: string;
@@ -26,6 +28,7 @@ const DiaryModal = ({ className, modalMode = 'default' }: DiaryModalProps) => {
         <DiaryModalPhoto />
       )}
       <DiaryModalContents>
+        {modalMode === 'write' && <WeatherWrapper></WeatherWrapper>}
         {modalMode === 'write' ? (
           <TitleWriteWrapper>
             <TitleWrite placeholder="당신의 하루는 어떠셨나요?" />
@@ -83,9 +86,18 @@ const DiaryModal = ({ className, modalMode = 'default' }: DiaryModalProps) => {
           </DiaryModalText>
         )}
         <DiaryModalBottom>
-          <DiaryModalShare />
-          <DiaryModalEdit />
-          <DiaryModalDelete />
+          {modalMode === 'write' ? (
+            <>
+              <DiaryModalCheck />
+              <DiaryModalCancel />
+            </>
+          ) : (
+            <>
+              <DiaryModalShare />
+              <DiaryModalEdit />
+              <DiaryModalDelete />
+            </>
+          )}
         </DiaryModalBottom>
       </DiaryModalContents>
     </DiaryModalContainer>
@@ -140,6 +152,8 @@ const DiaryModalContents = styled.div`
   margin: 50px 30px 0 60px;
 `;
 
+const WeatherWrapper = styled.div``;
+
 const DiaryTitleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -161,7 +175,7 @@ const DiaryModalTitle = styled.div`
 
 const TitleWriteWrapper = styled.div`
   margin-top: 20px;
-  font-size: 12px;
+  font-size: 14px;
   border-bottom: 1px solid ${colors.gray[300]};
   display: flex;
   justify-content: space-between;
@@ -172,6 +186,7 @@ const TitleWrite = styled.input`
   padding: 5px;
   width: 350px;
   line-height: 22px;
+  font-size: 14px;
   text-align: left;
   border: none;
   &:focus {
@@ -235,7 +250,7 @@ const DiaryModalText = styled.div`
   }
 `;
 
-const DiaryModalWeather = styled(MuiSunnyIcon)`
+const DiaryModalWeather = styled(MuiWbSunnyOutlinedIcon)`
   font-size: 10px;
   color: ${colors.orange};
 `;
@@ -280,5 +295,23 @@ const DiaryModalDelete = styled(MuiDeleteIcon)`
     cursor: pointer;
     transition: all ease 0.5s;
     color: darkred;
+  }
+`;
+
+const DiaryModalCheck = styled(MuiCheckRoundedIcon)`
+  color: ${colors.gray[800]};
+  margin-right: 10px;
+  &:hover {
+    cursor: pointer;
+    transition: all ease 0.5s;
+    color: black;
+  }
+`;
+
+const DiaryModalCancel = styled(MuiClearRoundedIcon)`
+  color: ${colors.gray[800]};
+  color: #af0000;
+  &:hover {
+    cursor: pointer;
   }
 `;

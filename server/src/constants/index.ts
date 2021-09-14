@@ -10,3 +10,38 @@ export const STATUS_CODE = {
 };
 
 export const JWT_EXPIRATION_TIME = '600s';
+
+export const ERROR_RESPONSE = {
+  ID_ALREADY_EXISTS: {
+    errors: [
+      {
+        type: 'ID_ALREADY_EXISTS',
+        message: '아이디가 이미 존재합니다.',
+      },
+    ],
+  },
+  UNAUTHORIZED: {
+    errors: [
+      {
+        type: 'UNAUTHORIZED',
+        message: '로그인을 해주세요.',
+      },
+    ],
+  },
+  ALREADY_SIGNED_IN: {
+    errors: [
+      {
+        type: 'ALREADY_SIGNED_IN',
+        message: '이미 로그인되어 있습니다.',
+      },
+    ],
+  },
+  NO_ITEMS_TO_DELETE: {
+    errors: [
+      {
+        type: 'NO_ITEMS_TO_DELETE',
+        message: '삭제할 아이템이 존재하지 않습니다.',
+      },
+    ],
+  },
+};

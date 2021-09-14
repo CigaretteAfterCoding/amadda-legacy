@@ -1,4 +1,5 @@
 import { Diary } from 'Types/diary';
+import { NoItemsToDeleteErrorResponse, UnauthorizedErrorResponse } from 'Types/errors';
 import { amaddaApi } from './baseAPI';
 
 interface AddDiaryParams {
@@ -7,13 +8,6 @@ interface AddDiaryParams {
   date: string;
   weather: 'sunny' | 'cloudy' | 'rainy' | 'snowy';
   is_private: boolean;
-}
-
-interface UnauthorizedErrorResponse {
-  errors: Array<{
-    type: string;
-    message: string;
-  }>
 }
 
 type AddDiaryResponse = Diary | UnauthorizedErrorResponse;
@@ -65,7 +59,7 @@ async function updateDiary({ diaryId, title, content, date, weather, is_private 
   }
 }
 
-type DeleteDiaryResponse = Diary | UnauthorizedErrorResponse;
+type DeleteDiaryResponse = Diary | UnauthorizedErrorResponse | NoItemsToDeleteErrorResponse;
 
 async function deleteDiary(diaryId: number): Promise<DeleteDiaryResponse | void> {
   try {

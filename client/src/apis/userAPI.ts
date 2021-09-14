@@ -1,4 +1,5 @@
-import { User } from 'Types/user';
+import { AlreadySignedInErrorResponse, IdAlreadyExistsErrorResponse, UnauthorizedErrorResponse } from 'Types/errors';
+import { UserWithToken } from 'Types/user';
 import { amaddaApi } from './baseAPI';
 
 let refreshTimeoutId: ReturnType<typeof setTimeout>;
@@ -8,9 +9,8 @@ interface SignUpParams {
   password: string;
 }
 
-interface SignUpResponse extends User {
-  access_token: string;
-}
+// 임시방편
+type SignUpResponse = UserWithToken & IdAlreadyExistsErrorResponse;
 
 async function signUp({
   email,
@@ -35,14 +35,16 @@ async function signUp({
 }
 
 type SignInParams = SignUpParams
-type SignInResponse = SignUpResponse
+
+// 임시방편
+type SignInResponse = UserWithToken & AlreadySignedInErrorResponse;
 
 async function signIn({
   email,
   password,
 }: SignInParams): Promise<SignInResponse | void> {
   try {
-    const { data } = await amaddaApi.post('/user/sign-in', {
+    const { data } = await amaddaApi.post<SignInResponse>('/user/sign-in', {
       email,
       password,
     });
@@ -81,7 +83,7 @@ async function refreshAccessTokens(): Promise<void> {
   refreshTimeoutId = setTimeout(refreshAccessTokens, 10000);
 }
 
-type GetCurrentUserResponse = User
+type GetCurrentUserResponse = UserWithToken | UnauthorizedErrorResponse;
 
 async function getCurrentUser() {
   try {

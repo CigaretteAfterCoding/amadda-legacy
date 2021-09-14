@@ -18,7 +18,7 @@ export async function signUpWithEmail(req: Request, res: Response, _next: NextFu
 
   const hash = await bcrypt.hash(password, 12);
   const nickname = email.split('@')[0];
-  const profile_image = 'random_image';
+  const profile_image = 'https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar.png';
 
   const insertId = await UserRepo.createUser({
     email,
@@ -38,7 +38,9 @@ export async function signInWithEmail(req: Request, res: Response): Promise<void
   const { id, email, nickname }: any = req.user;
   const accessToken = createJWT({ id, email, nickname });
   const refreshToken = createRefreshJWT({ id, email, nickname });
-  const signInWithEmailResponse = { id, email, nickname, access_token: accessToken };
+
+  const { profile_image } = await UserRepo.findByEmail(email);
+  const signInWithEmailResponse = { id, email, nickname, profile_image, access_token: accessToken };
 
   res.cookie('refreshToken', refreshToken);
   res.status(200).json(signInWithEmailResponse);
@@ -53,6 +55,7 @@ export async function refreshTokens(req: Request, res: Response): Promise<void> 
 }
 
 export async function getCurrentUser(req: Request, res: Response): Promise<void> {
-  const { id, email, nickname, profile_image }: any = req.user;
+  const { id, email, nickname }: any = req.user;
+  const { profile_image } = await UserRepo.findByEmail(email);
   res.status(200).json({ id, email, nickname, profile_image });
 }

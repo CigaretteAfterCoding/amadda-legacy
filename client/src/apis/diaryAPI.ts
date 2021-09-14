@@ -9,7 +9,14 @@ interface AddDiaryParams {
   is_private: boolean;
 }
 
-type AddDiaryResponse = Diary;
+interface UnauthorizedErrorResponse {
+  errors: Array<{
+    type: string;
+    message: string;
+  }>
+}
+
+type AddDiaryResponse = Diary | UnauthorizedErrorResponse;
 
 async function addDiary(diary: AddDiaryParams): Promise<AddDiaryResponse | void> {
   try {
@@ -40,7 +47,7 @@ interface UpdateDiaryParams {
   is_private?: boolean;
 }
 
-type UpdateDiaryResponse = Diary;
+type UpdateDiaryResponse = Diary | UnauthorizedErrorResponse;
 
 async function updateDiary({ diaryId, title, content, date, weather, is_private }: UpdateDiaryParams): Promise<UpdateDiaryResponse | void> {
   try {
@@ -58,7 +65,7 @@ async function updateDiary({ diaryId, title, content, date, weather, is_private 
   }
 }
 
-type DeleteDiaryResponse = Diary;
+type DeleteDiaryResponse = Diary | UnauthorizedErrorResponse;
 
 async function deleteDiary(diaryId: number): Promise<DeleteDiaryResponse | void> {
   try {

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { STATUS_CODE } from 'build/constants';
-import { ERROR_RESPONSE } from 'Constants';
+import { ERROR_RESPONSE, STATUS_CODE } from 'Constants';
 import { Request, Response } from 'express';
 import DiaryRepo from 'Model/diary-model';
 

@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { verifyJWT, verifyRefreshJWT } from 'Utils/jwt';
 import { AuthenticateError } from 'Errors/authenticate-error';
-import { STATUS_CODE } from 'build/constants';
-import { ERROR_RESPONSE } from 'Constants';
+import { ERROR_RESPONSE, STATUS_CODE } from 'Constants';
 
 export const TOKEN_KEY = 'authorization';
 

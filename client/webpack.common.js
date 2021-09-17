@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-const { ProvidePlugin } = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
 const config = {
   entry: './src/index',
@@ -49,9 +49,7 @@ const config = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
-    new ProvidePlugin({
-      process: 'process/browser',
-    }),
+    new Dotenv(),
   ],
 };
 

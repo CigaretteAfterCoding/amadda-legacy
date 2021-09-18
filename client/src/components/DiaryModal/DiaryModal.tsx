@@ -15,28 +15,69 @@ import MuiCheckRoundedIcon from '@material-ui/icons/CheckRounded';
 import MuiClearRoundedIcon from '@material-ui/icons/ClearRounded';
 import weatherAPI from 'Apis/weatherAPI';
 import WeatherSelect from 'Elements/Select/WeatherSelect';
+import Alert from 'Elements/Alert/Alert';
 
 interface DiaryModalProps {
   className: string;
   modalMode: 'default' | 'write' | 'edit';
+  onClose: () => void;
 }
 
-const DiaryModal = ({ className, modalMode = 'default' }: DiaryModalProps) => {
-  const [weatherData, setWeatherData] = useState<0 | 1 | 2 | 3 | null>(null);
+const DiaryModal = ({ className, modalMode = 'default', onClose }: DiaryModalProps) => {
+  const [weatherData, setWeatherData] = useState<0 | 1 | 2 | 3 >(0);
+  const [alertModal, setAlertModal] = useState(false);
+  const handleAlertButton = () =>{
+    setAlertModal(!alertModal);
+  };
+  const closeAlertButton = () =>{
+    setAlertModal(false);
+  };
   const weatherIcon = [
-    <MuiSunnyIcon className="sunny" />,
-    <MuiCloudIcon className="cloudy" />,
-    <FontAwesomeIcon icon={faCloudShowersHeavy} size="lg" className="rainy" />,
-    <MuiSnowIcon className="snowy" />,
+    <MuiSunnyIcon
+      className="sunny"
+      key="sunny"
+    />,
+    <MuiCloudIcon
+      className="cloudy"
+      key="cloudy"
+    />,
+    <FontAwesomeIcon
+      icon={faCloudShowersHeavy}
+      size="lg"
+      className="rainy"
+      key="rainy"
+    />,
+    <MuiSnowIcon
+      className="snowy"
+      key="snowy"
+    />,
   ];
   const SELECT_MENU = [
-    <MuiSunnyIcon fontSize="small" className="sunny" />,
-    <MuiCloudIcon fontSize="small" className="cloudy" />,
-    <FontAwesomeIcon icon={faCloudShowersHeavy} size="lg" className="rainy" />,
-    <MuiSnowIcon fontSize="small" className="snowy" />,
+    <MuiSunnyIcon
+      fontSize="small"
+      className="sunny"
+      key="sunny"
+    />,
+    <MuiCloudIcon
+      fontSize="small"
+      className="cloudy"
+      key="cloudy"
+    />,
+    <FontAwesomeIcon
+      icon={faCloudShowersHeavy}
+      size="lg"
+      className="rainy"
+      key="rainy"
+    />,
+    <MuiSnowIcon
+      fontSize="small"
+      className="snowy"
+      key="snowy"
+    />,
   ];
   const [weatherMenu, setWeatherMenu] = useState(false);
-  const [weather, setWeather] = useState('');
+  const [weather, setWeather] = useState<React.ReactNode>('');
+
   const handleClickMenu = () => {
     setWeatherMenu(!weatherMenu);
   };
@@ -46,14 +87,17 @@ const DiaryModal = ({ className, modalMode = 'default' }: DiaryModalProps) => {
       setWeatherMenu(false);
       setWeather(weatherIcon[0]);
     }
+
     if ((e.target as HTMLElement).closest('.cloudy')) {
       setWeatherMenu(false);
       setWeather(weatherIcon[1]);
     }
+
     if ((e.target as HTMLElement).closest('.rainy')) {
       setWeatherMenu(false);
       setWeather(weatherIcon[2]);
     }
+
     if ((e.target as HTMLElement).closest('.snowy')) {
       setWeatherMenu(false);
       setWeather(weatherIcon[3]);
@@ -65,6 +109,7 @@ const DiaryModal = ({ className, modalMode = 'default' }: DiaryModalProps) => {
       const data = await weatherAPI.getWeather();
       setWeatherData(data);
     }
+
     getWeatherAPI();
   }, []);
 
@@ -79,6 +124,7 @@ const DiaryModal = ({ className, modalMode = 'default' }: DiaryModalProps) => {
         setWeatherMenu(false);
       }
     };
+
     const bodyElement = document.querySelector('body');
     bodyElement?.addEventListener('click', handleClickSelect);
 
@@ -99,12 +145,18 @@ const DiaryModal = ({ className, modalMode = 'default' }: DiaryModalProps) => {
       <DiaryModalContents>
         {modalMode === 'write' && (
           <WeatherContainer>
-            <WeatherWrapper onClick={handleClickMenu} className="icon">
+            <WeatherWrapper onClick={handleClickMenu}
+              className="icon"
+            >
               {weather || <>{weatherIcon[weatherData]}</>}
             </WeatherWrapper>
-            <SelectWrapper className="select-wrapper" onClick={handleSetMenu}>
-              {weatherMenu && <WeatherSelect menus={SELECT_MENU} />}
-            </SelectWrapper>
+            {weatherMenu && (
+              <SelectWrapper className="select-wrapper"
+                onClick={handleSetMenu}
+              >
+                <WeatherSelect menus={SELECT_MENU} />
+              </SelectWrapper>
+            )}
           </WeatherContainer>
         )}
         {modalMode === 'write' ? (
@@ -166,8 +218,17 @@ const DiaryModal = ({ className, modalMode = 'default' }: DiaryModalProps) => {
         <DiaryModalBottom>
           {modalMode === 'write' ? (
             <>
-              <DiaryModalCheck />
-              <DiaryModalCancel />
+              <DiaryModalCheckWrapper>
+                <DiaryModalCheckIcon />
+              </DiaryModalCheckWrapper>
+              {alertModal && <AlertWrapper>
+                <Alert
+                  onClose={onClose}
+                  closeAlertButton={closeAlertButton}
+                /></AlertWrapper>}
+              <DiaryModalCancelWrapper onClick={handleAlertButton}>
+                <DiaryModalCancelIcon />
+              </DiaryModalCancelWrapper>
             </>
           ) : (
             <>
@@ -175,7 +236,8 @@ const DiaryModal = ({ className, modalMode = 'default' }: DiaryModalProps) => {
               <DiaryModalEdit />
               <DiaryModalDelete />
             </>
-          )}
+          )
+          }
         </DiaryModalBottom>
       </DiaryModalContents>
     </DiaryModalContainer>
@@ -364,6 +426,7 @@ const DiaryModalBottom = styled.div`
   justify-content: flex-end;
   align-items: center;
   margin: 20px 20px 0px 0;
+  position:relative;
 `;
 
 const DiaryModalShare = styled(MuiShareIcon)`
@@ -395,7 +458,11 @@ const DiaryModalDelete = styled(MuiDeleteIcon)`
   }
 `;
 
-const DiaryModalCheck = styled(MuiCheckRoundedIcon)`
+const DiaryModalCheckWrapper = styled.div`
+
+`;
+
+const DiaryModalCheckIcon = styled(MuiCheckRoundedIcon)`
   color: ${colors.gray[800]};
   margin-right: 10px;
   &:hover {
@@ -405,10 +472,16 @@ const DiaryModalCheck = styled(MuiCheckRoundedIcon)`
   }
 `;
 
-const DiaryModalCancel = styled(MuiClearRoundedIcon)`
+const DiaryModalCancelWrapper = styled.div`
+`;
+
+const DiaryModalCancelIcon = styled(MuiClearRoundedIcon)`
   color: ${colors.gray[800]};
   color: #af0000;
   &:hover {
     cursor: pointer;
   }
+`;
+
+const AlertWrapper = styled.div`
 `;

@@ -8,6 +8,7 @@ import diaryAPI from 'Apis/diaryAPI';
 
 const MainPage = () => {
   const [diaryModalOpen, setDiaryModalOpen] = useState(false);
+  const [writeModalOpen, setWriteModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<'default' | 'write' | 'edit'>(
     'default',
   );
@@ -19,8 +20,12 @@ const MainPage = () => {
   };
 
   const openDiaryWriteModal = () => {
-    setDiaryModalOpen(!diaryModalOpen);
+    setWriteModalOpen(true);
     setModalMode('write');
+  };
+
+  const closeDiaryWriteModal = () => {
+    setWriteModalOpen(false);
   };
 
   const body = document.querySelector('body');
@@ -30,13 +35,11 @@ const MainPage = () => {
       if (
         !(
           (e.target as HTMLElement).closest('.diary-modal') ||
-          (e.target as HTMLElement).closest('.sunny') ||
-          (e.target as HTMLElement).closest('.cloudy') ||
-          (e.target as HTMLElement).closest('.rainy') ||
-          (e.target as HTMLElement).closest('.snowy')
+          (e.target as HTMLElement).closest('.select-wrapper')
         )
       ) {
         setDiaryModalOpen(false);
+        setWriteModalOpen(false);
         setModalMode('default');
       }
     };
@@ -54,14 +57,26 @@ const MainPage = () => {
       <MainPageWrapper>
         <CardContainer>
           {test?.map((item, idx) => (
-            <DiaryCardWrapper key={idx} onClick={openDiaryModal}>
+            <DiaryCardWrapper key={idx}
+              onClick={openDiaryModal}
+            >
               <DiaryCard key={idx} />
             </DiaryCardWrapper>
           ))}
         </CardContainer>
-        <DiaryModalWrapper diaryModalOpen={diaryModalOpen}>
+        <DiaryModalWrapper diaryModalOpen={diaryModalOpen}
+          writeModalOpen={writeModalOpen}
+        >
           {diaryModalOpen && (
-            <DiaryModal className="diary-modal" modalMode={modalMode} />
+            <DiaryModal className="diary-modal"
+              modalMode={modalMode}
+            />
+          )}
+          {writeModalOpen && (
+            <DiaryModal className="diary-modal"
+              modalMode={modalMode}
+              onClose={closeDiaryWriteModal}
+            />
           )}
         </DiaryModalWrapper>
       </MainPageWrapper>
@@ -91,8 +106,8 @@ const DiaryCardWrapper = styled.div`
   }
 `;
 
-const DiaryModalWrapper = styled.div<{ diaryModalOpen: boolean }>`
-  display: ${(props) => (props.diaryModalOpen ? 'flex' : 'none')};
+const DiaryModalWrapper = styled.div<{ diaryModalOpen: boolean, writeModalOpen: boolean}>`
+  display: ${(props) => ((props.diaryModalOpen) || (props.writeModalOpen) ? 'flex' : 'none')};
   position: fixed;
   justify-content: center;
   align-items: center;

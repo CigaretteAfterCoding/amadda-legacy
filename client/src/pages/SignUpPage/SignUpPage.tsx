@@ -6,6 +6,8 @@ import Rain from 'Images/Rain.mp4';
 import Clear from 'Images/Clear.mp4';
 import Snow from 'Images/Snow.mp4';
 import weatherAPI from 'Apis/weatherAPI';
+import { Link } from 'react-router-dom';
+import Logo from 'Layouts/Header/Logo';
 
 const SignUpPage = () => {
   const [weatherData, setWeatherData] = useState<0|1|2|3|null>(null);
@@ -20,8 +22,14 @@ const SignUpPage = () => {
   }, []);
 
   return (
-    <Container>
-      {weatherData !== null &&
+    <>
+      <Link to="/">
+        <LogoWrapper>
+          <Logo />
+        </LogoWrapper>
+      </Link>
+      <Container>
+        {weatherData !== null &&
       <video width="100%"
         height="auto"
         autoPlay
@@ -32,11 +40,12 @@ const SignUpPage = () => {
           type="video/mp4"
         />
       </video>
-      }
-      <SignUpWrapper>
-        <SignUpForm />
-      </SignUpWrapper>
-    </Container>
+        }
+        <SignUpWrapper>
+          <SignUpForm />
+        </SignUpWrapper>
+      </Container>
+    </>
   );
 };
 
@@ -52,4 +61,15 @@ const Container = styled.div`
 
 const SignUpWrapper = styled.div`
   position: absolute;
+`;
+
+const LogoWrapper = styled.div`
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 47%;
+  z-index:999;
+  & :hover{
+    cursor:pointer;
+  }
 `;

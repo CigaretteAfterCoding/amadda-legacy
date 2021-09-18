@@ -255,6 +255,17 @@ const DiaryModalContainer = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   background-color: ${colors.white};
   position: relative;
+  animation: topmove 0.3s;
+  @keyframes topmove {
+    0% {
+      transform: translateY(5px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
 `;
 
 const PhotoContainer = styled.div`

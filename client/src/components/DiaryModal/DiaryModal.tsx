@@ -458,9 +458,7 @@ const DiaryModalDelete = styled(MuiDeleteIcon)`
   }
 `;
 
-const DiaryModalCheckWrapper = styled.div`
-
-`;
+const DiaryModalCheckWrapper = styled.div``;
 
 const DiaryModalCheckIcon = styled(MuiCheckRoundedIcon)`
   color: ${colors.gray[800]};

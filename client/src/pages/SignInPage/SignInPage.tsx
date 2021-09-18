@@ -7,6 +7,7 @@ import Rain from 'Images/Rain.mp4';
 import Clear from 'Images/Clear.mp4';
 import Snow from 'Images/Snow.mp4';
 import weatherAPI from 'Apis/weatherAPI';
+import { Link } from 'react-router-dom';
 
 const SignInPage = () => {
   const [weatherData, setWeatherData] = useState<0|1|2|3|null>(null);
@@ -21,11 +22,14 @@ const SignInPage = () => {
   }, []);
   return (
     <>
-      <LogoWrapper>
-        <Logo />
-      </LogoWrapper>
+      <Link to="/">
+        <LogoWrapper>
+          <Logo />
+        </LogoWrapper>
+      </Link>
       <Container>
-        {weatherData !== null && <video width="100%"
+        {weatherData !== null &&
+        <video width="100%"
           height="auto"
           autoPlay
           loop
@@ -59,6 +63,10 @@ const LogoWrapper = styled.div`
   display: flex;
   top: 0;
   left: 47%;
+  z-index:999;
+  & :hover{
+    cursor:pointer;
+  }
 `;
 
 const SignInWrapper = styled.div`

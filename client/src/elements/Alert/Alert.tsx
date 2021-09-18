@@ -32,7 +32,7 @@ export default Alert;
 
 const AlertContainer = styled.div`
   width:200px;
-  height:97px;
+  height:99px;
   position:absolute;
   background-color: ${colors.gray[100]};
   border-radius: 5px;
@@ -47,6 +47,17 @@ const AlertContainer = styled.div`
   position:absolute;
   bottom:-10px;
   right:30px;
+  }
+  animation: topmove 0.3s;
+  @keyframes topmove {
+    0% {
+      transform: translateY(5px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
   }
 `;
 
@@ -82,8 +93,8 @@ align-items: center;
 `;
 
 const YesBtn = styled.button`
-width:35px;
-margin-bottom:3px;
+width:40px;
+margin-bottom:7px;
 border: 1px solid ${colors.gray[800]};
 background-color: transparent;
 border-radius: 30px;
@@ -99,9 +110,9 @@ color: ${colors.gray[900]};
 
 const ExitBtn = styled.div`
 width:20px;
+padding-top:4px;
 color:${colors.gray[700]};
-padding: 3px;
-margin-left:170px;
+margin-left:172px;
  & :hover{
    cursor:pointer;
  }

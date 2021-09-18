@@ -470,8 +470,7 @@ const DiaryModalCheckIcon = styled(MuiCheckRoundedIcon)`
   }
 `;
 
-const DiaryModalCancelWrapper = styled.div`
-`;
+const DiaryModalCancelWrapper = styled.div``;
 
 const DiaryModalCancelIcon = styled(MuiClearRoundedIcon)`
   color: ${colors.gray[800]};

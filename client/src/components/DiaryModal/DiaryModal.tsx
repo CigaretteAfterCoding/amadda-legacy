@@ -480,5 +480,4 @@ const DiaryModalCancelIcon = styled(MuiClearRoundedIcon)`
   }
 `;
 
-const AlertWrapper = styled.div`
-`;
+const AlertWrapper = styled.div``;

@@ -136,7 +136,6 @@ const HeaderRight = styled.div`
 const SignInBtn = styled.button`
   background-color: ${colors.white};
   border:1px solid ${colors.white};
-  border-radius:80px;
   width:70px;
   height:30px;
   color:${colors.amadda};
@@ -144,10 +143,10 @@ const SignInBtn = styled.button`
   font-size:15px;
   font-family: Roboto;
   margin-right: 10px;
+  margin-bottom:20px;
   &:hover{
     cursor:pointer;
   }
-  margin-bottom:20px;
 `;
 
 const ProfileImage = styled.img`

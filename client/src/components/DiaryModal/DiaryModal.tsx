@@ -25,13 +25,10 @@ interface DiaryModalProps {
 
 const DiaryModal = ({ className, modalMode = 'default', onClose }: DiaryModalProps) => {
   const [weatherData, setWeatherData] = useState<0 | 1 | 2 | 3 >(0);
+  const [weatherMenu, setWeatherMenu] = useState(false);
+  const [weather, setWeather] = useState<React.ReactNode>('');
   const [alertModal, setAlertModal] = useState(false);
-  const handleAlertButton = () =>{
-    setAlertModal(!alertModal);
-  };
-  const closeAlertButton = () =>{
-    setAlertModal(false);
-  };
+
   const weatherIcon = [
     <MuiSunnyIcon
       className="sunny"
@@ -52,6 +49,7 @@ const DiaryModal = ({ className, modalMode = 'default', onClose }: DiaryModalPro
       key="snowy"
     />,
   ];
+
   const SELECT_MENU = [
     <MuiSunnyIcon
       fontSize="small"
@@ -75,8 +73,14 @@ const DiaryModal = ({ className, modalMode = 'default', onClose }: DiaryModalPro
       key="snowy"
     />,
   ];
-  const [weatherMenu, setWeatherMenu] = useState(false);
-  const [weather, setWeather] = useState<React.ReactNode>('');
+
+  const handleAlertButton = () =>{
+    setAlertModal(!alertModal);
+  };
+
+  const closeAlertButton = () =>{
+    setAlertModal(false);
+  };
 
   const handleClickMenu = () => {
     setWeatherMenu(!weatherMenu);
@@ -109,7 +113,6 @@ const DiaryModal = ({ className, modalMode = 'default', onClose }: DiaryModalPro
       const data = await weatherAPI.getWeather();
       setWeatherData(data);
     }
-
     getWeatherAPI();
   }, []);
 
@@ -382,7 +385,6 @@ const TextWrite = styled.textarea`
   border: 0px;
   background-color: white;
   overflow: scroll;
-
   &::-webkit-scrollbar {
     width: 6px;
   }
@@ -393,7 +395,6 @@ const TextWrite = styled.textarea`
   &:focus {
     outline: none;
   }
-
   &:focus::placeholder {
     color: transparent;
   }
@@ -410,7 +411,6 @@ const DiaryModalText = styled.div`
   border: 0px;
   background-color: white;
   overflow: scroll;
-
   &::-webkit-scrollbar {
     width: 6px;
   }
@@ -469,9 +469,7 @@ const DiaryModalDelete = styled(MuiDeleteIcon)`
   }
 `;
 
-const DiaryModalCheckWrapper = styled.div`
-
-`;
+const DiaryModalCheckWrapper = styled.div``;
 
 const DiaryModalCheckIcon = styled(MuiCheckRoundedIcon)`
   color: ${colors.gray[800]};
@@ -483,8 +481,7 @@ const DiaryModalCheckIcon = styled(MuiCheckRoundedIcon)`
   }
 `;
 
-const DiaryModalCancelWrapper = styled.div`
-`;
+const DiaryModalCancelWrapper = styled.div``;
 
 const DiaryModalCancelIcon = styled(MuiClearRoundedIcon)`
   color: ${colors.gray[800]};
@@ -494,5 +491,4 @@ const DiaryModalCancelIcon = styled(MuiClearRoundedIcon)`
   }
 `;
 
-const AlertWrapper = styled.div`
-`;
+const AlertWrapper = styled.div``;

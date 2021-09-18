@@ -28,12 +28,13 @@ const SignInPage = () => {
         </LogoWrapper>
       </Link>
       <Container>
-        {weatherData !== null && <video width="100%"
+        {weatherData !== null &&
+        <video width="100%"
           height="auto"
           autoPlay
           loop
           muted
-                                 >
+        >
           <source src={videos[weatherData]}
             type="video/mp4"
           />

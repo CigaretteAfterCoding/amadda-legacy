@@ -8,6 +8,7 @@ interface AlertProps {
   onClose: () => void;
   closeAlertButton: () => void;
 }
+
 const Alert = ({ onClose, closeAlertButton }: AlertProps) => {
   return (
     <AlertContainer>
@@ -18,7 +19,7 @@ const Alert = ({ onClose, closeAlertButton }: AlertProps) => {
         <CancelMessage>취소하시겠습니까?</CancelMessage>
         <WarningMessage>
           <ErrorOutlineOutlinedIcon fontSize="small" />
-        작성한 글은 저장되지 않습니다!
+            작성한 글은 저장되지 않습니다!
         </WarningMessage>
         <YesOrNoBtn>
           <YesBtn onClick={onClose}>예</YesBtn>
@@ -70,50 +71,50 @@ const AlertMessage = styled.div`
 `;
 
 const WarningMessage = styled.div`
-margin-top:3px;
-font-size:10px;
-display:flex;
-justify-content: center;
-align-items: center;
-color:${colors.red};
+  margin-top:3px;
+  font-size:10px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  color:${colors.red};
 `;
 
 const CancelMessage = styled.div`
-text-align:center;
- font-size:13px;
- font-weight: bold;
+  text-align:center;
+  font-size:13px;
+  font-weight: bold;
 `;
 
 const YesOrNoBtn = styled.div`
-margin-top:7px;
-font-size:12px;
-display:flex;
-justify-content: center;
-align-items: center;
+  margin-top:7px;
+  font-size:12px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const YesBtn = styled.button`
-width:40px;
-margin-bottom:7px;
-border: 1px solid ${colors.gray[800]};
-background-color: transparent;
-border-radius: 30px;
-font-size:11px;
-color: ${colors.gray[900]};
-&:hover{
-  color: ${colors.white};
-  background-color: ${colors.red};
-  border-color:${colors.red};
-  cursor:pointer;
-}
+  width:40px;
+  margin-bottom:7px;
+  border: 1px solid ${colors.gray[800]};
+  background-color: transparent;
+  border-radius: 30px;
+  font-size:11px;
+  color: ${colors.gray[900]};
+  &:hover{
+    color: ${colors.white};
+    background-color: ${colors.red};
+    border-color:${colors.red};
+    cursor:pointer;
+  }
 `;
 
 const ExitBtn = styled.div`
-width:20px;
-padding-top:4px;
-color:${colors.gray[700]};
-margin-left:172px;
- & :hover{
-   cursor:pointer;
- }
+  width:20px;
+  padding-top:4px;
+  color:${colors.gray[700]};
+  margin-left:172px;
+  &:hover{
+    cursor:pointer;
+  }
 `;

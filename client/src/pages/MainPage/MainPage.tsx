@@ -26,6 +26,7 @@ const MainPage = () => {
 
   const closeDiaryWriteModal = () => {
     setWriteModalOpen(false);
+    setModalMode('default');
   };
 
   const body = document.querySelector('body');

@@ -17,6 +17,8 @@ const colors = {
   black: '#000',
   red: '#ff0000',
   orange: '#ffa500',
+  skyblue: '#87ceeb',
+  blue: '#0000CD',
   inputBlue: '#1da1fa',
   inputRed: '#fa1d1d',
 };

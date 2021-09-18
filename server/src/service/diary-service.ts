@@ -18,6 +18,7 @@ class DiaryService {
     });
 
     const diary = await DiaryRepo.findOneDiary(diaryId);
+    diary.is_private = diary.is_private === 1;
 
     res.status(200).json(diary);
   }
@@ -25,11 +26,14 @@ class DiaryService {
   static async getDiary(req: Request, res: Response): Promise<void> {
     const diaryId = parseInt(req.params.diaryId);
     const diary = await DiaryRepo.findOneDiary(diaryId);
+    diary.is_private = diary.is_private === 1;
+
     res.status(200).json(diary);
   }
 
   static async getAllDiaries(req: Request, res: Response): Promise<void> {
     const diaries = await DiaryRepo.findAllDiaries();
+    diaries.map(diary => diary.is_private = diary.is_private === 1);
     res.status(200).json(diaries);
   }
 
@@ -40,6 +44,7 @@ class DiaryService {
     await DiaryRepo.updateDiary({ diaryId, title, content, date, weather, isPrivate });
 
     const diary = await DiaryRepo.findOneDiary(diaryId);
+    diary.is_private = diary.is_private === 1;
 
     res.status(200).json(diary);
   }
@@ -47,6 +52,7 @@ class DiaryService {
   static async deleteDiary(req: Request, res: Response): Promise<void> {
     const diaryId = parseInt(req.params.diaryId);
     const diary = await DiaryRepo.findOneDiary(diaryId);
+    diary.is_private = diary.is_private === 1;
     const { affectedRows } = await DiaryRepo.deleteDiary(diaryId);
     if (affectedRows > 0) {
       res.status(200).json(diary);

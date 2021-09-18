@@ -8,6 +8,7 @@ import diaryAPI from 'Apis/diaryAPI';
 
 const MainPage = () => {
   const [diaryModalOpen, setDiaryModalOpen] = useState(false);
+  const [writeModalOpen, setWriteModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<'default' | 'write' | 'edit'>(
     'default',
   );
@@ -19,16 +20,27 @@ const MainPage = () => {
   };
 
   const openDiaryWriteModal = () => {
-    setDiaryModalOpen(!diaryModalOpen);
+    setWriteModalOpen(true);
     setModalMode('write');
+  };
+
+  const closeDiaryWriteModal = () => {
+    setWriteModalOpen(false);
+    setModalMode('default');
   };
 
   const body = document.querySelector('body');
 
   useEffect(() => {
     const closeDiaryModal = (e: React.MouseEvent<HTMLBodyElement>) => {
-      if (!(e.target as HTMLElement).closest('.diary-modal')) {
+      if (
+        !(
+          (e.target as HTMLElement).closest('.diary-modal') ||
+          (e.target as HTMLElement).closest('.select-wrapper')
+        )
+      ) {
         setDiaryModalOpen(false);
+        setWriteModalOpen(false);
         setModalMode('default');
       }
     };
@@ -53,10 +65,18 @@ const MainPage = () => {
             </DiaryCardWrapper>
           ))}
         </CardContainer>
-        <DiaryModalWrapper diaryModalOpen={diaryModalOpen}>
+        <DiaryModalWrapper diaryModalOpen={diaryModalOpen}
+          writeModalOpen={writeModalOpen}
+        >
           {diaryModalOpen && (
             <DiaryModal className="diary-modal"
               modalMode={modalMode}
+            />
+          )}
+          {writeModalOpen && (
+            <DiaryModal className="diary-modal"
+              modalMode={modalMode}
+              onClose={closeDiaryWriteModal}
             />
           )}
         </DiaryModalWrapper>
@@ -87,8 +107,8 @@ const DiaryCardWrapper = styled.div`
   }
 `;
 
-const DiaryModalWrapper = styled.div<{ diaryModalOpen: boolean }>`
-  display: ${(props) => (props.diaryModalOpen ? 'flex' : 'none')};
+const DiaryModalWrapper = styled.div<{ diaryModalOpen: boolean, writeModalOpen: boolean}>`
+  display: ${(props) => ((props.diaryModalOpen) || (props.writeModalOpen) ? 'flex' : 'none')};
   position: fixed;
   justify-content: center;
   align-items: center;

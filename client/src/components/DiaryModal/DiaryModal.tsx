@@ -437,7 +437,7 @@ const DiaryModalBottom = styled.div`
   justify-content: flex-end;
   align-items: center;
   margin: 20px 20px 0px 0;
-  position:relative;
+  position: relative;
 `;
 
 const DiaryModalShare = styled(MuiShareIcon)`

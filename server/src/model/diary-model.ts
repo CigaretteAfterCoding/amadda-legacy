@@ -72,7 +72,7 @@ class DiaryRepo {
     return result;
   }
 
-  static async findAllMyDiaries(userId: number): Promise<DiaryResponse[]> {
+  static async findAllPublicDiaries(): Promise<DiaryResponse[]> {
     const query = `
       SELECT
         diary.id id,
@@ -81,6 +81,7 @@ class DiaryRepo {
         diary.date date,
         diary.weather weather,
         diary.is_private is_private,
+        diary.image image,
         diary.created_at created_at,
         diary.updated_at updated_at,
         user.email user_email,
@@ -90,8 +91,8 @@ class DiaryRepo {
         diary
       JOIN
         user
-      ON
-        diary.user_id=${userId}
+      WHERE
+          diary.is_private=0
     `;
     const result = await queryExecutor(query);
     return result;

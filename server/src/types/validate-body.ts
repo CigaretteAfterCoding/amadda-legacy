@@ -16,6 +16,7 @@ export interface AddDiaryBody {
   date: string;
   weather: string;
   is_private: boolean;
+  image?: string | null;
 }
 
 export interface UpdateDiaryBody {
@@ -24,4 +25,5 @@ export interface UpdateDiaryBody {
   date?: string;
   weather?: string;
   is_private?: boolean;
+  image?: string;
 }

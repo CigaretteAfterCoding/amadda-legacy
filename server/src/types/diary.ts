@@ -5,6 +5,7 @@ export interface DiaryParams {
   date: string;
   weather: string;
   isPrivate: 0 | 1;
+  image: string | null;
   userId: number;
 }
 
@@ -15,5 +16,6 @@ export interface DiaryResponse {
   date: string;
   weather: string;
   is_private: 0 | 1 | boolean;
+  image: string | null;
   userId: number;
 }

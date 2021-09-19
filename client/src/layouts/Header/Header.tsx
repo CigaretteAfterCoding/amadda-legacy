@@ -16,7 +16,6 @@ import PersonIcon from '@mui/icons-material/Person';
 const Header = () => {
   const [profileMenu, setProfileMenu] = useState(false);
   const [user, setUser] = useRecoilState(userState);
-  console.log('headeruser:', user);
 
   const handleClickSignOut = () => {
     userAPI.signOut();
@@ -57,7 +56,7 @@ const Header = () => {
   ];
 
   useEffect(() => {
-    const handleClickSelect = (e: React.MouseEvent<HTMLBodyElement>) => {
+    const handleClickSelect = (e: MouseEvent) => {
       if (
         !(
           (e.target as HTMLElement).closest('.select-wrapper') ||

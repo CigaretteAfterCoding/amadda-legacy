@@ -3,16 +3,17 @@ import { DiaryParams, DiaryResponse } from 'Types/diary';
 import { queryExecutor } from 'Utils/query-executor';
 
 type AddDiaryParams = DiaryParams;
-interface UpdateDiaryParams extends Pick<DiaryParams, 'title'| 'content'| 'date' | 'weather' | 'isPrivate'> {
+
+interface UpdateDiaryParams extends Pick<DiaryParams, 'title'| 'content'| 'date' | 'weather' | 'isPrivate' | 'image'> {
   diaryId: number;
 }
 
 class DiaryRepo {
-  static async addDiary({ title, content, date, weather, isPrivate, userId }: AddDiaryParams): Promise<number> {
+  static async addDiary({ title, content, date, weather, isPrivate, image, userId }: AddDiaryParams): Promise<number> {
     const query = `
       INSERT INTO 
-        diary(title, content, date, weather, is_private, user_id, created_at, updated_at) 
-      VALUES('${title}', '${content}', '${date}', '${weather}', '${isPrivate}', '${userId}', NOW(), NOW())
+        diary(title, content, date, weather, is_private, image, user_id, created_at, updated_at) 
+      VALUES('${title}', '${content}', '${date}', '${weather}', '${isPrivate}', '${image}, '${userId}', NOW(), NOW())
     `;
     return await queryExecutor(query);
   }
@@ -26,6 +27,7 @@ class DiaryRepo {
         diary.date date,
         diary.weather weather,
         diary.is_private is_private,
+        diary.image image,
         diary.created_at created_at,
         diary.updated_at updated_at,
         user.email user_email,
@@ -53,6 +55,7 @@ class DiaryRepo {
         diary.date date,
         diary.weather weather,
         diary.is_private is_private,
+        diary.image image,
         diary.created_at created_at,
         diary.updated_at updated_at,
         user.email user_email,
@@ -69,7 +72,7 @@ class DiaryRepo {
     return result;
   }
 
-  static async updateDiary({ diaryId, title, content, date, weather, isPrivate }: UpdateDiaryParams): Promise<any> {
+  static async updateDiary({ diaryId, title, content, date, weather, isPrivate, image }: UpdateDiaryParams): Promise<any> {
     const query = `
       UPDATE
         diary
@@ -79,6 +82,7 @@ class DiaryRepo {
         date='${date}',
         weather='${weather}',
         is_private='${isPrivate}',
+        image='${image}',
         updated_at=NOW()
       WHERE 
         id=${diaryId}

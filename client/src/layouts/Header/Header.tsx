@@ -56,7 +56,7 @@ const Header = () => {
   ];
 
   useEffect(() => {
-    const handleClickSelect = (e: React.MouseEvent<HTMLBodyElement>) => {
+    const handleClickSelect = (e: MouseEvent) => {
       if (
         !(
           (e.target as HTMLElement).closest('.select-wrapper') ||

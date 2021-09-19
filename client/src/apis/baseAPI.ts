@@ -2,7 +2,7 @@ import Axios from 'axios';
 
 export const TOKEN_KEY = 'Authorization';
 
-const devURL = 'http://3.36.113.129:';
+const devURL = 'http://localhost:';
 const prodURL = 'http://3.36.113.129:';
 const PORT = 4000;
 
@@ -14,7 +14,7 @@ export const amaddaApi = Axios.create({
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
-    // [TOKEN_KEY]: `Bearer ${localStorage.getItem('accessToken')}`,
+    [TOKEN_KEY]: `Bearer ${localStorage.getItem('access_token')}`,
   },
 });
 

@@ -28,6 +28,9 @@ function App() {
     getInitialUser();
   }, []);
 
+  /**
+   * @todo 조건 변경해야 함(현재 로그아웃시 빈 페이지 리턴)
+  */
   if (!user) {
     return null;
   }

@@ -14,7 +14,7 @@ export const amaddaApi = Axios.create({
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
-    // [TOKEN_KEY]: `Bearer ${localStorage.getItem('accessToken')}`,
+    [TOKEN_KEY]: `Bearer ${localStorage.getItem('access_token')}`,
   },
 });
 

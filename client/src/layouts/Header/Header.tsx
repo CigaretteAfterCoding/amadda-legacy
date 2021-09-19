@@ -16,6 +16,7 @@ import PersonIcon from '@mui/icons-material/Person';
 const Header = () => {
   const [profileMenu, setProfileMenu] = useState(false);
   const [user, setUser] = useRecoilState(userState);
+  console.log('headeruser:', user);
 
   const handleClickSignOut = () => {
     userAPI.signOut();

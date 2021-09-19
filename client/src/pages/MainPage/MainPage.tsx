@@ -16,7 +16,6 @@ const MainPage = () => {
 
   const openDiaryModal = () => {
     setDiaryModalOpen(!diaryModalOpen);
-    diaryAPI.deleteDiary(3);
   };
 
   const openDiaryWriteModal = () => {

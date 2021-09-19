@@ -5,7 +5,7 @@ import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import MuiClearRoundedIcon from '@material-ui/icons/ClearRounded';
 
 interface AlertProps {
-  onClose: () => void;
+  onClose?: () => void;
   closeAlertButton: () => void;
 }
 

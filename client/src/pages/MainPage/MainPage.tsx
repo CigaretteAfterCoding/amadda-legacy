@@ -4,7 +4,6 @@ import Header from 'Layouts/Header/Header';
 import DiaryCard from 'Components/DiaryCard/DiaryCard';
 import WriteButton from 'Components/WriteButton/WriteButton';
 import DiaryModal from 'Components/DiaryModal/DiaryModal';
-import diaryAPI from 'Apis/diaryAPI';
 
 const MainPage = () => {
   const [diaryModalOpen, setDiaryModalOpen] = useState(false);
@@ -31,7 +30,7 @@ const MainPage = () => {
   const body = document.querySelector('body');
 
   useEffect(() => {
-    const closeDiaryModal = (e: React.MouseEvent<HTMLBodyElement>) => {
+    const closeDiaryModal = (e: MouseEvent) => {
       if (
         !(
           (e.target as HTMLElement).closest('.diary-modal') ||
@@ -68,12 +67,14 @@ const MainPage = () => {
           writeModalOpen={writeModalOpen}
         >
           {diaryModalOpen && (
-            <DiaryModal className="diary-modal"
+            <DiaryModal
+              className="diary-modal"
               modalMode={modalMode}
             />
           )}
           {writeModalOpen && (
-            <DiaryModal className="diary-modal"
+            <DiaryModal
+              className="diary-modal"
               modalMode={modalMode}
               onClose={closeDiaryWriteModal}
             />

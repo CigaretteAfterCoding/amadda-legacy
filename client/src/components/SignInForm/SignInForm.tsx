@@ -27,7 +27,7 @@ const SignInForm = () => {
   const [emailError, setEmailError] = useState(false);
   const [emptyPassword, setEmptyPassword] = useState(false);
   const [signInError, setSignInError] = useState(false);
-  const [_, setUser] = useRecoilState(userState);
+  const [user, setUser] = useRecoilState(userState);
 
   useEffect(() => {
     emailRef?.current?.focus();
@@ -62,8 +62,8 @@ const SignInForm = () => {
     const data = await userAPI.signIn({ email, password });
 
     if (data.id) {
-      history.push('/');
       setUser(data);
+      history.push('/');
       return;
     }
 

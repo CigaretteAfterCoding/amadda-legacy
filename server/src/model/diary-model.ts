@@ -44,7 +44,7 @@ class DiaryRepo {
     return result[0];
   }
 
-  static async findAllDiaries(): Promise<DiaryResponse[]> {
+  static async findAllMyDiaries(userId: number): Promise<DiaryResponse[]> {
     const query = `
       SELECT
         diary.id id,
@@ -63,7 +63,7 @@ class DiaryRepo {
       JOIN
         user
       ON
-        diary.user_id=user.id
+        diary.user_id=${userId}
     `;
     const result = await queryExecutor(query);
     return result;

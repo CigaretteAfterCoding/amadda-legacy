@@ -13,7 +13,7 @@ class DiaryRepo {
     const query = `
       INSERT INTO 
         diary(title, content, date, weather, is_private, image, user_id, created_at, updated_at) 
-      VALUES('${title}', '${content}', '${date}', '${weather}', '${isPrivate}', '${image}, '${userId}', NOW(), NOW())
+      VALUES('${title}', '${content}', '${date}', '${weather}', '${isPrivate}', '${image}', '${userId}', NOW(), NOW())
     `;
     return await queryExecutor(query);
   }
@@ -39,6 +39,19 @@ class DiaryRepo {
         user
       ON
         diary.user_id=user.id
+      WHERE
+        diary.id=${diaryId}
+    `;
+    const result = await queryExecutor(query);
+    return result[0];
+  }
+
+  static async findUserIdByDiaryId(diaryId: number): Promise<{ user_id: number }> {
+    const query = `
+      SELECT
+        diary.user_id user_id
+      FROM 
+        diary
       WHERE
         diary.id=${diaryId}
     `;

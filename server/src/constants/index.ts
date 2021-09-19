@@ -9,7 +9,7 @@ export const STATUS_CODE = {
   SERVER_ERROR: 500,
 };
 
-export const JWT_EXPIRATION_TIME = '600s';
+export const JWT_EXPIRATION_TIME = '3600s';
 
 export const ERROR_RESPONSE = {
   ID_ALREADY_EXISTS: {

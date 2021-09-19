@@ -14,5 +14,4 @@ export async function checkPermission(req: Request, res: Response, next: NextFun
   }
 
   next();
-  return;
 }

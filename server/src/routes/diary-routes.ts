@@ -16,6 +16,7 @@ diaryRouter.post(
     'date',
     'weather',
     'is_private',
+    'image',
   ]),
   isSignedIn,
   DiaryService.addDiary,
@@ -34,6 +35,7 @@ diaryRouter.patch(
     'date',
     'weather',
     'is_private',
+    'image',
   ]),
   DiaryService.updateDiary,
 );

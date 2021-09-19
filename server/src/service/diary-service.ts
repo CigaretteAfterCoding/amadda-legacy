@@ -38,6 +38,13 @@ class DiaryService {
     res.status(200).json(diaries);
   }
 
+  static async getAllPublicDiaries(req: Request, res: Response): Promise<void> {
+    const userId = parseInt((req.user as any).id);
+    const diaries = await DiaryRepo.findAllMyDiaries(userId);
+    diaries.map(diary => diary.is_private = diary.is_private === 1);
+    res.status(200).json(diaries);
+  }
+
   static async updateDiary(req: Request, res: Response): Promise<void> {
     const diaryId = parseInt(req.params.diaryId);
     const { title, content, date, weather, is_private } = req.body;

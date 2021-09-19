@@ -69,6 +69,31 @@ class DiaryRepo {
     return result;
   }
 
+  static async findAllMyDiaries(userId: number): Promise<DiaryResponse[]> {
+    const query = `
+      SELECT
+        diary.id id,
+        diary.title title,
+        diary.content content,
+        diary.date date,
+        diary.weather weather,
+        diary.is_private is_private,
+        diary.created_at created_at,
+        diary.updated_at updated_at,
+        user.email user_email,
+        user.nickname user_nickname,
+        user.profile_image user_profile_image
+      FROM 
+        diary
+      JOIN
+        user
+      ON
+        diary.user_id=${userId}
+    `;
+    const result = await queryExecutor(query);
+    return result;
+  }
+
   static async updateDiary({ diaryId, title, content, date, weather, isPrivate }: UpdateDiaryParams): Promise<any> {
     const query = `
       UPDATE

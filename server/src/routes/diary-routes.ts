@@ -22,8 +22,9 @@ diaryRouter.post(
   DiaryService.addDiary,
 );
 
-diaryRouter.get('/:diaryId', DiaryService.getDiary);
-diaryRouter.get('/', DiaryService.getAllDiaries);
+diaryRouter.get('/:diaryId', decodeJWT, DiaryService.getDiary);
+diaryRouter.get('/', decodeJWT, DiaryService.getAllMyDiaries);
+diaryRouter.get('/square', DiaryService.getAllPublicDiaries);
 
 diaryRouter.patch(
   '/:diaryId',

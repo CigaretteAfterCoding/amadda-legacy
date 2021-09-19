@@ -32,8 +32,15 @@ class DiaryService {
     res.status(200).json(diary);
   }
 
-  static async getAllDiaries(req: Request, res: Response): Promise<void> {
-    const diaries = await DiaryRepo.findAllDiaries();
+  static async getAllMyDiaries(req: Request, res: Response): Promise<void> {
+    const userId = parseInt((req.user as any).id);
+    const diaries = await DiaryRepo.findAllMyDiaries(userId);
+    diaries.map(diary => diary.is_private = diary.is_private === 1);
+    res.status(200).json(diaries);
+  }
+
+  static async getAllPublicDiaries(req: Request, res: Response): Promise<void> {
+    const diaries = await DiaryRepo.findAllPublicDiaries();
     diaries.map(diary => diary.is_private = diary.is_private === 1);
 
     res.status(200).json(diaries);

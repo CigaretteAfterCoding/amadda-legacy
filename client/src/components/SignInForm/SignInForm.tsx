@@ -27,11 +27,7 @@ const SignInForm = () => {
   const [emailError, setEmailError] = useState(false);
   const [emptyPassword, setEmptyPassword] = useState(false);
   const [signInError, setSignInError] = useState(false);
-  const [user, setUser] = useRecoilState(userState);
-
-  useEffect(() => {
-    emailRef?.current?.focus();
-  }, []);
+  const [_, setUser] = useRecoilState(userState);
 
   const isValidEmail = useMemo(() => {
     const emailRegex =
@@ -61,7 +57,7 @@ const SignInForm = () => {
 
     const data = await userAPI.signIn({ email, password });
 
-    if (data.id) {
+    if (data?.id) {
       setUser(data);
       history.push('/');
       return;
@@ -94,6 +90,20 @@ const SignInForm = () => {
       return '비밀번호를 입력해주세요.';
     }
   }, [emptyPassword]);
+
+  useEffect(() => {
+    emailRef?.current?.focus();
+
+    const keyboardHandler = (e: KeyboardEvent) => {
+      if (e.key === 'Enter') {
+        handleClickSubmit();
+      }
+    };
+
+    window.addEventListener('keydown', keyboardHandler);
+
+    return () => window.removeEventListener('keydown', keyboardHandler);
+  }, [handleClickSubmit]);
 
   return (
     <Container>

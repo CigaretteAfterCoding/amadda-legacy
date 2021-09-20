@@ -127,6 +127,7 @@ const SignUpForm = () => {
 
   useEffect(() => {
     emailRef?.current?.focus();
+
     const keyboardHandler = (e: KeyboardEvent) => {
       if (e.key === 'Enter') {
         handleClickSubmit();

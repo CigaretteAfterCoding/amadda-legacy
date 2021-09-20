@@ -12,8 +12,10 @@ import path from 'path';
 const PORT = process.env.PORT || 4000;
 const app = express();
 
+const corsOrigin = process.env.NODE_ENV === 'production' ? 'http://amadda.net' : 'http://localhost:3000';
+
 app.use(morgan('dev'));
-app.use(cors());
+app.use(cors({ origin: corsOrigin, credentials: true }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

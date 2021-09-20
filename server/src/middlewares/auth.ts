@@ -9,7 +9,7 @@ export function isSignedIn(req: Request, res: Response, next: NextFunction): voi
     return;
   }
 
-  res.status(STATUS_CODE.NO_TOKEN).json(ERROR_RESPONSE.UNAUTHORIZED);
+  res.status(STATUS_CODE.UNAUTHORIZED).json(ERROR_RESPONSE.UNAUTHORIZED);
   next(new AuthenticateError());
   return;
 }

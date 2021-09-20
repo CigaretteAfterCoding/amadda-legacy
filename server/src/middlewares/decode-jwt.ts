@@ -7,7 +7,7 @@ export const TOKEN_KEY = 'authorization';
 
 export function decodeJWT(req: Request, res: Response, next: NextFunction): void {
   if (!req.headers[TOKEN_KEY]) {
-    res.status(STATUS_CODE.NO_TOKEN).json(ERROR_RESPONSE.UNAUTHORIZED);
+    res.status(STATUS_CODE.UNAUTHORIZED).json(ERROR_RESPONSE.UNAUTHORIZED);
     next(new AuthenticateError());
     return;
   }
@@ -20,7 +20,7 @@ export function decodeJWT(req: Request, res: Response, next: NextFunction): void
 
 export function decodeRefreshJWT(req: Request, res: Response, next: NextFunction): void {
   if (!req.cookies.refreshToken) {
-    res.status(STATUS_CODE.NO_TOKEN).json(ERROR_RESPONSE.UNAUTHORIZED);
+    res.status(STATUS_CODE.UNAUTHORIZED).json(ERROR_RESPONSE.UNAUTHORIZED);
     next(new AuthenticateError());
     return;
   }

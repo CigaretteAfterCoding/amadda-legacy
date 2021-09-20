@@ -2,14 +2,14 @@ export const STATUS_CODE = {
   OK: 200,
   CREATED: 201,
   BAD_REQUEST: 400,
-  NO_TOKEN: 401,
+  UNAUTHORIZED: 401,
   NOT_FOUND: 404,
   NO_PERMISSION: 403,
   CONFLICT: 409,
   SERVER_ERROR: 500,
 };
 
-export const JWT_EXPIRATION_TIME = '600s';
+export const JWT_EXPIRATION_TIME = '3600s';
 
 export const ERROR_RESPONSE = {
   ID_ALREADY_EXISTS: {
@@ -41,6 +41,14 @@ export const ERROR_RESPONSE = {
       {
         type: 'NO_ITEMS_TO_DELETE',
         message: '삭제할 아이템이 존재하지 않습니다.',
+      },
+    ],
+  },
+  PERMISION_DENIED: {
+    errors: [
+      {
+        type: 'PERMISION_DENIED',
+        message: '권한이 없습니다.',
       },
     ],
   },

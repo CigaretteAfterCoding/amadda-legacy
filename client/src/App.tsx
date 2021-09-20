@@ -8,6 +8,7 @@ import MainPage from 'Pages/MainPage/MainPage';
 import { RecoilRoot } from 'recoil';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import InitializeRecoilState from 'Recoil/InitializeRecoilState';
 
 function App() {
   const queryClient = new QueryClient();
@@ -15,31 +16,33 @@ function App() {
   return (
     <div className="App">
       <RecoilRoot>
-        <QueryClientProvider client={queryClient}>
-          <ReactQueryDevtools initialIsOpen={false} />
-          <GlobalStyle />
-          {/* <Header /> */}
-          <Switch>
-            <Route
-              path="/"
-              exact
-            >
-              <MainPage />
-            </Route>
-            <Route
-              path="/sign-in"
-              exact
-            >
-              <SignInPage />
-            </Route>
-            <Route
-              path="/sign-up"
-              exact
-            >
-              <SignUpPage />
-            </Route>
-          </Switch>
-        </QueryClientProvider>
+        <InitializeRecoilState>
+          <QueryClientProvider client={queryClient}>
+            <ReactQueryDevtools initialIsOpen={false} />
+            <GlobalStyle />
+            {/* <Header /> */}
+            <Switch>
+              <Route
+                path="/"
+                exact
+              >
+                <MainPage />
+              </Route>
+              <Route
+                path="/sign-in"
+                exact
+              >
+                <SignInPage />
+              </Route>
+              <Route
+                path="/sign-up"
+                exact
+              >
+                <SignUpPage />
+              </Route>
+            </Switch>
+          </QueryClientProvider>
+        </InitializeRecoilState>
       </RecoilRoot>
     </div>
   );

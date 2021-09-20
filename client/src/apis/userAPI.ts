@@ -1,8 +1,9 @@
 import { AlreadySignedInErrorResponse, IdAlreadyExistsErrorResponse, UnauthorizedErrorResponse } from 'Types/errors';
-import { UserWithToken } from 'Types/user';
+import { User, UserWithToken } from 'Types/user';
 import { amaddaApi } from './baseAPI';
 
 let refreshTimeoutId: ReturnType<typeof setTimeout>;
+const refreshDelay = 1000 * 60 * 50;
 
 interface SignUpParams {
   email: string;
@@ -25,8 +26,8 @@ async function signUp({
     amaddaApi.defaults.headers.common[
       'Authorization'
     ] = `Bearer ${data.access_token}`;
-    localStorage.setItem('accessToken', data.access_token);
-    refreshTimeoutId = setTimeout(refreshAccessTokens, 500000);
+    localStorage.setItem('access_token', data.access_token);
+    refreshTimeoutId = setTimeout(refreshAccessTokens, refreshDelay);
 
     return data;
   } catch (error) {
@@ -52,8 +53,8 @@ async function signIn({
     amaddaApi.defaults.headers.common[
       'Authorization'
     ] = `Bearer ${data.access_token}`;
-    localStorage.setItem('accessToken', data.access_token);
-    refreshTimeoutId = setTimeout(refreshAccessTokens, 500000);
+    localStorage.setItem('access_token', data.access_token);
+    refreshTimeoutId = setTimeout(refreshAccessTokens, refreshDelay);
 
     return data;
   } catch (error) {
@@ -65,6 +66,7 @@ async function signIn({
 function signOut(): void {
   delete amaddaApi.defaults.headers.common['Authorization'];
   clearTimeout(refreshTimeoutId);
+  localStorage.removeItem('access_token');
   console.log('로그아웃 되었습니다');
 }
 
@@ -79,11 +81,12 @@ async function refreshAccessTokens(): Promise<void> {
   amaddaApi.defaults.headers.common[
     'Authorization'
   ] = `Bearer ${data.access_token}`;
-  localStorage.setItem('accessToken', data.access_token);
+  localStorage.setItem('access_token', data.access_token);
   refreshTimeoutId = setTimeout(refreshAccessTokens, 10000);
 }
 
-type GetCurrentUserResponse = UserWithToken | UnauthorizedErrorResponse;
+// type GetCurrentUserResponse = UserWithToken | UnauthorizedErrorResponse;
+type GetCurrentUserResponse = User;
 
 async function getCurrentUser() {
   try {

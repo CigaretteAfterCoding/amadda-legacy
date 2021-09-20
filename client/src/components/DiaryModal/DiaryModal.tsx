@@ -20,7 +20,7 @@ import Alert from 'Elements/Alert/Alert';
 interface DiaryModalProps {
   className: string;
   modalMode: 'default' | 'write' | 'edit';
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 const DiaryModal = ({ className, modalMode = 'default', onClose }: DiaryModalProps) => {
@@ -86,7 +86,7 @@ const DiaryModal = ({ className, modalMode = 'default', onClose }: DiaryModalPro
     setWeatherMenu(!weatherMenu);
   };
 
-  const handleSetMenu = (e) => {
+  const handleSetMenu = (e: React.MouseEvent) => {
     if ((e.target as HTMLElement).closest('.sunny')) {
       setWeatherMenu(false);
       setWeather(weatherIcon[0]);
@@ -117,7 +117,7 @@ const DiaryModal = ({ className, modalMode = 'default', onClose }: DiaryModalPro
   }, []);
 
   useEffect(() => {
-    const handleClickSelect = (e: React.MouseEvent<HTMLBodyElement>) => {
+    const handleClickSelect = (e: MouseEvent) => {
       if (
         !(
           (e.target as HTMLElement).closest('.select-wrapper') ||

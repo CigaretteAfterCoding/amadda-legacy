@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 import { User } from 'Types/user';
 
-interface UserState extends User {
+export interface UserState extends User {
   access_token?: string;
 }
 

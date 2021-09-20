@@ -31,10 +31,6 @@ const SignUpForm = () => {
   const [passwordError, setPasswordError] = useState(false);
   const [_, setUser] = useRecoilState(userState);
 
-  useEffect(() => {
-    emailRef?.current?.focus();
-  }, []);
-
   const isValidEmail = useMemo(() => {
     const emailRegex =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -89,7 +85,7 @@ const SignUpForm = () => {
 
     const data = await userAPI.signUp({ email, password });
 
-    if (data.id) {
+    if (data?.id) {
       history.push('/');
       setUser(data);
     }
@@ -128,6 +124,19 @@ const SignUpForm = () => {
       return '비밀번호 확인이 틀렸습니다.';
     }
   }, [emptyPasswordConfirm, passwordError]);
+
+  useEffect(() => {
+    emailRef?.current?.focus();
+    const keyboardHandler = (e: KeyboardEvent) => {
+      if (e.key === 'Enter') {
+        handleClickSubmit();
+      }
+    };
+
+    window.addEventListener('keydown', keyboardHandler);
+
+    return () => window.removeEventListener('keydown', keyboardHandler);
+  }, [handleClickSubmit]);
 
   return (
     <Container>

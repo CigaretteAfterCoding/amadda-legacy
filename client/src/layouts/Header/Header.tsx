@@ -7,7 +7,7 @@ import Select from 'Elements/Select/Select';
 import SettingsIcon from '@material-ui/icons/Settings';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import userState from 'Recoil/userState';
 import userAPI from 'Apis/userAPI';
@@ -16,6 +16,7 @@ import PersonIcon from '@mui/icons-material/Person';
 const Header = () => {
   const [profileMenu, setProfileMenu] = useState(false);
   const [user, setUser] = useRecoilState(userState);
+  const history = useHistory();
 
   const handleClickSignOut = () => {
     userAPI.signOut();
@@ -24,6 +25,10 @@ const Header = () => {
 
   const handleClickMenu = () => {
     setProfileMenu(!profileMenu);
+  };
+
+  const handleClickLogo = () => {
+    history.push('/');
   };
 
   const selectMenus = [
@@ -75,7 +80,7 @@ const Header = () => {
   return (
     <div>
       <Container>
-        <HomeTitle>AMADDA</HomeTitle>
+        <HomeTitle onClick={handleClickLogo}>AMADDA</HomeTitle>
         <HeaderRight>
           <Search />
           {!user ? (
@@ -120,6 +125,7 @@ const HomeTitle = styled.h1`
   display: flex;
   color: ${colors.amadda};
   user-select: none;
+  cursor: pointer;
 `;
 
 const HeaderRight = styled.div`

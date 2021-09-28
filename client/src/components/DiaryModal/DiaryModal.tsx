@@ -20,7 +20,7 @@ import Alert from 'Elements/Alert/Alert';
 interface DiaryModalProps {
   className: string;
   modalMode: 'default' | 'write' | 'edit';
-  onClose?: () => void;
+  onClose?: (e: Event) => void;
 }
 
 const DiaryModal = ({ className, modalMode = 'default', onClose }: DiaryModalProps) => {
@@ -128,11 +128,22 @@ const DiaryModal = ({ className, modalMode = 'default', onClose }: DiaryModalPro
       }
     };
 
-    const bodyElement = document.querySelector('body');
-    bodyElement?.addEventListener('click', handleClickSelect);
+    const keyboardHandler = (e: KeyboardEvent) => {
+      console.log(e.key);
+      if (modalMode === 'default') {
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        onClose && onClose(e);
+      }
+    };
 
-    return () => bodyElement?.removeEventListener('click', handleClickSelect);
-  }, []);
+    window.addEventListener('click', handleClickSelect);
+    window.addEventListener('keydown', keyboardHandler);
+
+    return () => {
+      window.removeEventListener('click', handleClickSelect);
+      window.removeEventListener('keydown', keyboardHandler);
+    };
+  }, [modalMode, onClose]);
 
   return (
     <DiaryModalContainer className={className}>

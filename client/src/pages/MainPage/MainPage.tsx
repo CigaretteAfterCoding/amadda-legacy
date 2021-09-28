@@ -29,20 +29,20 @@ const MainPage = () => {
 
   const body = document.querySelector('body');
 
-  useEffect(() => {
-    const closeDiaryModal = (e: MouseEvent) => {
-      if (
-        !(
-          (e.target as HTMLElement).closest('.diary-modal') ||
-          (e.target as HTMLElement).closest('.select-wrapper')
-        )
-      ) {
-        setDiaryModalOpen(false);
-        setWriteModalOpen(false);
-        setModalMode('default');
-      }
-    };
+  const closeDiaryModal = (e: Event) => {
+    if (
+      !(
+        (e.target as HTMLElement).closest('.diary-modal') ||
+        (e.target as HTMLElement).closest('.select-wrapper')
+      ) || (e as KeyboardEvent).key === 'Escpae'
+    ) {
+      setDiaryModalOpen(false);
+      setWriteModalOpen(false);
+      setModalMode('default');
+    }
+  };
 
+  useEffect(() => {
     if (diaryModalOpen) {
       body?.addEventListener('click', closeDiaryModal);
     }
@@ -70,6 +70,7 @@ const MainPage = () => {
             <DiaryModal
               className="diary-modal"
               modalMode={modalMode}
+              onClose={closeDiaryModal}
             />
           )}
           {writeModalOpen && (

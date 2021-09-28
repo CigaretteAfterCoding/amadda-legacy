@@ -129,7 +129,6 @@ const DiaryModal = ({ className, modalMode = 'default', onClose }: DiaryModalPro
     };
 
     const keyboardHandler = (e: KeyboardEvent) => {
-      console.log(e.key);
       if (modalMode === 'default') {
         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         onClose && onClose(e);

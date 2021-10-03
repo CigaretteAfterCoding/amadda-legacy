@@ -4,7 +4,7 @@
   "description": "아마따 일기",
   "main": "index.js",
   "scripts": {
-    "dev": "env-cmd -f .env.local ts-node -r tsconfig-paths/register src/app.ts",
+    "dev": "ts-node -r tsconfig-paths/register src/app.ts",
     "dev:aws": "ts-node -r tsconfig-paths/register src/app.ts",
     "prebuild": "pm2 kill",
     "build": "NODE_ENV=production rimraf build/* && ttsc",

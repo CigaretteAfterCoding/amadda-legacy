@@ -4,6 +4,8 @@ import Header from 'Layouts/Header/Header';
 import DiaryCard from 'Components/DiaryCard/DiaryCard';
 import WriteButton from 'Components/WriteButton/WriteButton';
 import DiaryModal from 'Components/DiaryModal/DiaryModal';
+import diaryAPI, { GetDiaryResponse } from 'Apis/diaryAPI';
+import { useQuery } from 'react-query';
 
 const MainPage = () => {
   const [diaryModalOpen, setDiaryModalOpen] = useState(false);
@@ -11,6 +13,18 @@ const MainPage = () => {
   const [modalMode, setModalMode] = useState<'default' | 'write' | 'edit'>(
     'default',
   );
+  const { data: diaries, isLoading, isError } = useQuery<GetDiaryResponse[] | void>(
+    'diary/diaries',
+    diaryAPI.getAllDiaries,
+    {
+      refetchOnWindowFocus: false,
+      refetchInterval: false,
+      refetchOnReconnect: false,
+      refetchOnMount: false,
+    },
+  );
+  console.log({ diaries });
+
   const test = Array(8).fill('');
 
   const openDiaryModal = () => {

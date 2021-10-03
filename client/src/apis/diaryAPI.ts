@@ -21,7 +21,16 @@ async function addDiary(diary: AddDiaryParams): Promise<AddDiaryResponse | void>
   }
 }
 
-type GetDiaryResponse = Diary;
+export type GetDiaryResponse = Diary;
+
+async function getAllDiaries(): Promise<GetDiaryResponse[] | void> {
+  try {
+    const { data } = await amaddaApi.get<GetDiaryResponse[]>('/diary');
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 async function getDiary(diaryId: number): Promise<GetDiaryResponse | void> {
   try {
@@ -73,6 +82,7 @@ async function deleteDiary(diaryId: number): Promise<DeleteDiaryResponse | void>
 
 export default {
   addDiary,
+  getAllDiaries,
   getDiary,
   updateDiary,
   deleteDiary,

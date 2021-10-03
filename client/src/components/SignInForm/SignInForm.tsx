@@ -92,8 +92,6 @@ const SignInForm = () => {
   }, [emptyPassword]);
 
   useEffect(() => {
-    emailRef?.current?.focus();
-
     const keyboardHandler = (e: KeyboardEvent) => {
       if (e.key === 'Enter') {
         handleClickSubmit();

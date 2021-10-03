@@ -6,6 +6,8 @@ import WriteButton from 'Components/WriteButton/WriteButton';
 import DiaryModal from 'Components/DiaryModal/DiaryModal';
 import diaryAPI, { GetDiaryResponse } from 'Apis/diaryAPI';
 import { useQuery } from 'react-query';
+import { useRecoilState } from 'recoil';
+import userState from 'Recoil/userState';
 
 const MainPage = () => {
   const [diaryModalOpen, setDiaryModalOpen] = useState(false);
@@ -13,7 +15,8 @@ const MainPage = () => {
   const [modalMode, setModalMode] = useState<'default' | 'write' | 'edit'>(
     'default',
   );
-  const { data: diaries, isLoading, isError } = useQuery<GetDiaryResponse[] | void>(
+  const [user, _] = useRecoilState(userState);
+  const { data: diaries, isLoading } = useQuery<GetDiaryResponse[] | void>(
     'diary/diaries',
     diaryAPI.getAllDiaries,
     {
@@ -24,8 +27,6 @@ const MainPage = () => {
     },
   );
   console.log({ diaries });
-
-  const test = Array(8).fill('');
 
   const openDiaryModal = () => {
     setDiaryModalOpen(!diaryModalOpen);
@@ -68,37 +69,47 @@ const MainPage = () => {
     <MainPageContainer>
       <Header />
       <MainPageWrapper>
-        <CardContainer>
-          {test?.map((item, idx) => (
-            <DiaryCardWrapper key={idx}
-              onClick={openDiaryModal}
+        {isLoading ?
+          '로딩중~~' :
+          <>
+            <CardContainer>
+              {diaries?.map((diary, idx) => (
+                <DiaryCardWrapper key={idx}
+                  onClick={openDiaryModal}
+                >
+                  <DiaryCard
+                    key={idx}
+                    diary={diary}
+                  />
+                </DiaryCardWrapper>
+              ))}
+            </CardContainer>
+            <DiaryModalWrapper diaryModalOpen={diaryModalOpen}
+              writeModalOpen={writeModalOpen}
             >
-              <DiaryCard key={idx} />
-            </DiaryCardWrapper>
-          ))}
-        </CardContainer>
-        <DiaryModalWrapper diaryModalOpen={diaryModalOpen}
-          writeModalOpen={writeModalOpen}
-        >
-          {diaryModalOpen && (
-            <DiaryModal
-              className="diary-modal"
-              modalMode={modalMode}
-              onClose={closeDiaryModal}
-            />
-          )}
-          {writeModalOpen && (
-            <DiaryModal
-              className="diary-modal"
-              modalMode={modalMode}
-              onClose={closeDiaryWriteModal}
-            />
-          )}
-        </DiaryModalWrapper>
+              {diaryModalOpen && (
+                <DiaryModal
+                  className="diary-modal"
+                  modalMode={modalMode}
+                  onClose={closeDiaryModal}
+                />
+              )}
+              {writeModalOpen && (
+                <DiaryModal
+                  className="diary-modal"
+                  modalMode={modalMode}
+                  onClose={closeDiaryWriteModal}
+                />
+              )}
+            </DiaryModalWrapper>
+          </>
+        }
       </MainPageWrapper>
+      {user?.id &&
       <WriteButtonWrapper onClick={openDiaryWriteModal}>
         <WriteButton />
       </WriteButtonWrapper>
+      }
     </MainPageContainer>
   );
 };

@@ -5,8 +5,13 @@ import testImg from 'Images/test2.jpg';
 import MuiLikeBorderIcon from '@material-ui/icons/FavoriteBorder';
 import MuiLikeIcon from '@material-ui/icons/Favorite';
 import MuiWbSunnyOutlinedIcon from '@material-ui/icons/WbSunnyOutlined';
+import { Diary } from 'Types/diary';
 
-const DiaryCard = () => {
+interface DiaryCardProps {
+  diary: Diary;
+}
+
+const DiaryCard = ({ diary }: DiaryCardProps) => {
   const [like, setLike] = useState(false);
   const handleClickLike = () => {
     setLike(!like);
@@ -17,21 +22,19 @@ const DiaryCard = () => {
       <DiaryCardPhoto />
       <DiaryCardContents>
         <ContentsTop>
-          <DiaryCardTitle>아 너무 덥다</DiaryCardTitle>
+          <DiaryCardTitle>{diary.title}</DiaryCardTitle>
           <DiaryCardWeather />
         </ContentsTop>
         <ContentsMid>
           <DiaryCardText>
-            12월 9일 목요일 사랑하는 사람과 마지막 하루를 보냈다고 4월에 나눌
-            인사를 미리 서둘러 하고 세상과도 이별한다고 눈을 감고 깨어나질
-            못하고 매일 써오던 일기 내게 전해주라고
+            {diary.content}
           </DiaryCardText>
         </ContentsMid>
         <ContentsBtm>
           <LikeWrapper onClick={handleClickLike}>
             {like ? <DiaryCardLike /> : <DiaryCardLikeBorder />}
           </LikeWrapper>
-          <DiaryCardDate>2021년 07월 19일</DiaryCardDate>
+          <DiaryCardDate>{diary.date}</DiaryCardDate>
         </ContentsBtm>
       </DiaryCardContents>
     </DiaryCardContainer>

@@ -10,12 +10,12 @@ import colors from 'Styles/color-variables';
 import MuiCreateIcon from '@material-ui/icons/CreateOutlined';
 import MuiDeleteIcon from '@material-ui/icons/DeleteOutline';
 import MuiShareIcon from '@material-ui/icons/Reply';
-import WriteButton from 'Components/WriteButton/WriteButton';
 import MuiCheckRoundedIcon from '@material-ui/icons/CheckRounded';
 import MuiClearRoundedIcon from '@material-ui/icons/ClearRounded';
 import weatherAPI from 'Apis/weatherAPI';
 import WeatherSelect from 'Elements/Select/WeatherSelect';
 import Alert from 'Elements/Alert/Alert';
+import AddRoundedIcon from '@material-ui/icons/AddRounded';
 
 interface DiaryModalProps {
   className: string;
@@ -28,6 +28,8 @@ const DiaryModal = ({ className, modalMode = 'default', onClose }: DiaryModalPro
   const [weatherMenu, setWeatherMenu] = useState(false);
   const [weather, setWeather] = useState<React.ReactNode>('');
   const [alertModal, setAlertModal] = useState(false);
+  const [imageFile, setImageFile] = useState('');
+  const [previewImage, setPreviewImage] = useState('');
 
   const weatherIcon = [
     <MuiSunnyIcon
@@ -73,6 +75,17 @@ const DiaryModal = ({ className, modalMode = 'default', onClose }: DiaryModalPro
       key="snowy"
     />,
   ];
+
+  const handleFileOnChange = (e: MouseEvent) =>{
+    e?.preventDefault();
+    const reader = new FileReader();
+    const file = e?.target?.files[0];
+    reader.onloadend = () => {
+      setImageFile(file);
+      setPreviewImage(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
 
   const handleAlertButton = () =>{
     setAlertModal(!alertModal);
@@ -148,9 +161,28 @@ const DiaryModal = ({ className, modalMode = 'default', onClose }: DiaryModalPro
     <DiaryModalContainer className={className}>
       {modalMode === 'write' ? (
         <PhotoContainer>
-          <UploadButtonWrapper>
-            <UploadButton />
-          </UploadButtonWrapper>
+          {imageFile ?
+            <>
+              <label htmlFor="ex_file" >
+                <ImageWrapper src={previewImage}>
+                </ImageWrapper>
+              </label>
+              <input type="file"
+                id="ex_file"
+                onChange={handleFileOnChange}
+              />
+            </>
+            :
+            <PhotoWrapper>
+              <UploadButtonWrapper >
+                <label htmlFor="ex_file" ><AddRoundedIcon fontSize="large" /></label>
+              </UploadButtonWrapper>
+              <input type="file"
+                id="ex_file"
+                onChange={handleFileOnChange}
+              />
+            </PhotoWrapper>
+          }
         </PhotoContainer>
       ) : (
         <DiaryModalPhoto />
@@ -286,6 +318,26 @@ const PhotoContainer = styled.div`
   width: 380px;
   height: 520px;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & input[type="file"]{
+    position: absolute; 
+    width: 1px; 
+    height: 1px; 
+    padding: 0; 
+    margin: -1px; 
+    overflow: hidden; 
+    clip:rect(0,0,0,0); 
+    border: 0; 
+  }
+`;
+
+const PhotoWrapper = styled.div`
+  width: 290px;
+  height: 520px;
+  border-radius: 10px;
   border: 2px dashed ${colors.gray[300]};
   display: flex;
   align-items: center;
@@ -294,15 +346,36 @@ const PhotoContainer = styled.div`
 
 const UploadButtonWrapper = styled.div`
   opacity: 0.7;
-  border-radius: 999px;
-  & button:hover {
-    opacity: 1;
-    transform: rotate(90deg);
-    cursor: pointer;
+ 
+  & label{
+    color:white;
+    background-color: ${colors.amadda};
+    height: 2.5em;
+    width: 2.5em;
+    border-radius: 999px;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
-const UploadButton = styled(WriteButton)``;
+const ImageWrapper = styled.div<{src: string}>`
+  width: 300px;
+  height: 520px;
+  background-image: ${(props)=> `url(${(props.src)})`};
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+ 
+  &:hover{
+    cursor:pointer;
+  }
+`;
 
 const DiaryModalPhoto = styled.div`
   margin: 30px 0 30px 30px;

@@ -26,7 +26,6 @@ const MainPage = () => {
       refetchOnMount: false,
     },
   );
-  console.log({ diaries });
 
   const openDiaryModal = () => {
     setDiaryModalOpen(!diaryModalOpen);
@@ -84,7 +83,8 @@ const MainPage = () => {
                 </DiaryCardWrapper>
               ))}
             </CardContainer>
-            <DiaryModalWrapper diaryModalOpen={diaryModalOpen}
+            <DiaryModalWrapper
+              diaryModalOpen={diaryModalOpen}
               writeModalOpen={writeModalOpen}
             >
               {diaryModalOpen && (

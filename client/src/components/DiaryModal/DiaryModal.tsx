@@ -16,14 +16,17 @@ import weatherAPI from 'Apis/weatherAPI';
 import WeatherSelect from 'Elements/Select/WeatherSelect';
 import Alert from 'Elements/Alert/Alert';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
+import diaryAPI from 'Apis/diaryAPI';
 
 interface DiaryModalProps {
   className: string;
   modalMode: 'default' | 'write' | 'edit';
   onClose?: (e: Event) => void;
+  diaryId?: number;
 }
 
-const DiaryModal = ({ className, modalMode = 'default', onClose }: DiaryModalProps) => {
+const DiaryModal = ({ className, modalMode = 'default', onClose, diaryId }: DiaryModalProps) => {
+  const [diary, setDiary] = useState();
   const [weatherData, setWeatherData] = useState<0 | 1 | 2 | 3 >(0);
   const [weatherMenu, setWeatherMenu] = useState(false);
   const [weather, setWeather] = useState<React.ReactNode>('');
@@ -126,8 +129,17 @@ const DiaryModal = ({ className, modalMode = 'default', onClose }: DiaryModalPro
       const data = await weatherAPI.getWeather();
       setWeatherData(data);
     }
-    getWeatherAPI();
-  }, []);
+
+    if (modalMode === 'write') {
+      getWeatherAPI();
+    }
+
+    // MainPage diaryId prop 못 받아옴(렌더 방식 수정해야함)
+    if (modalMode === 'default' && diaryId) {
+      const data = diaryAPI.getDiary(diaryId);
+      setDiary(data);
+    }
+  }, [modalMode, diaryId]);
 
   useEffect(() => {
     const handleClickSelect = (e: MouseEvent) => {

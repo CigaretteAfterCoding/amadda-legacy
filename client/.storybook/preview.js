@@ -1,6 +1,7 @@
 import GlobalStyle from 'Styles/GlobalStyle.tsx'
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
+import { MemoryRouter } from 'react-router-dom';
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -17,10 +18,12 @@ const queryClient = new QueryClient();
 export const decorators = [
   (Story) => (
     <RecoilRoot>
-      <QueryClientProvider client={queryClient}>
-        <GlobalStyle />
-        <Story />
-      </QueryClientProvider>
+      <MemoryRouter>
+        <QueryClientProvider client={queryClient}>
+          <GlobalStyle />
+          <Story />
+        </QueryClientProvider>
+      </MemoryRouter>
     </RecoilRoot>
   ),
 ];

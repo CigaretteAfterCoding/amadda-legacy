@@ -12,10 +12,15 @@ const colors = {
     1000: '#393732',
   },
   amadda: '#45259d',
+  amaddaHover: '#331b74',
   white: '#fff',
   black: '#000',
   red: '#ff0000',
   orange: '#ffa500',
+  skyblue: '#87ceeb',
+  blue: '#0000CD',
+  inputBlue: '#1da1fa',
+  inputRed: '#fa1d1d',
 };
 
 export default colors;

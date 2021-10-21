@@ -8,3 +8,22 @@ export interface SignInUserBody {
   email: string;
   password: string;
 }
+
+// diary
+export interface AddDiaryBody {
+  title: string;
+  content: string;
+  date: string;
+  weather: string;
+  is_private: boolean;
+  image?: string | null;
+}
+
+export interface UpdateDiaryBody {
+  title?: string;
+  content?: string;
+  date?: string;
+  weather?: string;
+  is_private?: boolean;
+  image?: string;
+}

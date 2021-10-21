@@ -1,21 +1,22 @@
-import { User } from 'Types/user';
+import { AlreadySignedInErrorResponse, IdAlreadyExistsErrorResponse, UnauthorizedErrorResponse } from 'Types/errors';
+import { User, UserWithToken } from 'Types/user';
 import { amaddaApi } from './baseAPI';
 
 let refreshTimeoutId: ReturnType<typeof setTimeout>;
+const refreshDelay = 1000 * 60 * 50;
 
 interface SignUpParams {
   email: string;
   password: string;
 }
 
-interface SignUpResponse extends User {
-  accessToken: string;
-}
+// 임시방편
+type SignUpResponse = UserWithToken & IdAlreadyExistsErrorResponse;
 
 async function signUp({
   email,
   password,
-}: SignUpParams): Promise<SignUpResponse> {
+}: SignUpParams): Promise<SignUpResponse | void> {
   try {
     const { data } = await amaddaApi.post<SignUpResponse>('/user/sign-up', {
       email,
@@ -24,36 +25,40 @@ async function signUp({
 
     amaddaApi.defaults.headers.common[
       'Authorization'
-    ] = `Bearer ${data.accessToken}`;
-    refreshTimeoutId = setTimeout(refreshAccessTokens, 5000);
+    ] = `Bearer ${data.access_token}`;
+    localStorage.setItem('access_token', data.access_token);
+    refreshTimeoutId = setTimeout(refreshAccessTokens, refreshDelay);
 
     return data;
   } catch (error) {
-    return error.response.data;
+    console.error(error);
   }
 }
 
-interface SignInParams extends SignUpParams {}
-interface SignInResponse extends SignUpResponse {}
+type SignInParams = SignUpParams
+
+// 임시방편
+type SignInResponse = UserWithToken & AlreadySignedInErrorResponse;
 
 async function signIn({
   email,
   password,
-}: SignInParams): Promise<SignInResponse> {
+}: SignInParams): Promise<SignInResponse | void> {
   try {
-    const { data } = await amaddaApi.post('/user/sign-in', {
+    const { data } = await amaddaApi.post<SignInResponse>('/user/sign-in', {
       email,
       password,
     });
 
     amaddaApi.defaults.headers.common[
       'Authorization'
-    ] = `Bearer ${data.accessToken}`;
-    refreshTimeoutId = setTimeout(refreshAccessTokens, 5000);
+    ] = `Bearer ${data.access_token}`;
+    localStorage.setItem('access_token', data.access_token);
+    refreshTimeoutId = setTimeout(refreshAccessTokens, refreshDelay);
 
     return data;
   } catch (error) {
-    return error.response.data;
+    console.error(error);
   }
 }
 
@@ -61,11 +66,12 @@ async function signIn({
 function signOut(): void {
   delete amaddaApi.defaults.headers.common['Authorization'];
   clearTimeout(refreshTimeoutId);
+  localStorage.removeItem('access_token');
   console.log('로그아웃 되었습니다');
 }
 
 interface RefreshAccessTokensResponse {
-  accessToken: string;
+  access_token: string;
 }
 
 async function refreshAccessTokens(): Promise<void> {
@@ -74,18 +80,20 @@ async function refreshAccessTokens(): Promise<void> {
   );
   amaddaApi.defaults.headers.common[
     'Authorization'
-  ] = `Bearer ${data.accessToken}`;
+  ] = `Bearer ${data.access_token}`;
+  localStorage.setItem('access_token', data.access_token);
   refreshTimeoutId = setTimeout(refreshAccessTokens, 10000);
 }
 
-interface GetCurrentUserResponse extends User {}
+// type GetCurrentUserResponse = UserWithToken | UnauthorizedErrorResponse;
+type GetCurrentUserResponse = User;
 
 async function getCurrentUser() {
   try {
     const { data } = await amaddaApi.get<GetCurrentUserResponse>('/user');
     return data;
   } catch (error) {
-    return error.response.data;
+    console.error(error);
   }
 }
 

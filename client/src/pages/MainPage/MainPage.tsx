@@ -4,6 +4,8 @@ import Header from 'Layouts/Header/Header';
 import DiaryCard from 'Components/DiaryCard/DiaryCard';
 import WriteButton from 'Components/WriteButton/WriteButton';
 import DiaryModal from 'Components/DiaryModal/DiaryModal';
+import { useRecoilState } from 'recoil';
+import userState from 'Recoil/userState';
 
 const MainPage = () => {
   const [diaryModalOpen, setDiaryModalOpen] = useState(false);
@@ -11,6 +13,8 @@ const MainPage = () => {
   const [modalMode, setModalMode] = useState<'default' | 'write' | 'edit'>(
     'default',
   );
+  const [user, _] = useRecoilState(userState);
+
   const test = Array(8).fill('');
 
   const openDiaryModal = () => {
@@ -82,9 +86,11 @@ const MainPage = () => {
           )}
         </DiaryModalWrapper>
       </MainPageWrapper>
+      {user?.id &&
       <WriteButtonWrapper onClick={openDiaryWriteModal}>
         <WriteButton />
       </WriteButtonWrapper>
+      }
     </MainPageContainer>
   );
 };

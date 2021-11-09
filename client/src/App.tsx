@@ -7,6 +7,7 @@ import SignUpPage from 'Pages/SignUpPage/SignUpPage';
 import MainPage from 'Pages/MainPage/MainPage';
 
 function App() {
+  // 테스트
   return (
     <div className="App">
       <GlobalStyle />

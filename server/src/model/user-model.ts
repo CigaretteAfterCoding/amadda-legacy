@@ -1,25 +1,33 @@
 import { queryExecutor } from 'Utils/query-executor';
-import { CreateUserParams } from 'Types/repository-param';
 
 export interface UserInfo {
   id: number;
   email: string;
   nickname: string;
   password: string;
+  profile_image: string;
 }
 
 export interface PublicUserInfo {
   id: number;
   email: string;
   nickname: string;
+  profile_image: string;
+}
+
+export interface CreateUserParams {
+  email: string;
+  nickname: string;
+  password: string;
+  profile_image: string;
 }
 
 class UserRepo {
-  static async createUser({ email, nickname, password }: CreateUserParams): Promise<number> {
+  static async createUser({ email, nickname, password, profile_image }: CreateUserParams): Promise<number> {
     const query = `
       INSERT INTO 
-        user(email, nickname, password, created_at, updated_at) 
-      VALUES('${email}', '${nickname}', '${password}', NOW(), NOW())
+        user(email, nickname, password, profile_image, created_at, updated_at) 
+      VALUES('${email}', '${nickname}', '${password}', '${profile_image}', NOW(), NOW())
     `;
     return await queryExecutor(query);
   }
@@ -27,7 +35,7 @@ class UserRepo {
   static async findPublicUserInfoByLoginId(email: string): Promise<PublicUserInfo> {
     const query = `
       SELECT 
-        id, email, nickname 
+        id, email, nickname, profile_image
       FROM
         user 
       WHERE 

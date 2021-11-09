@@ -1,23 +1,42 @@
-import React from 'react';
+/* eslint-disable indent */
+/* eslint-disable react/jsx-max-props-per-line */
+import React, { forwardRef } from 'react';
 import colors from 'Styles/color-variables';
-import styled from 'styled-components';
-
+import styled, { css } from 'styled-components';
+import WarningIcon from '@material-ui/icons/Warning';
 interface InputProps {
   type: 'email' | 'password';
   label?: string | null;
+  error?: boolean;
+  errorMessage?: string | null;
   placeholder: string;
+  value?: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input = ({ label = null, ...rests }: InputProps) => {
-  return (
-    <Container>
-      {label && <Label>{label}</Label>}
-      <InputBoxWrapper>
-        <InputBox {...rests} />
-      </InputBoxWrapper>
-    </Container>
-  );
-};
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  (
+    { label = null, errorMessage = null, error = false, ...rests }: InputProps,
+    ref,
+  ) => {
+    return (
+      <Container>
+        {label && <Label>{label}</Label>}
+        <InputBoxWrapper>
+          <InputBox ref={ref} error={error} {...rests} />
+        </InputBoxWrapper>
+        {errorMessage && (
+          <Error>
+            <WarningIcon fontSize="small" />
+            {errorMessage}
+          </Error>
+        )}
+      </Container>
+    );
+  },
+);
+
+Input.displayName = 'Input';
 
 export default Input;
 
@@ -29,20 +48,41 @@ const Container = styled.div`
 const Label = styled.label`
   color: ${colors.black};
   font-weight: bold;
-  font-size: 17px;
+  font-size: 15px;
   line-height: 15px;
   margin-bottom: 13px;
+  margin-top: 13px;
+`;
+
+const Error = styled.div`
+  margin-bottom: 5px;
+  color: ${colors.inputRed};
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  margin-top: 3px;
+  font-weight: bold;
+  animation: fadein 0.4s;
+
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
 `;
 
 const InputBoxWrapper = styled.div``;
 
-const InputBox = styled.input`
+const InputBox = styled.input<{ error: boolean }>`
   background: ${colors.white};
   border: 1px solid ${colors.gray[500]};
-  border-radius: 5px;
+  border-radius: 3px;
   width: 323px;
   height: 46px;
-  margin-bottom: 13px;
   padding: 0px;
   font-size: 16px;
   padding: 0 10px;
@@ -52,6 +92,30 @@ const InputBox = styled.input`
   }
 
   &:focus {
+    box-shadow: 0 0 2px 2px ${colors.inputBlue};
     outline: none;
   }
+
+  ${({ error }) =>
+    error &&
+    css`
+      box-shadow: 0 0 2px 2px ${colors.inputRed};
+      outline: none;
+
+      &:focus {
+        box-shadow: 0 0 2px 2px ${colors.inputRed};
+        outline: none;
+      }
+
+      animation: fadein 0.4s;
+
+      @keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    `}
 `;

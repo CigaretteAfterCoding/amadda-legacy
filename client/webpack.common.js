@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 
 const config = {
   entry: './src/index',
@@ -22,6 +24,7 @@ const config = {
       Types: path.resolve(__dirname, './src/types'),
       Images: path.resolve(__dirname, './src/images'),
       Layouts: path.resolve(__dirname, './src/layouts'),
+      Recoil: path.resolve(__dirname, './src/recoil'),
     },
   },
 
@@ -46,6 +49,7 @@ const config = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
+    new Dotenv(),
   ],
 };
 

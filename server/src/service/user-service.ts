@@ -1,43 +1,48 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextFunction, Request, Response } from 'express';
 import UserRepo from 'Model/user-model';
 import { createJWT, createRefreshJWT } from 'Utils/jwt';
 import bcrypt from 'bcryptjs';
-import { STATUS_CODE } from 'Constants';
-import { DuplicateIdError } from 'Errors/authenticate-error';
+import { ERROR_RESPONSE, STATUS_CODE } from 'Constants';
 
-export async function signUpWithEmail(req: Request, res: Response, next: NextFunction): Promise<void> {
+export async function signUpWithEmail(req: Request, res: Response, _next: NextFunction): Promise<void> {
   const { email, password } = req.body;
 
   const user = await UserRepo.findByEmail(email);
 
   if (user) {
-    next(new DuplicateIdError());
+    res.status(STATUS_CODE.CONFLICT).json(ERROR_RESPONSE.ID_ALREADY_EXISTS);
+
     return;
   }
 
   const hash = await bcrypt.hash(password, 12);
   const nickname = email.split('@')[0];
+  const profile_image = 'https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar.png';
 
   const insertId = await UserRepo.createUser({
     email,
     nickname,
     password: hash,
+    profile_image,
   });
 
   const accessToken = createJWT({ id: insertId, email, nickname });
   const refreshToken = createRefreshJWT({ id: insertId, email, nickname });
   res.cookie('refreshToken', refreshToken);
 
-  res.status(STATUS_CODE.CREATED).json({ id: insertId, email, nickname, accessToken });
+  res.status(STATUS_CODE.CREATED).json({ id: insertId, email, nickname, profile_image, access_token: accessToken });
 }
 
 export async function signInWithEmail(req: Request, res: Response): Promise<void> {
   const { id, email, nickname }: any = req.user;
   const accessToken = createJWT({ id, email, nickname });
   const refreshToken = createRefreshJWT({ id, email, nickname });
-  res.cookie('refreshToken', refreshToken);
 
-  const signInWithEmailResponse = { id, email, nickname, accessToken };
+  const { profile_image } = await UserRepo.findByEmail(email);
+  const signInWithEmailResponse = { id, email, nickname, profile_image, access_token: accessToken };
+
+  res.cookie('refreshToken', refreshToken);
   res.status(200).json(signInWithEmailResponse);
 }
 
@@ -46,10 +51,11 @@ export async function refreshTokens(req: Request, res: Response): Promise<void> 
   const accessToken = createJWT({ id, email, nickname });
   const refreshToken = createRefreshJWT({ id, email, nickname });
   res.cookie('refreshToken', refreshToken);
-  res.status(200).json({ accessToken });
+  res.status(200).json({ access_token: accessToken });
 }
 
 export async function getCurrentUser(req: Request, res: Response): Promise<void> {
   const { id, email, nickname }: any = req.user;
-  res.status(200).json({ id, email, nickname });
+  const { profile_image } = await UserRepo.findByEmail(email);
+  res.status(200).json({ id, email, nickname, profile_image });
 }

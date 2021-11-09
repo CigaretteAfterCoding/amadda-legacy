@@ -6,10 +6,9 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   extends: [
     'eslint:recommended',
-    'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
   ],
-  plugins: ['@typescript-eslint', 'react', 'react-hooks', 'jsx-a11y'],
+  plugins: ['@typescript-eslint'],
   rules: {
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
@@ -28,15 +27,9 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
     '@typescript-eslint/no-unused-expressions': 'error',
     '@typescript-eslint/no-shadow': 'error',
     '@typescript-eslint/type-annotation-spacing': 'error',
-
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
-    'react/jsx-max-props-per-line': ['error', { maximum: 1 }],
-    'react/jsx-wrap-multilines': 'error',
-    'react/jsx-closing-bracket-location': ['error', 'tag-aligned'],
-    'react/jsx-tag-spacing': ['error', { beforeSelfClosing: 'always' }],
   },
 };

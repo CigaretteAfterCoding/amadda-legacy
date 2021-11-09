@@ -1,18 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import colors from 'Styles/color-variables';
+import AddRoundedIcon from '@material-ui/icons/AddRounded';
 
 const WriteButton = () => {
   return (
-    <WriteButtonContainer>
-      <WriteButtonBody />
-    </WriteButtonContainer>
+    <WriteButtonBody>
+      <AddRoundedIcon fontSize="large" />
+    </WriteButtonBody>
   );
 };
 
 export default WriteButton;
-
-const WriteButtonContainer = styled.div``;
 
 const WriteButtonBody = styled.button`
   border: 0;
@@ -22,28 +21,10 @@ const WriteButtonBody = styled.button`
   border-radius: 999px;
   font-size: 22px;
   transition: all ease 0.25s;
-  &:after,
-  &:before {
-    content: '';
-    display: block;
-    background-color: ${colors.white};
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  &:before {
-    height: 1em;
-    width: 0.15em;
-    border-radius: 5px;
-  }
-
-  &:after {
-    height: 0.15em;
-    width: 1em;
-    border-radius: 5px;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${colors.white};
 
   &:hover {
     transform: rotate(90deg);

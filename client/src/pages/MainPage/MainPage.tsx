@@ -1,26 +1,88 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Header from 'Layouts/Header/Header';
 import DiaryCard from 'Components/DiaryCard/DiaryCard';
 import WriteButton from 'Components/WriteButton/WriteButton';
 import DiaryModal from 'Components/DiaryModal/DiaryModal';
 
-interface MainPageProps {}
+const MainPage = () => {
+  const [diaryModalOpen, setDiaryModalOpen] = useState(false);
+  const [writeModalOpen, setWriteModalOpen] = useState(false);
+  const [modalMode, setModalMode] = useState<'default' | 'write' | 'edit'>(
+    'default',
+  );
+  const test = Array(8).fill('');
 
-const MainPage = ({}: MainPageProps) => {
-  const test = Array(10).fill('');
+  const openDiaryModal = () => {
+    setDiaryModalOpen(!diaryModalOpen);
+  };
+
+  const openDiaryWriteModal = () => {
+    setWriteModalOpen(true);
+    setModalMode('write');
+  };
+
+  const closeDiaryWriteModal = () => {
+    setWriteModalOpen(false);
+    setModalMode('default');
+  };
+
+  const body = document.querySelector('body');
+
+  const closeDiaryModal = (e: Event) => {
+    if (
+      !(
+        (e.target as HTMLElement).closest('.diary-modal') ||
+        (e.target as HTMLElement).closest('.select-wrapper')
+      ) || (e as KeyboardEvent).key === 'Escpae'
+    ) {
+      setDiaryModalOpen(false);
+      setWriteModalOpen(false);
+      setModalMode('default');
+    }
+  };
+
+  useEffect(() => {
+    if (diaryModalOpen) {
+      body?.addEventListener('click', closeDiaryModal);
+    }
+
+    return () => body?.removeEventListener('click', closeDiaryModal);
+  }, [diaryModalOpen, body]);
+
   return (
     <MainPageContainer>
       <Header />
       <MainPageWrapper>
-        {/* <CardContainer>
+        <CardContainer>
           {test?.map((item, idx) => (
-            <DiaryCard />
+            <DiaryCardWrapper key={idx}
+              onClick={openDiaryModal}
+            >
+              <DiaryCard key={idx} />
+            </DiaryCardWrapper>
           ))}
-        </CardContainer> */}
-        <DiaryModal />
+        </CardContainer>
+        <DiaryModalWrapper diaryModalOpen={diaryModalOpen}
+          writeModalOpen={writeModalOpen}
+        >
+          {diaryModalOpen && (
+            <DiaryModal
+              className="diary-modal"
+              modalMode={modalMode}
+              onClose={closeDiaryModal}
+            />
+          )}
+          {writeModalOpen && (
+            <DiaryModal
+              className="diary-modal"
+              modalMode={modalMode}
+              onClose={closeDiaryWriteModal}
+            />
+          )}
+        </DiaryModalWrapper>
       </MainPageWrapper>
-      <WriteButtonWrapper>
+      <WriteButtonWrapper onClick={openDiaryWriteModal}>
         <WriteButton />
       </WriteButtonWrapper>
     </MainPageContainer>
@@ -32,16 +94,37 @@ export default MainPage;
 const MainPageContainer = styled.div``;
 
 const MainPageWrapper = styled.div`
-  margin-top: 50px;
   display: flex;
   justify-content: center;
+  min-width: 1340px;
+  max-width: 1350px;
+  margin: 50px auto;
+`;
+
+const DiaryCardWrapper = styled.div`
+  &:hover {
+    transition: all ease 0.5s;
+    transform: translateY(-8px);
+  }
+`;
+
+const DiaryModalWrapper = styled.div<{ diaryModalOpen: boolean, writeModalOpen: boolean}>`
+  display: ${(props) => ((props.diaryModalOpen) || (props.writeModalOpen) ? 'flex' : 'none')};
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 
 const CardContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  max-width: 1425px;
 `;
 
 const WriteButtonWrapper = styled.div`

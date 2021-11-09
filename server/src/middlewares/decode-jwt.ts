@@ -1,11 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
 import { verifyJWT, verifyRefreshJWT } from 'Utils/jwt';
 import { AuthenticateError } from 'Errors/authenticate-error';
+import { ERROR_RESPONSE, STATUS_CODE } from 'Constants';
 
 export const TOKEN_KEY = 'authorization';
 
 export function decodeJWT(req: Request, res: Response, next: NextFunction): void {
   if (!req.headers[TOKEN_KEY]) {
+    res.status(STATUS_CODE.UNAUTHORIZED).json(ERROR_RESPONSE.UNAUTHORIZED);
     next(new AuthenticateError());
     return;
   }
@@ -18,6 +20,7 @@ export function decodeJWT(req: Request, res: Response, next: NextFunction): void
 
 export function decodeRefreshJWT(req: Request, res: Response, next: NextFunction): void {
   if (!req.cookies.refreshToken) {
+    res.status(STATUS_CODE.UNAUTHORIZED).json(ERROR_RESPONSE.UNAUTHORIZED);
     next(new AuthenticateError());
     return;
   }

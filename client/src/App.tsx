@@ -11,6 +11,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import InitializeRecoilState from 'Recoil/InitializeRecoilState';
 
 function App() {
+  // test
   const queryClient = new QueryClient();
 
   return (
